@@ -17,11 +17,14 @@ import (
 
 var client = &http.Client{Timeout: 5 * time.Second}
 var licenseForRepo = map[string]string{
-	"golang.org/x/crypto": "BSD-3-Clause",
-	"golang.org/x/image":  "BSD-3-Clause",
-	"golang.org/x/net":    "BSD-3-Clause",
-	"golang.org/x/sys":    "BSD-3-Clause",
-	"golang.org/x/text":   "BSD-3-Clause",
+	"golang.org/x/crypto":   "BSD-3-Clause",
+	"golang.org/x/image":    "BSD-3-Clause",
+	"golang.org/x/net":      "BSD-3-Clause",
+	"golang.org/x/sys":      "BSD-3-Clause",
+	"golang.org/x/text":     "BSD-3-Clause",
+	"golang.org/x/oauth2":   "BSD-3-Clause",
+	"google.golang.org/api": "BSD-3-Clause",
+	"cloud.google.com/go":   "NOASSERTION",
 }
 
 // Objects used when reading from Gopkg.lock
@@ -171,12 +174,14 @@ func reportObjFromPkgObj(m pkgObject, githubToken string) (reportObject, error) 
 		Website: m.Source,
 	}
 
-	if strings.Contains(m.Name, "golang.org") {
-		if err := reportObjFromGerrit(&r, m); err != nil {
+	if strings.Contains(m.Name, "github.com") {
+		if err := reportObjFromGithub(&r, m, githubToken); err != nil {
 			return r, err
 		}
+	} else if strings.Contains(m.Name, "gitlab.1password.io") {
+		// TODO for xplatform gitlab
 	} else {
-		if err := reportObjFromGithub(&r, m, githubToken); err != nil {
+		if err := reportObjFromGerrit(&r, m); err != nil {
 			return r, err
 		}
 	}
@@ -231,7 +236,12 @@ func reportObjFromGithub(r *reportObject, m pkgObject, githubToken string) error
 
 func repoNameFromGithubPackage(packageName string) string {
 	parts := strings.Split(packageName, "/")
-	return parts[1] + "/" + parts[2]
+	if len(parts) > 2 {
+		return parts[1] + "/" + parts[2]
+	} else {
+		return packageName
+	}
+
 }
 
 func getGithub(url string, target interface{}, token string) error {
@@ -260,8 +270,17 @@ func reportObjFromGerrit(r *reportObject, m pkgObject) error {
 	r.Source = "gerrit"
 	r.Name = m.Name
 
-	repoName := strings.TrimPrefix(r.Name, "golang.org/x/")
-	repoURL := "https://go-review.googlesource.com/projects/" + repoName
+	var repoName, repoURL string
+	if m.Name == "google.golang.org/api" {
+		repoName = "google-api-go-client"
+		repoURL = "https://code-review.googlesource.com/projects/" + repoName
+	} else if m.Name == "cloud.google.com/go" {
+		repoName = "gocloud"
+		repoURL = "https://code-review.googlesource.com/projects/" + repoName
+	} else {
+		repoName = strings.TrimPrefix(r.Name, "golang.org/x/")
+		repoURL = "https://go-review.googlesource.com/projects/" + repoName
+	}
 
 	commitURL := repoURL + "/commits/" + m.Revision
 	var installed commit
