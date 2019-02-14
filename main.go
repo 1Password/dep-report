@@ -65,7 +65,7 @@ type report struct {
 }
 
 func main() {
-	if len(os.Args) != 2 {
+	if len(os.Args) < 2 {
 		log.Fatal("missing argument: GitHub Token")
 	}
 
@@ -122,17 +122,26 @@ func readGopkg() (*pkg, error) {
 }
 
 func getCurrentCommitAndCommitTime() (string, string) {
-	commit, err := exec.Command("git", "rev-parse", "HEAD").Output()
-	if err != nil {
-		log.Fatal("Failed to get current commit", err)
+	var commit, commitTime string
+	if len(os.Args) < 4 {
+		// Commit SHA and time weren't provided as args, try to get it locally
+		commitBytes, err := exec.Command("git", "rev-parse", "HEAD").Output()
+		if err != nil {
+			log.Fatal("Failed to get current commit", err)
+		}
+		commit = strings.TrimSpace(string(commitBytes))
+
+		commitTimeBytes, err := exec.Command("git", "show", "-s", "--format=%cI", "HEAD").Output()
+		if err != nil {
+			log.Fatal("Failed to get current commit time", err)
+		}
+		commitTime = strings.TrimSpace(string(commitTimeBytes))
+	} else {
+		commit = strings.TrimSpace(os.Args[2])
+		commitTime = strings.TrimSpace(os.Args[3])
 	}
 
-	commitTime, err := exec.Command("git", "show", "-s", "--format=%cI", "HEAD").Output()
-	if err != nil {
-		log.Fatal("Failed to get current commit time", err)
-	}
-
-	return strings.TrimSpace(string(commit)), strings.TrimSpace(string(commitTime))
+	return commit, commitTime
 }
 
 type license struct {
