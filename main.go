@@ -27,6 +27,21 @@ var licenseForRepo = map[string]string{
 	"cloud.google.com/go":   "NOASSERTION",
 }
 
+var repoURLForPackage = map[string]string{
+	"go.opencensus.io":            "https://github.com/census-instrumentation/opencensus-go",
+	"google.golang.org/grpc":      "https://github.com/grpc/grpc-go",
+	"google.golang.org/genproto":  "https://github.com/googleapis/go-genproto",
+	"google.golang.org/appengine": "https://github.com/golang/appengine",
+	"google.golang.org/api":       "https://code-review.googlesource.com/projects/google-api-go-client",
+	"cloud.google.com/go":         "https://code-review.googlesource.com/projects/gocloud",
+}
+
+const (
+	GITHUB = "github"
+	GITLAB = "gitlab"
+	GERRIT = "gerrit"
+)
+
 // Objects used when reading from Gopkg.lock
 type pkgObject struct {
 	Source   string
@@ -172,28 +187,69 @@ type tag struct {
 func reportObjFromPkgObj(m pkgObject, githubToken string) (reportObject, error) {
 	log.Println("Transforming ", m.Name)
 	r := reportObject{
+		Name:    m.Name,
 		Website: m.Source,
 	}
 
-	if strings.Contains(m.Name, "github.com") {
+	source := determineSource(m.Name)
+
+	switch source {
+	case GITHUB:
 		if err := reportObjFromGithub(&r, m, githubToken); err != nil {
 			return r, err
 		}
-	} else if strings.Contains(m.Name, "gitlab.1password.io") {
-		// TODO for xplatform gitlab
-	} else {
+	case GITLAB:
+		if err := reportObjFromGitlab(&r, m); err != nil {
+			return r, err
+		}
+	case GERRIT:
 		if err := reportObjFromGerrit(&r, m); err != nil {
 			return r, err
 		}
+	default:
+		log.Println("Unable to determine repo source for ", m.Name)
 	}
 
 	return r, nil
+}
+
+func determineSource(packageName string) string {
+	repo := packageName
+
+	if url, ok := repoURLForPackage[packageName]; ok {
+		repo = url
+	}
+
+	if strings.Contains(repo, GITHUB) {
+		return GITHUB
+	}
+
+	if strings.Contains(repo, "1password.io") {
+		return GITLAB
+	}
+
+	if strings.Contains(repo, "googlesource") {
+		return GERRIT
+	}
+
+	if strings.Contains(repo, "golang.org/x") {
+		return GERRIT
+	}
+
+	return ""
+}
+
+func reportObjFromGitlab(r *reportObject, m pkgObject) error {
+	r.Source = "gitlab"
+	// TODO
+	return nil
 }
 
 func reportObjFromGithub(r *reportObject, m pkgObject, githubToken string) error {
 	r.Source = "github"
 	r.Name = repoNameFromGithubPackage(m.Name)
 	repoURL := "https://api.github.com/repos/" + r.Name
+	r.Website = repoURL
 
 	licenseURL := repoURL + "/license"
 	var licenseResponse licenseResponse
@@ -236,9 +292,13 @@ func reportObjFromGithub(r *reportObject, m pkgObject, githubToken string) error
 }
 
 func repoNameFromGithubPackage(packageName string) string {
+	if url, found := repoURLForPackage[packageName]; found {
+		packageName = url
+	}
+
 	parts := strings.Split(packageName, "/")
 	if len(parts) > 2 {
-		return parts[1] + "/" + parts[2]
+		return parts[len(parts)-2] + "/" + parts[len(parts)-1]
 	} else {
 		return packageName
 	}
@@ -271,17 +331,14 @@ func reportObjFromGerrit(r *reportObject, m pkgObject) error {
 	r.Source = "gerrit"
 	r.Name = m.Name
 
-	var repoName, repoURL string
-	if m.Name == "google.golang.org/api" {
-		repoName = "google-api-go-client"
-		repoURL = "https://code-review.googlesource.com/projects/" + repoName
-	} else if m.Name == "cloud.google.com/go" {
-		repoName = "gocloud"
-		repoURL = "https://code-review.googlesource.com/projects/" + repoName
+	var repoURL string
+	if url, found := repoURLForPackage[r.Name]; found {
+		repoURL = url
 	} else {
-		repoName = strings.TrimPrefix(r.Name, "golang.org/x/")
+		repoName := strings.TrimPrefix(r.Name, "golang.org/x/")
 		repoURL = "https://go-review.googlesource.com/projects/" + repoName
 	}
+	r.Website = repoURL
 
 	commitURL := repoURL + "/commits/" + m.Revision
 	var installed commit
