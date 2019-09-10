@@ -18,10 +18,12 @@ import (
 var client = &http.Client{Timeout: 5 * time.Second}
 var licenseForRepo = map[string]string{
 	"golang.org/x/crypto":   "BSD-3-Clause",
+	"golang.org/x/sync":     "BSD-3-Clause",
 	"golang.org/x/image":    "BSD-3-Clause",
 	"golang.org/x/net":      "BSD-3-Clause",
 	"golang.org/x/sys":      "BSD-3-Clause",
 	"golang.org/x/text":     "BSD-3-Clause",
+	"golang.org/x/tools":    "BSD-3-Clause",
 	"golang.org/x/oauth2":   "BSD-3-Clause",
 	"google.golang.org/api": "BSD-3-Clause",
 	"cloud.google.com/go":   "NOASSERTION",
@@ -85,6 +87,11 @@ func main() {
 		log.Fatal("missing argument: GitHub Token")
 	}
 
+	productName, ok := os.LookupEnv("DEP_REPORT_PRODUCT")
+	if !ok {
+		productName = "b5server"
+	}
+
 	pkg, err := readGopkg()
 	if err != nil {
 		log.Fatal(err)
@@ -93,7 +100,7 @@ func main() {
 	commit, commitTime := getCurrentCommitAndCommitTime()
 
 	report := report{
-		Product:    "b5server",
+		Product:    productName,
 		Commit:     commit,
 		CommitTime: commitTime,
 		ReportTime: time.Now().UTC().Format("2006-01-02T15:04:05Z"),
