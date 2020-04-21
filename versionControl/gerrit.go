@@ -11,7 +11,7 @@ import (
 	"time"
 )
 
-func ReportObjFromGerrit(r *models.ReportObject, m models.PkgObject) error {
+func ReportObjFromGerrit(r *models.ReportObject, m models.PkgObject, c http.Client) error {
 	r.Source = "gerrit"
 	r.Name = m.Name
 

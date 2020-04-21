@@ -1,19 +1,19 @@
 package models
 
-type license struct {
+type License struct {
 	Name string `json:"spdx_id"`
 }
 
 type LicenseResponse struct {
-	License license `json:"license"`
+	License License `json:"License"`
 }
 
-type committer struct {
+type Committer struct {
 	Date string `json:"date"`
 }
 
 type Commit struct {
-	Committer committer `json:"committer"`
+	Committer Committer `json:"Committer"`
 }
 
 type CommitResponse struct {

@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+//TODO improve this test!
 func TestParseModules(t *testing.T) {
 	_, err := ParseModules()
 	if err != nil {

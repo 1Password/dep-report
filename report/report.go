@@ -68,18 +68,22 @@ func reportObjFromPkgObj(m models.PkgObject, githubToken string) (models.ReportO
 	}
 
 	source := determineSource(m.Name)
-	fmt.Println(source)
 
 	switch source {
 	case GITHUB:
-		if err := versionControl.ReportObjFromGithub(&r, m, githubToken); err != nil {
+		//TODO fix this when you reorg repo; needs client passed in
+		if err := versionControl.ReportObjFromGithub(&r, m, githubToken, versionControl.Client); err != nil {
 			return r, err
 		}
 	case GITLAB:
 		if err := versionControl.ReportObjFromGitlab(&r, m); err != nil {
 			return r, err
 		}
-	case GERRIT:
+		//TODO Can we just get this data from the github flow?
+		//URL is https://api.github.com/repos/golang/sys/commits/85ca7c5b95cd where "golang/sys" is the packagename
+		//packagename appears as golang.org/x/net but github link
+		//license info is not available from github
+		case GERRIT:
 		if err := versionControl.ReportObjFromGerrit(&r, m); err != nil {
 			return r, err
 		}
