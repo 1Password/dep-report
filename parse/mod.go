@@ -32,6 +32,8 @@ func ParseModules() (*models.Pkg, error) {
 		}
 	}
 
+	fmt.Printf("Pkg: %v", splitGoMod)
+
 	return mapModToPkg(&models.Modules{
 		Mods: modArray,
 	}), nil

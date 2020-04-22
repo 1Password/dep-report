@@ -2,10 +2,11 @@ package report
 
 import (
 	"dep-report/models"
-	"dep-report/versionControl"
+	"dep-report/versioncontrol"
 	"encoding/json"
 	"fmt"
 	"log"
+	"net/http"
 	"os/exec"
 	"strings"
 	"time"
@@ -16,6 +17,8 @@ const (
 	GITLAB        = "gitlab"
 	GERRIT        = "gerrit"
 )
+
+var Client = &http.Client{Timeout: 5 * time.Second}
 
 // GenerateReport This function is used to create the dependency report
 func GenerateReport (githubToken string, productName string, pkg *models.Pkg) ([]byte, error){
@@ -65,26 +68,21 @@ func reportObjFromPkgObj(m models.PkgObject, githubToken string) (models.ReportO
 	r := models.ReportObject{
 		Name:    m.Name,
 		Website: m.Source,
+		Source: determineSource(m.Name),
 	}
 
-	source := determineSource(m.Name)
-
-	switch source {
+	switch r.Source {
 	case GITHUB:
 		//TODO fix this when you reorg repo; needs client passed in
-		if err := versionControl.ReportObjFromGithub(&r, m, githubToken, versionControl.Client); err != nil {
+		if err := versioncontrol.ReportObjFromGithub(&r, m, githubToken, Client); err != nil {
 			return r, err
 		}
 	case GITLAB:
-		if err := versionControl.ReportObjFromGitlab(&r, m); err != nil {
+		if err := versioncontrol.ReportObjFromGitlab(&r, m); err != nil {
 			return r, err
 		}
-		//TODO Can we just get this data from the github flow?
-		//URL is https://api.github.com/repos/golang/sys/commits/85ca7c5b95cd where "golang/sys" is the packagename
-		//packagename appears as golang.org/x/net but github link
-		//license info is not available from github
-		case GERRIT:
-		if err := versionControl.ReportObjFromGerrit(&r, m); err != nil {
+	case GERRIT:
+		if err := versioncontrol.ReportObjFromGerrit(&r, m, githubToken, Client); err != nil {
 			return r, err
 		}
 	default:
@@ -97,7 +95,7 @@ func reportObjFromPkgObj(m models.PkgObject, githubToken string) (models.ReportO
 func determineSource(packageName string) string {
 	repo := packageName
 
-	if url, ok := versionControl.RepoURLForPackage[packageName]; ok {
+	if url, ok := versioncontrol.GithubRepoURLForPackage[packageName]; ok {
 		repo = url
 	}
 
