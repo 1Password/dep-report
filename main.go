@@ -24,6 +24,7 @@ var licenseForRepo = map[string]string{
 	"golang.org/x/sys":      "BSD-3-Clause",
 	"golang.org/x/text":     "BSD-3-Clause",
 	"golang.org/x/tools":    "BSD-3-Clause",
+	"golang.org/x/xerrors":  "BSD-3-Clause",
 	"golang.org/x/oauth2":   "BSD-3-Clause",
 	"google.golang.org/api": "BSD-3-Clause",
 	"cloud.google.com/go":   "NOASSERTION",
