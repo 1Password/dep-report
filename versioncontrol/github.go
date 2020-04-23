@@ -37,7 +37,7 @@ func ReportObjFromGithub(r *models.ReportObject, m models.PkgObject, githubToken
 	}
 
 	r.Installed = models.VersionDetails{
-		Commit: m.Revision,
+		Commit: installed.SHA,
 		Time:   installed.Commit.Committer.Date,
 	}
 

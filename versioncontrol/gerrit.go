@@ -16,9 +16,7 @@ func ReportObjFromGerrit(r *models.ReportObject, m models.PkgObject, token strin
 
 	var gerritRepoURL string
 	var githubRepoURL string
-	//think on this logic
-	//need to check for gerrit repo & github repo
-	//if both/either? is not found, use string concat
+
 	url, found := GerritRepoURLForPackage[r.Name]
 	if found {
 		gerritRepoURL = url
@@ -57,7 +55,7 @@ func ReportObjFromGerrit(r *models.ReportObject, m models.PkgObject, token strin
 		return errors.Wrapf(err, "Unable to formatGerritTime")
 	}
 	r.Installed = models.VersionDetails{
-		Commit: m.Revision,
+		Commit: installed.CommitSHA,
 		Time:   t,
 	}
 
@@ -83,7 +81,7 @@ func ReportObjFromGerrit(r *models.ReportObject, m models.PkgObject, token strin
 	}
 
 	tagsURL := gerritRepoURL + "/tags"
-	tags := []models.Tag{}
+	var tags []models.Tag
 	if err := getGerrit(tagsURL, &tags, c); err != nil {
 		return errors.Wrapf(err, "Unable to get from %s :", tagsURL)
 	}
@@ -95,7 +93,8 @@ func ReportObjFromGerrit(r *models.ReportObject, m models.PkgObject, token strin
 	var ok bool
 	r.License, ok = licenseForRepo[m.Name]
 	if !ok {
-		return fmt.Errorf("License info for %s not provided", m.Name)
+		r.License = "Unknown license"
+		fmt.Printf("License info for %s not provided", m.Name)
 	}
 
 	return nil

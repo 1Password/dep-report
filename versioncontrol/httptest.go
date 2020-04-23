@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func setupHTTPRecord (fileName string) (*recorder.Recorder, *http.Client, error){
+func SetupHTTPRecord(fileName string) (*recorder.Recorder, *http.Client, error){
 	r, err := recorder.New("./testData/"+fileName)
 	if err != nil {
 		return nil, nil, fmt.Errorf("unable to setup http recorder, %v", err)

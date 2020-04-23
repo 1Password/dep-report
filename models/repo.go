@@ -13,6 +13,7 @@ type Committer struct {
 }
 
 type Commit struct {
+	CommitSHA string `json:"commit"`
 	Committer Committer `json:"Committer"`
 }
 

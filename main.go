@@ -6,7 +6,9 @@ import (
 	"dep-report/report"
 	"fmt"
 	"log"
+	"net/http"
 	"os"
+	"time"
 )
 
 
@@ -22,6 +24,7 @@ func main() {
 	}
 
 	productName, ok := os.LookupEnv("DEP_REPORT_PRODUCT")
+
 	if !ok {
 		productName = "b5server"
 	}
@@ -30,7 +33,13 @@ func main() {
 	if err != nil {
 		log.Fatalf("unable to parse dependency file: %v",err)
 	}
-	prettyReport, err := report.GenerateReport(githubToken, productName, pkg)
+
+	cfg := report.Config{
+		Httpclient: &http.Client{Timeout: 5 * time.Second},
+		Token: githubToken,
+		Productname: productName,
+	}
+	prettyReport, err := cfg.GenerateReport(pkg)
 	if err != nil {
 		log.Fatalf("unable to generate report: %v", err)
 	}
@@ -46,12 +55,14 @@ func getDependencyFile() (*models.Pkg, error) {
 
 	switch {
 	case fileExists(wd + depFilePath):
+		fmt.Println("Parsing dependencies from gopkg.lock")
 		pkg, err = parse.ReadGopkg(wd + depFilePath)
 		if err != nil {
 			return nil, err
 		}
 		return pkg, nil
 	case fileExists(wd + goModFilePath):
+		fmt.Println("Parsing dependencies from go.mod")
 		pkg, err = parse.ParseModules()
 		if err != nil {
 			return nil, err

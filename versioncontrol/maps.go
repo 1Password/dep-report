@@ -7,11 +7,13 @@ var GithubRepoURLForPackage = map[string]string{
 	"google.golang.org/appengine": "https://github.com/golang/appengine",
 	"google.golang.org/api":       "https://api.github.com/repos/googleapis/google-api-go-client",
 	"cloud.google.com/go":         "https://api.github.com/repos/googleapis/google-cloud-go",
+	"gopkg.in/check.v1":           "https://github.com/go-check/check",
+	"gopkg.in/yaml.v2":            "https://github.com/go-yaml/yaml",
 }
 
 var GerritRepoURLForPackage = map[string]string{
-	"google.golang.org/api":       "https://code-review.googlesource.com/projects/google-api-go-client",
-	"cloud.google.com/go":         "https://code-review.googlesource.com/projects/gocloud",
+	"google.golang.org/api": "https://code-review.googlesource.com/projects/google-api-go-client",
+	"cloud.google.com/go":   "https://code-review.googlesource.com/projects/gocloud",
 }
 var licenseForRepo = map[string]string{
 	"golang.org/x/crypto":   "BSD-3-Clause",

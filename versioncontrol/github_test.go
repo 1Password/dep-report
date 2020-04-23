@@ -40,7 +40,7 @@ func TestRepoNameFromGithubPackage(t *testing.T) {
 }
 
 func TestReportObjFromGithub(t *testing.T) {
-	r, c, err := setupHTTPRecord("reportObjFromGithub")
+	r, c, err := SetupHTTPRecord("reportObjFromGithub")
 	if err != nil {
 		t.Fatalf("unable to setup http recorder, %v", err)
 	}
@@ -57,7 +57,7 @@ func TestReportObjFromGithub(t *testing.T) {
 			description: "should successfully update report object where release is not available",
 			reportObject: &models.ReportObject{
 				Name:   "github.com/BurntSushi/toml",
-				Source: "",
+				Source: "github",
 			},
 			pkgObject: models.PkgObject{
 				Name:     "github.com/BurntSushi/toml",
@@ -83,7 +83,7 @@ func TestReportObjFromGithub(t *testing.T) {
 			description: "should successfully update report object where release is available",
 			reportObject: &models.ReportObject{
 				Name:   "github.com/pkg/profile",
-				Source: "",
+				Source: "github",
 			},
 			pkgObject: models.PkgObject{
 				Name:     "github.com/pkg/profile",
@@ -120,7 +120,7 @@ func TestReportObjFromGithub(t *testing.T) {
 }
 
 func TestGetGithub(t *testing.T) {
-	r, c, err := setupHTTPRecord("getGithub")
+	r, c, err := SetupHTTPRecord("getGithub")
 	if err != nil {
 		t.Fatalf("unable to setup http recorder, %v", err)
 	}
@@ -253,22 +253,3 @@ func TestGetGithub(t *testing.T) {
 		})
 	}
 }
-
-//func setupHTTPRecord (fileName string) (*recorder.Recorder, *http.Client, error){
-//	r, err := recorder.New("./testData/"+fileName)
-//	if err != nil {
-//		return nil, nil, fmt.Errorf("unable to setup http recorder, %v", err)
-//	}
-//
-//	r.AddFilter(func(i *cassette.Interaction) error {
-//		delete(i.Request.Headers, "Authorization")
-//		return nil
-//	})
-//
-//	return r, &http.Client{
-//		Transport:     r,
-//		CheckRedirect: nil,
-//		Jar:           nil,
-//		Timeout:       5 * time.Second,
-//	}, nil
-//}

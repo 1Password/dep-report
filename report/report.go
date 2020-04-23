@@ -20,19 +20,25 @@ const (
 
 var Client = &http.Client{Timeout: 5 * time.Second}
 
+type Config struct {
+	Httpclient *http.Client
+	Token string
+	Productname string
+}
+
 // GenerateReport This function is used to create the dependency report
-func GenerateReport (githubToken string, productName string, pkg *models.Pkg) ([]byte, error){
+func (c *Config) GenerateReport (pkg *models.Pkg) ([]byte, error){
 	commit, commitTime := getCurrentCommitAndCommitTime()
 
 	report := models.Report{
-		Product:    productName,
+		Product:    c.Productname,
 		Commit:     commit,
 		CommitTime: commitTime,
 		ReportTime: time.Now().UTC().Format("2006-01-02T15:04:05Z"),
 	}
 
 	for _, pObj := range pkg.Projects {
-		rObj, err := reportObjFromPkgObj(pObj, githubToken)
+		rObj, err := c.reportObjFromPkgObj(pObj, c.Token)
 		if err != nil {
 			return nil, fmt.Errorf("failed to create report object from pkg object: %v, %w", pObj, err)
 		}
@@ -63,7 +69,7 @@ func getCurrentCommitAndCommitTime() (string, string) {
 	return commit, commitTime
 }
 
-func reportObjFromPkgObj(m models.PkgObject, githubToken string) (models.ReportObject, error) {
+func (c Config) reportObjFromPkgObj(m models.PkgObject, githubToken string) (models.ReportObject, error) {
 	log.Println("Transforming ", m.Name)
 	r := models.ReportObject{
 		Name:    m.Name,
@@ -73,8 +79,7 @@ func reportObjFromPkgObj(m models.PkgObject, githubToken string) (models.ReportO
 
 	switch r.Source {
 	case GITHUB:
-		//TODO fix this when you reorg repo; needs client passed in
-		if err := versioncontrol.ReportObjFromGithub(&r, m, githubToken, Client); err != nil {
+		if err := versioncontrol.ReportObjFromGithub(&r, m, c.Token, c.Httpclient); err != nil {
 			return r, err
 		}
 	case GITLAB:
@@ -82,7 +87,7 @@ func reportObjFromPkgObj(m models.PkgObject, githubToken string) (models.ReportO
 			return r, err
 		}
 	case GERRIT:
-		if err := versioncontrol.ReportObjFromGerrit(&r, m, githubToken, Client); err != nil {
+		if err := versioncontrol.ReportObjFromGerrit(&r, m, c.Token, c.Httpclient); err != nil {
 			return r, err
 		}
 	default:
@@ -99,21 +104,20 @@ func determineSource(packageName string) string {
 		repo = url
 	}
 
-	if strings.Contains(repo, GITHUB) {
-		return GITHUB
-	}
-
-	if strings.Contains(repo, "1password.io") {
+	switch{
+	case strings.Contains(repo, GITHUB):
+		if strings.Contains(repo,"repo"){
+			return GERRIT
+		} else {
+			return GITHUB
+		}
+	case strings.Contains(repo, "1password.io"):
 		return GITLAB
-	}
-
-	if strings.Contains(repo, "googlesource") {
+	case strings.Contains(repo, "googlesource"):
 		return GERRIT
-	}
-
-	if strings.Contains(repo, "golang.org/x") {
+	case strings.Contains(repo, "golang.org/x"):
 		return GERRIT
+	default:
+		return ""
 	}
-
-	return ""
 }
