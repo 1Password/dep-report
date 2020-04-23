@@ -11,7 +11,6 @@ import (
 	"time"
 )
 
-
 const (
 	depFilePath   = "/Gopkg.lock"
 	goModFilePath = "/go.mod"
