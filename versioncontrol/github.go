@@ -11,60 +11,64 @@ import (
 	"strings"
 )
 
-func ReportObjFromGithub(r *models.ReportObject, m models.PkgObject, githubToken string, c *http.Client) error {
-	repoName, err := repoNameFromGithubPackage(m.Name)
+func ReportObjFromGithub(dep models.Dependency, r Client) (*models.ReportObject,error) {
+	repoName, err := repoNameFromGithubPackage(dep.Name)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	r.Name = m.Name
 	//consider whether or not we need this var
 	repoURL := "https://api.github.com/repos/" + repoName
-	r.Website = repoURL
+
+	reportObject := models.ReportObject{
+		Name: dep.Name,
+		Website: repoURL,
+		Source: dep.Source,
+	}
 
 	licenseURL := repoURL + "/license"
 	var licenseResponse models.LicenseResponse
-	if err := getGithub(licenseURL, &licenseResponse, githubToken, c); err != nil {
-		return errors.Wrapf(err, "Unable to get from %s :", licenseURL)
+	if err := r.getGithub(licenseURL, &licenseResponse); err != nil {
+		return nil, errors.Wrapf(err, "Unable to get from %s :", licenseURL)
 	}
 
-	r.License = licenseResponse.License.Name
+	reportObject.License = licenseResponse.License.Name
 
-	commitURL := repoURL + "/commits/" + m.Revision
+	commitURL := repoURL + "/commits/" + dep.Revision
 	var installed models.CommitResponse
-	if err := getGithub(commitURL, &installed, githubToken, c); err != nil {
-		return errors.Wrapf(err, "Unable to get from %s :", commitURL)
+	if err := r.getGithub(commitURL, &installed); err != nil {
+		return nil, errors.Wrapf(err, "Unable to get from %s :", commitURL)
 	}
 
-	r.Installed = models.VersionDetails{
+	reportObject.Installed = models.VersionDetails{
 		Commit: installed.SHA,
 		Time:   installed.Commit.Committer.Date,
 	}
 
 	branchURL := repoURL + "/commits/HEAD"
 	var latest models.CommitResponse
-	if err := getGithub(branchURL, &latest, githubToken, c); err != nil {
-		return errors.Wrapf(err, "Unable to get from %s :", branchURL)
+	if err := r.getGithub(branchURL, &latest); err != nil {
+		return nil, errors.Wrapf(err, "Unable to get from %s :", branchURL)
 	}
 
-	r.Latest = models.VersionDetails{
+	reportObject.Latest = models.VersionDetails{
 		Commit: latest.SHA,
 		Time:   latest.Commit.Committer.Date,
 	}
 
 	releaseURL := repoURL + "/releases/latest"
 	var release models.Release
-	if err := getGithub(releaseURL, &release, githubToken, c); err != nil {
-		return errors.Wrapf(err, "Unable to get from %s :", releaseURL)
+	if err := r.getGithub(releaseURL, &release); err != nil {
+		return nil, errors.Wrapf(err, "Unable to get from %s :", releaseURL)
 	}
-	r.Latest.Version = release.Name
+	reportObject.Latest.Version = release.Name
 
-	return nil
+	return &reportObject, nil
 }
 
 func repoNameFromGithubPackage(packageName string) (string, error) {
-	if url, found := GithubRepoURLForPackage[packageName]; found {
-		packageName = url
+	if rawURL, found := GithubRepoURLForPackage[packageName]; found {
+		packageName = rawURL
 	} else {
 		packageName = "https://" + packageName
 	}
@@ -77,20 +81,23 @@ func repoNameFromGithubPackage(packageName string) (string, error) {
 	return strings.Replace(u.Path, "/", "", 1), nil
 }
 
-func getGithub(url string, target interface{}, token string, client *http.Client) error {
+func (r *Client) getGithub(url string, target interface{}) error {
 	req, err := http.NewRequest("GET", url, nil)
-	req.Header.Add("Authorization", "token "+token)
+	if err != nil {
+		return errors.Wrapf(err,"unable to create request for %s", url)
+	}
+	req.Header.Add("Authorization", "token "+r.Token)
 
-	r, err := client.Do(req)
+	resp, err := r.HttpClient.Do(req)
 	if err != nil {
 		return errors.Wrapf(err, "unable to make http request to github")
 	}
-	if r.StatusCode == 401 {
-		return fmt.Errorf("%s returned from github, verify that GITHUB_OAUTH_TOKEN is set", r.Status)
+	if resp.StatusCode == 401 {
+		return fmt.Errorf("%s returned from github, verify that GITHUB_OAUTH_TOKEN is set", resp.Status)
 	}
-	defer r.Body.Close()
+	defer resp.Body.Close()
 
-	body, err := ioutil.ReadAll(r.Body)
+	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return errors.Wrapf(err, "unable to read response body")
 	}

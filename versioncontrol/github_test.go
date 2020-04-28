@@ -2,7 +2,6 @@ package versioncontrol
 
 import (
 	"dep-report/models"
-	"errors"
 	"flag"
 	"github.com/stretchr/testify/assert"
 	"testing"
@@ -46,24 +45,23 @@ func TestReportObjFromGithub(t *testing.T) {
 	}
 	defer r.Stop()
 
+	request := Client{
+		HttpClient: c,
+		Token: *githubToken,
+	}
+
 	tests := []struct {
 		description      string
-		reportObject     *models.ReportObject
-		pkgObject        models.PkgObject
-		githubToken      string
+		dependency       models.Dependency
 		wantReportObject *models.ReportObject
 	}{
 		{
 			description: "should successfully update report object where release is not available",
-			reportObject: &models.ReportObject{
-				Name:   "github.com/BurntSushi/toml",
-				Source: "github",
-			},
-			pkgObject: models.PkgObject{
+			dependency: models.Dependency{
 				Name:     "github.com/BurntSushi/toml",
 				Revision: "3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005",
+				Source: "github",
 			},
-			githubToken: *githubToken,
 			wantReportObject: &models.ReportObject{
 				Name:    "github.com/BurntSushi/toml",
 				Source:  "github",
@@ -81,15 +79,11 @@ func TestReportObjFromGithub(t *testing.T) {
 		},
 		{
 			description: "should successfully update report object where release is available",
-			reportObject: &models.ReportObject{
-				Name:   "github.com/pkg/profile",
-				Source: "github",
-			},
-			pkgObject: models.PkgObject{
+			dependency: models.Dependency{
 				Name:     "github.com/pkg/profile",
 				Revision: "acd64d450fd45fb2afa41f833f3788c8a7797219",
+				Source: "github",
 			},
-			githubToken: *githubToken,
 			wantReportObject: &models.ReportObject{
 				Name:    "github.com/pkg/profile",
 				Source:  "github",
@@ -110,11 +104,11 @@ func TestReportObjFromGithub(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.description, func(t *testing.T) {
-			err = ReportObjFromGithub(test.reportObject, test.pkgObject, test.githubToken, c)
+			reportObject, err := ReportObjFromGithub(test.dependency, request)
 			if err != nil{
 				t.Errorf("error returned from ReportObjFromGithub, err: %v", err)
 			}
-			assert.EqualValues(t, test.wantReportObject, test.reportObject)
+			assert.EqualValues(t, test.wantReportObject, reportObject)
 		})
 	}
 }
@@ -126,6 +120,11 @@ func TestGetGithub(t *testing.T) {
 	}
 	defer r.Stop()
 
+	request := Client{
+		HttpClient: c,
+		Token: *githubToken,
+	}
+
 	var installed models.CommitResponse
 	var latest models.CommitResponse
 	var license models.LicenseResponse
@@ -133,22 +132,12 @@ func TestGetGithub(t *testing.T) {
 		description string
 		url         string
 		target      interface{}
-		token       string
-		wantErr     error
 		wantTarget  interface{}
 	}{
-		{
-			description: "getGithub should fail when no token is passed",
-			url:         "https://api.github.com/repos/BurntSushi/toml/commits/HEAD",
-			target:      &installed,
-			token:       "",
-			wantErr:     errors.New("401 Unauthorized returned from github, verify that GITHUB_OAUTH_TOKEN is set"),
-		},
 		{
 			description: "getGithub should successfully update latest object",
 			url:         "https://api.github.com/repos/BurntSushi/toml/commits/HEAD",
 			target:      &latest,
-			token:       *githubToken,
 			wantTarget: &models.CommitResponse{
 				Commit: models.Commit{
 					Committer: models.Committer{
@@ -157,13 +146,11 @@ func TestGetGithub(t *testing.T) {
 				},
 				SHA: "3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005",
 			},
-			wantErr: nil,
 		},
 		{
-			description: "getGithub should successfully get gerrit resources",
-			url:         "https://api.github.com/repos/golang/net/commits/HEAD",
-			target:      &latest,
-			token:       *githubToken,
+			description: "getGithub should successfully get gerrit dependencies",
+			url:         "https://api.github.com/repos/golang/net/commits/d3edc9973b7eb1fb302b0ff2c62357091cea9a30",
+			target:      &installed,
 			wantTarget: &models.CommitResponse{
 				Commit: models.Commit{
 					Committer: models.Committer{
@@ -172,14 +159,12 @@ func TestGetGithub(t *testing.T) {
 				},
 				SHA: "d3edc9973b7eb1fb302b0ff2c62357091cea9a30",
 			},
-			wantErr: nil,
 		},
 		{
 			//This is not the true installed version of toml, just forcing this for testing purposes.
 			description: "getGithub should successfully update installed object",
 			url:         "https://api.github.com/repos/BurntSushi/toml/commits/a368813c5e648fee92e5f6c30e3944ff9d5e8895",
 			target:      &installed,
-			token:       *githubToken,
 			wantTarget: &models.CommitResponse{
 				Commit: models.Commit{
 					Committer: models.Committer{
@@ -188,26 +173,22 @@ func TestGetGithub(t *testing.T) {
 				},
 				SHA: "a368813c5e648fee92e5f6c30e3944ff9d5e8895",
 			},
-			wantErr: nil,
 		},
 		{
 			description: "getGithub should successfully update license object",
 			url:         "https://api.github.com/repos/BurntSushi/toml/license",
 			target:      &license,
-			token:       *githubToken,
 			wantTarget: &models.LicenseResponse{
 				License: models.License{
 					Name: "MIT",
 				},
 			},
-			wantErr: nil,
 		},
 		{
 			//This test proves that go.mod mapping to gopkg fields works properly
 			description: "getGithub should successfully update installed object with semantic version",
 			url:         "https://api.github.com/repos/BurntSushi/toml/commits/v0.3.1",
 			target:      &latest,
-			token:       *githubToken,
 			wantTarget: &models.CommitResponse{
 				Commit: models.Commit{
 					Committer: models.Committer{
@@ -216,14 +197,12 @@ func TestGetGithub(t *testing.T) {
 				},
 				SHA: "3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005",
 			},
-			wantErr: nil,
 		},
 		{
 			//This test proves that go.mod mapping to gopkg fields works properly
 			description: "getGithub should successfully update installed object with commit sha prefix",
 			url:         "https://api.github.com/repos/asaskevich/govalidator/commits/475eaeb16496",
 			target:      &installed,
-			token:       *githubToken,
 			wantTarget: &models.CommitResponse{
 				Commit: models.Commit{
 					Committer: models.Committer{
@@ -232,20 +211,13 @@ func TestGetGithub(t *testing.T) {
 				},
 				SHA: "475eaeb164960a651e97470412a7d3b0c5036105",
 			},
-			wantErr: nil,
 		},
 	}
 	for _, test := range tests {
 		t.Run(test.description, func(t *testing.T) {
-			err := getGithub(test.url, &test.target, test.token, c)
-			if err != nil && test.wantErr == nil {
+			err := request.getGithub(test.url, &test.target)
+			if err != nil {
 				t.Errorf("error returned from getGithub: %v", err)
-			}
-			if err == nil && test.wantErr != nil {
-				t.Errorf("expected error, got none: want: %v, got nil", test.wantErr)
-			}
-			if err != nil && test.wantErr != nil {
-				assert.EqualError(t, err, test.wantErr.Error())
 			}
 			if test.wantTarget != nil {
 				assert.EqualValues(t, test.wantTarget, test.target)

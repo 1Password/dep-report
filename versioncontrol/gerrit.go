@@ -11,93 +11,95 @@ import (
 	"time"
 )
 
-func ReportObjFromGerrit(r *models.ReportObject, m models.PkgObject, token string, c *http.Client) error {
-	r.Name = m.Name
-
+func ReportObjFromGerrit(dep models.Dependency, r Client) (*models.ReportObject, error){
 	var gerritRepoURL string
 	var githubRepoURL string
 
-	url, found := GerritRepoURLForPackage[r.Name]
+	url, found := GerritRepoURLForPackage[dep.Name]
 	if found {
 		gerritRepoURL = url
 	}
-	url, found = GithubRepoURLForPackage[r.Name]
+	url, found = GithubRepoURLForPackage[dep.Name]
 	if found {
 		githubRepoURL = url
 	}
 	if !found {
-		repoName := strings.TrimPrefix(r.Name, "golang.org/x/")
+		repoName := strings.TrimPrefix(dep.Name, "golang.org/x/")
 		gerritRepoURL = "https://go-review.googlesource.com/projects/" + repoName
 		githubRepoURL = "https://api.github.com/repos/golang/" + repoName
 	}
 
-	r.Website = gerritRepoURL
-
-	//If the pkgObject comes from go.mod, we have to get the full commit SHA from github before we can call gerrit
-	//go.mod returns either semantic version (v0.3.2) or the commit SHA prefix (d3edc9973b7e)
-	var githubCommit models.CommitResponse
-	if len(m.Revision) != 40 {
-		if err := getGithub(githubRepoURL+"/commits/"+m.Revision, &githubCommit, token, c); err != nil {
-			return errors.Wrapf(err, "unable to get commit SHA from %s :", githubRepoURL)
-		}
-		m.Revision = githubCommit.SHA
+	reportObject := models.ReportObject{
+		Name: dep.Name,
+		Website: gerritRepoURL,
+		Source: dep.Source,
 	}
 
-	commitURL := gerritRepoURL + "/commits/" + m.Revision
+	//If the dependency comes from go.mod, we have to get the full commit SHA from github before we can call gerrit
+	//go.mod returns either semantic version (v0.3.2) or the commit SHA prefix (d3edc9973b7e)
+	var githubCommit models.CommitResponse
+	if len(dep.Revision) != 40 {
+		if err := r.getGithub(githubRepoURL+"/commits/"+dep.Revision, &githubCommit); err != nil {
+			return nil, errors.Wrapf(err, "unable to get commit SHA from %s :", githubRepoURL)
+		}
+		dep.Revision = githubCommit.SHA
+	}
+
+	commitURL := gerritRepoURL + "/commits/" + dep.Revision
 
 	var installed models.Commit
-	if err := getGerrit(commitURL, &installed, c); err != nil {
-		return errors.Wrapf(err, "Unable to get from %s :", commitURL)
+	if err := r.getGerrit(commitURL, &installed); err != nil {
+		return nil, errors.Wrapf(err, "Unable to get from %s :", commitURL)
 	}
 
 	t, err := formatGerritTime(installed.Committer.Date)
 	if err != nil {
-		return errors.Wrapf(err, "Unable to formatGerritTime")
+		return nil, errors.Wrapf(err, "Unable to formatGerritTime")
 	}
-	r.Installed = models.VersionDetails{
+	reportObject.Installed = models.VersionDetails{
 		Commit: installed.CommitSHA,
 		Time:   t,
 	}
 
 	masterURL := gerritRepoURL + "/branches/master"
 	var masterInfo models.BranchInfo
-	if err := getGerrit(masterURL, &masterInfo, c); err != nil {
-		return errors.Wrapf(err, "Unable to get from %s :", masterURL)
+	if err := r.getGerrit(masterURL, &masterInfo); err != nil {
+		return nil, errors.Wrapf(err, "Unable to get from %s :", masterURL)
 	}
 
 	latestURL := gerritRepoURL + "/commits/" + masterInfo.Revision
 	var latest models.Commit
-	if err := getGerrit(latestURL, &latest, c); err != nil {
-		return errors.Wrapf(err, "Unable to get from %s :", latestURL)
+	if err := r.getGerrit(latestURL, &latest); err != nil {
+		return nil, errors.Wrapf(err, "Unable to get from %s :", latestURL)
 	}
 
 	t, err = formatGerritTime(latest.Committer.Date)
 	if err != nil {
-		return errors.Wrapf(err, "Unable to formatGerritTime")
+		return nil, errors.Wrapf(err, "Unable to formatGerritTime")
 	}
-	r.Latest = models.VersionDetails{
+	reportObject.Latest = models.VersionDetails{
 		Commit: masterInfo.Revision,
 		Time:   t,
 	}
 
 	tagsURL := gerritRepoURL + "/tags"
 	var tags []models.Tag
-	if err := getGerrit(tagsURL, &tags, c); err != nil {
-		return errors.Wrapf(err, "Unable to get from %s :", tagsURL)
+	if err := r.getGerrit(tagsURL, &tags); err != nil {
+		return nil, errors.Wrapf(err, "Unable to get from %s :", tagsURL)
 	}
 	if len(tags) > 0 {
 		lastTag := tags[len(tags)-1]
-		r.Latest.Version = strings.Replace(lastTag.Ref, "refs/tags/", "", 1)
+		reportObject.Latest.Version = strings.Replace(lastTag.Ref, "refs/tags/", "", 1)
 	}
 
 	var ok bool
-	r.License, ok = licenseForRepo[m.Name]
+	reportObject.License, ok = licenseForRepo[dep.Name]
 	if !ok {
-		r.License = "Unknown license"
-		fmt.Printf("License info for %s not provided", m.Name)
+		reportObject.License = "Unknown license"
+		fmt.Printf("License info for %s not provided", dep.Name)
 	}
 
-	return nil
+	return &reportObject, nil
 }
 
 func formatGerritTime(t string) (string, error) {
@@ -108,16 +110,16 @@ func formatGerritTime(t string) (string, error) {
 	return t1.Format("2006-01-02T15:04:05Z"), nil
 }
 
-func getGerrit(url string, target interface{}, c *http.Client) error {
+func (r *Client) getGerrit(url string, target interface{}) error {
 	req, err := http.NewRequest("GET", url, nil)
 
-	r, err := c.Do(req)
+	resp, err := r.HttpClient.Do(req)
 	if err != nil {
 		return errors.Wrapf(err, "Unable to client.Do")
 	}
-	defer r.Body.Close()
+	defer resp.Body.Close()
 
-	body, err := ioutil.ReadAll(r.Body)
+	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return errors.Wrapf(err, "Unable to ioutil.ReadAll")
 	}

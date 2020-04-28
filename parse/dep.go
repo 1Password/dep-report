@@ -20,3 +20,16 @@ func ReadGopkg(filepath string) (*models.Pkg, error) {
 
 	return &pkg, nil
 }
+
+func MapPkgToDependency (packages models.Pkg) []models.Dependency{
+	dependencies := make([]models.Dependency, len(packages.Projects))
+	for i, pkg := range packages.Projects{
+		dependency := models.Dependency{
+			Source:   "",
+			Revision: pkg.Revision,
+			Name:     pkg.Name,
+		}
+		dependencies[i] = dependency
+	}
+	return dependencies
+}

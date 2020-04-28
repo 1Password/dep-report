@@ -6,9 +6,8 @@ import (
 	"dep-report/report"
 	"fmt"
 	"log"
-	"net/http"
 	"os"
-	"time"
+	"path/filepath"
 )
 
 const (
@@ -28,48 +27,48 @@ func main() {
 		productName = "b5server"
 	}
 
-	pkg, err := getDependencyFile()
+	dependencies, err := getDependencyFile()
 	if err != nil {
-		log.Fatalf("unable to parse dependency file: %v",err)
+		log.Fatalf("unable to parse dependency file: %v", err)
 	}
 
-	cfg := report.Config{
-		Httpclient: &http.Client{Timeout: 5 * time.Second},
-		Token: githubToken,
-		Productname: productName,
-	}
-	prettyReport, err := cfg.GenerateReport(pkg)
+	g := report.NewGenerator(githubToken, productName)
+
+	rawReport, err := g.GenerateReport(productName, dependencies)
 	if err != nil {
 		log.Fatalf("unable to generate report: %v", err)
+	}
+
+	prettyReport, err := report.FormatReport(*rawReport)
+	if err != nil {
+		log.Fatalf("unable to format report: %v", err)
 	}
 	fmt.Println(string(prettyReport))
 }
 
-func getDependencyFile() (*models.Pkg, error) {
+func getDependencyFile() ([]models.Dependency, error) {
 	wd, err := os.Getwd()
 	if err != nil {
 		return nil, err
 	}
-	var pkg *models.Pkg
+	var deps []models.Dependency
 
 	switch {
-	case fileExists(wd + depFilePath):
-		fmt.Println("Parsing dependencies from gopkg.lock")
-		pkg, err = parse.ReadGopkg(wd + depFilePath)
+	case fileExists(filepath.Join(wd, depFilePath)):
+		pkg, err := parse.ReadGopkg(wd + depFilePath)
 		if err != nil {
 			return nil, err
 		}
-		return pkg, nil
-	case fileExists(wd + goModFilePath):
-		fmt.Println("Parsing dependencies from go.mod")
-		pkg, err = parse.ParseModules()
+		deps = parse.MapPkgToDependency(*pkg)
+	case fileExists(filepath.Join(wd, goModFilePath)):
+		mods, err := parse.ParseModules()
 		if err != nil {
 			return nil, err
 		}
-		return pkg, nil
+		deps = parse.MapModToDependency(mods)
 	}
 
-	return nil, nil
+	return deps, nil
 }
 
 func fileExists(filename string) bool {

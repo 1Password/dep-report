@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func ParseModules() (*models.Pkg, error) {
+func ParseModules() ([]models.Module, error) {
 	var modArray []models.Module
 
 	goMod, err := exec.Command("go", "list", "-m", "-mod=mod", "-json", "all").Output()
@@ -32,28 +32,24 @@ func ParseModules() (*models.Pkg, error) {
 		}
 	}
 
-	return mapModToPkg(&models.Modules{
-		Mods: modArray,
-	}), nil
+	return modArray, nil
 }
 
-func mapModToPkg (modules *models.Modules) *models.Pkg{
-	pkgs := make([]models.PkgObject, len(modules.Mods))
-	for i, mod := range modules.Mods {
-		var pkg models.PkgObject
-		pkg.Name = mod.Path
+func MapModToDependency (modules []models.Module) []models.Dependency{
+	dependencies := make([]models.Dependency, len(modules))
+	for i, mod := range modules {
+		var dependency models.Dependency
+		dependency.Name = mod.Path
 
 		if strings.Contains(mod.Version, "-") {
 			splitVersion := strings.Split(mod.Version, "-")
-			pkg.Revision = splitVersion[len(splitVersion)-1]
+			dependency.Revision = splitVersion[len(splitVersion)-1]
 		} else {
-			pkg.Revision = mod.Version
+			dependency.Revision = mod.Version
 		}
-		pkgs[i] = pkg
+		dependencies[i] = dependency
 	}
-	return &models.Pkg{
-		Projects: pkgs,
-	}
+	return dependencies
 }
 
 

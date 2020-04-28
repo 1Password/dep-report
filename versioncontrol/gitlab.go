@@ -2,8 +2,10 @@ package versioncontrol
 
 import "dep-report/models"
 
-func ReportObjFromGitlab(r *models.ReportObject, m models.PkgObject) error {
-	r.Source = "gitlab"
-	// TODO
-	return nil
+func ReportObjFromGitlab(dep models.Dependency) (*models.ReportObject, error) {
+	reportObject := models.ReportObject{
+		Name: dep.Name,
+		Source: dep.Source,
+	}
+	return &reportObject, nil
 }

@@ -13,24 +13,23 @@ func TestReportObjFromGerrit(t *testing.T) {
 	}
 	defer r.Stop()
 
+	request := Client{
+		HttpClient: c,
+		Token: *githubToken,
+	}
+
 	tests := []struct {
 		description      string
-		reportObject     *models.ReportObject
-		pkgObject        models.PkgObject
-		githubToken      string
+		dependency       models.Dependency
 		wantReportObject *models.ReportObject
 	}{
 		{
-			description: "should successfully return report object when pkgObject is from go.mod and has pseudo version",
-			reportObject: &models.ReportObject{
-				Name:   "golang.org/x/net",
-				Source: "gerrit",
-			},
-			pkgObject: models.PkgObject{
+			description: "should successfully return report object when dependency is from go.mod and has pseudo version",
+			dependency: models.Dependency{
 				Name:     "golang.org/x/net",
 				Revision: "d3edc9973b7e",
+				Source: "gerrit",
 			},
-			githubToken: *githubToken,
 			wantReportObject: &models.ReportObject{
 				Name:    "golang.org/x/net",
 				Source:  "gerrit",
@@ -41,22 +40,18 @@ func TestReportObjFromGerrit(t *testing.T) {
 					Time:   "2020-03-24T14:37:07Z",
 				},
 				Latest: models.VersionDetails{
-					Commit: "e086a090c8fdb9982880f0fb6e3db47af1856533",
-					Time:   "2020-04-21T23:12:49Z",
+					Commit: "ff2c4b7c35a07b0c1e90ce72aa7bfe41bb66a3cb",
+					Time:   "2020-04-25T23:01:54Z",
 				},
 			},
 		},
 		{
-			description: "should successfully return report object when pkgObject is from gopkg",
-			reportObject: &models.ReportObject{
-				Name:   "golang.org/x/net",
-				Source: "gerrit",
-			},
-			pkgObject: models.PkgObject{
+			description: "should successfully return report object when dependency is from gopkg",
+			dependency: models.Dependency{
 				Name:     "golang.org/x/net",
 				Revision: "d3edc9973b7eb1fb302b0ff2c62357091cea9a30",
+				Source: "gerrit",
 			},
-			githubToken: *githubToken,
 			wantReportObject: &models.ReportObject{
 				Name:    "golang.org/x/net",
 				Source:  "gerrit",
@@ -67,22 +62,18 @@ func TestReportObjFromGerrit(t *testing.T) {
 					Time:   "2020-03-24T14:37:07Z",
 				},
 				Latest: models.VersionDetails{
-					Commit: "e086a090c8fdb9982880f0fb6e3db47af1856533",
-					Time:   "2020-04-21T23:12:49Z",
+					Commit: "ff2c4b7c35a07b0c1e90ce72aa7bfe41bb66a3cb",
+					Time:   "2020-04-25T23:01:54Z",
 				},
 			},
 		},
 		{
-			description: "should successfully return report object when pkgObject is from go.mod and has semantic version",
-			reportObject: &models.ReportObject{
-				Name:   "golang.org/x/text",
-				Source: "gerrit",
-			},
-			pkgObject: models.PkgObject{
+			description: "should successfully return report object when dependency is from go.mod and has semantic version",
+			dependency: models.Dependency{
 				Name:     "golang.org/x/text",
 				Revision: "v0.3.2",
+				Source: "gerrit",
 			},
-			githubToken: *githubToken,
 			wantReportObject: &models.ReportObject{
 				Name:    "golang.org/x/text",
 				Source:  "gerrit",
@@ -93,23 +84,19 @@ func TestReportObjFromGerrit(t *testing.T) {
 					Time:   "2019-04-25T21:42:06Z",
 				},
 				Latest: models.VersionDetails{
-					Commit: "06d492aade888ab8698aad35476286b7b555c961",
-					Time:   "2020-03-06T15:41:05Z",
+					Commit: "6ca2caf96f159660c33dae334f64e31e5da91752",
+					Time:   "2020-04-25T22:59:43Z",
 					Version: "v0.3.2",
 				},
 			},
 		},
 		{
-			description: "should successfully return report object when pkgObject is from go.mod and has inconsistent url pattern",
-			reportObject: &models.ReportObject{
-				Name:   "cloud.google.com/go",
-				Source: "gerrit",
-			},
-			pkgObject: models.PkgObject{
+			description: "should successfully return report object when dependency is from go.mod and has inconsistent url pattern",
+			dependency: models.Dependency{
 				Name:     "cloud.google.com/go",
 				Revision: "v0.54.0",
+				Source: "gerrit",
 			},
-			githubToken: *githubToken,
 			wantReportObject: &models.ReportObject{
 				Name:    "cloud.google.com/go",
 				Source:  "gerrit",
@@ -120,63 +107,31 @@ func TestReportObjFromGerrit(t *testing.T) {
 					Time:   "2020-03-05T18:01:17Z",
 				},
 				Latest: models.VersionDetails{
-					Commit: "f5bbb0cbd99b043da6d7054a5f495da3ae8dd15b",
-					Time:   "2020-04-21T14:37:30Z",
+					Commit: "35ee6fba71d7166e4e6e68d22182bb590d7e7da2",
+					Time:   "2020-04-27T12:16:02Z",
 					Version: "v0.9.0",
 				},
 			},
 		},
 		{
-			description: "should successfully return report object when pkgObject is from go.mod and has semantic version",
-			reportObject: &models.ReportObject{
-				Name:   "golang.org/x/text",
+			description: "should successfully return report object when dependency contains package not in licenseForRepo map",
+			dependency: models.Dependency{
+				Name:     "golang.org/x/lint",
+				Revision: "738671d3881b9731cc63024d5d88cf28db875626",
 				Source: "gerrit",
 			},
-			pkgObject: models.PkgObject{
-				Name:     "golang.org/x/text",
-				Revision: "v0.3.2",
-			},
-			githubToken: *githubToken,
 			wantReportObject: &models.ReportObject{
-				Name:    "golang.org/x/text",
-				Source:  "gerrit",
-				License: "BSD-3-Clause",
-				Website: "https://go-review.googlesource.com/projects/text",
-				Installed: models.VersionDetails{
-					Commit: "342b2e1fbaa52c93f31447ad2c6abc048c63e475",
-					Time:   "2019-04-25T21:42:06Z",
-				},
-				Latest: models.VersionDetails{
-					Commit: "06d492aade888ab8698aad35476286b7b555c961",
-					Time:   "2020-03-06T15:41:05Z",
-					Version: "v0.3.2",
-				},
-			},
-		},
-		{
-			description: "should successfully return report object when pkgObject contains package not in licenseForRepo map",
-			reportObject: &models.ReportObject{
-				Name:   "golang.org/x/xerrors",
-				Source: "gerrit",
-			},
-			pkgObject: models.PkgObject{
-				Name:     "golang.org/x/xerrors",
-				Revision: "9bdfabe68543c54f90421aeb9a60ef8061b5b544",
-				Branch: "master",
-			},
-			githubToken: *githubToken,
-			wantReportObject: &models.ReportObject{
-				Name:    "golang.org/x/xerrors",
+				Name:    "golang.org/x/lint",
 				Source:  "gerrit",
 				License: "Unknown license",
-				Website: "https://go-review.googlesource.com/projects/xerrors",
+				Website: "https://go-review.googlesource.com/projects/lint",
 				Installed: models.VersionDetails{
-					Commit: "9bdfabe68543c54f90421aeb9a60ef8061b5b544",
-					Time:   "2019-12-04T19:05:36Z",
+					Commit: "738671d3881b9731cc63024d5d88cf28db875626",
+					Time:   "2020-03-02T20:58:51Z",
 				},
 				Latest: models.VersionDetails{
-					Commit: "9bdfabe68543c54f90421aeb9a60ef8061b5b544",
-					Time:   "2019-12-04T19:05:36Z",
+					Commit: "738671d3881b9731cc63024d5d88cf28db875626",
+					Time:   "2020-03-02T20:58:51Z",
 					Version: "",
 				},
 			},
@@ -184,15 +139,11 @@ func TestReportObjFromGerrit(t *testing.T) {
 	}
 	for _, test := range tests {
 		t.Run(test.description, func(t *testing.T) {
-			err := ReportObjFromGerrit(test.reportObject, test.pkgObject, test.githubToken, c)
+			reportObject, err := ReportObjFromGerrit(test.dependency, request)
 			if err != nil {
 				t.Errorf("unable to compile report for gerrit: %v", err)
 			}
-			assert.EqualValues(t, test.wantReportObject, test.reportObject)
+			assert.EqualValues(t, test.wantReportObject, reportObject)
 		})
 	}
 }
-
-//func TestFormatGerritTime(t *testing.T) {
-//	time :=
-//}

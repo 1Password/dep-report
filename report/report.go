@@ -4,97 +4,100 @@ import (
 	"dep-report/models"
 	"dep-report/versioncontrol"
 	"encoding/json"
-	"fmt"
+	"github.com/pkg/errors"
 	"log"
-	"net/http"
 	"os/exec"
 	"strings"
 	"time"
 )
 
 const (
-	GITHUB        = "github"
-	GITLAB        = "gitlab"
-	GERRIT        = "gerrit"
+	GITHUB = "github"
+	GITLAB = "gitlab"
+	GERRIT = "gerrit"
 )
 
-var Client = &http.Client{Timeout: 5 * time.Second}
-
-type Config struct {
-	Httpclient *http.Client
-	Token string
-	Productname string
-}
-
 // GenerateReport This function is used to create the dependency report
-func (c *Config) GenerateReport (pkg *models.Pkg) ([]byte, error){
-	commit, commitTime := getCurrentCommitAndCommitTime()
+//consider naming this build report
+func (g *Generator) GenerateReport(productName string, dependencies []models.Dependency) (*models.Report, error) {
+	commit, commitTime, err := getCurrentCommitAndCommitTime()
+	if err != nil {
+		return nil, err
+	}
 
 	report := models.Report{
-		Product:    c.Productname,
-		Commit:     commit,
+		Product: productName,
+		Commit:  commit,
 		CommitTime: commitTime,
 		ReportTime: time.Now().UTC().Format("2006-01-02T15:04:05Z"),
 	}
 
-	for _, pObj := range pkg.Projects {
-		rObj, err := c.reportObjFromPkgObj(pObj, c.Token)
+	for _, dependency := range dependencies {
+		rObj, err := g.reportObjFromDependency(dependency)
 		if err != nil {
-			return nil, fmt.Errorf("failed to create report object from pkg object: %v, %w", pObj, err)
+			return nil, errors.Wrapf(err,"failed to create report object from dependency: %v", dependency)
 		}
 
-		report.Dependencies = append(report.Dependencies, rObj)
+		report.Dependencies = append(report.Dependencies, *rObj)
+	}
+	return &report, nil
+}
+
+//FormatReport takes a report struct and formats it into pretty json
+func FormatReport(rawReport models.Report) ([]byte, error){
+	prettyReport, err := json.MarshalIndent(rawReport, "", "  ")
+	if err != nil {
+		return nil, errors.Wrap(err, "unable to marshal indent report")
 	}
 
-	prettyReport, err := json.MarshalIndent(report, "", "  ")
-	if err != nil {
-		return nil, fmt.Errorf("unable to marshal report into pretty json format: %w", err)
-	}
 	return prettyReport, nil
 }
 
-func getCurrentCommitAndCommitTime() (string, string) {
+func getCurrentCommitAndCommitTime() (string, string, error) {
 	commitBytes, err := exec.Command("git", "rev-parse", "HEAD").Output()
 	if err != nil {
-		log.Fatal("Failed to get current commit", err)
+		return "", "", errors.Wrap(err, "Failed to get current commit")
 	}
+
 	commit := strings.TrimSpace(string(commitBytes))
 
 	commitTimeBytes, err := exec.Command("git", "show", "-s", "--format=%cI", "HEAD").Output()
 	if err != nil {
-		log.Fatal("Failed to get current commit time", err)
+		return "", "", errors.Wrap(err,"Failed to get current commit time")
 	}
+
 	commitTime := strings.TrimSpace(string(commitTimeBytes))
 
-	return commit, commitTime
+	return commit, commitTime, nil
 }
 
-func (c Config) reportObjFromPkgObj(m models.PkgObject, githubToken string) (models.ReportObject, error) {
-	log.Println("Transforming ", m.Name)
-	r := models.ReportObject{
-		Name:    m.Name,
-		Website: m.Source,
-		Source: determineSource(m.Name),
-	}
+func (g Generator) reportObjFromDependency(dep models.Dependency) (*models.ReportObject, error) {
+	dep.Source = determineSource(dep.Name)
 
-	switch r.Source {
+	var reportObject *models.ReportObject
+	var err error
+
+	switch dep.Source {
 	case GITHUB:
-		if err := versioncontrol.ReportObjFromGithub(&r, m, c.Token, c.Httpclient); err != nil {
-			return r, err
+		reportObject, err = versioncontrol.ReportObjFromGithub(dep, g.request)
+		if err != nil {
+			return nil, errors.Wrapf(err, "unable to generate reportObject from dependency %s", dep.Name)
 		}
 	case GITLAB:
-		if err := versioncontrol.ReportObjFromGitlab(&r, m); err != nil {
-			return r, err
+		reportObject, err = versioncontrol.ReportObjFromGitlab(dep)
+		if err != nil {
+			return nil, errors.Wrapf(err, "unable to generate reportObject from dependency %s", dep.Name)
 		}
 	case GERRIT:
-		if err := versioncontrol.ReportObjFromGerrit(&r, m, c.Token, c.Httpclient); err != nil {
-			return r, err
+		reportObject, err = versioncontrol.ReportObjFromGerrit(dep, g.request)
+		if err != nil {
+			return nil, errors.Wrapf(err, "unable to generate reportObject from dependency %s", dep.Name)
 		}
 	default:
-		log.Println("Unable to determine repo source for ", m.Name)
+		log.Println("Unable to determine repo source for ", dep.Name)
 	}
 
-	return r, nil
+	return reportObject, nil
 }
 
 func determineSource(packageName string) string {
@@ -104,9 +107,9 @@ func determineSource(packageName string) string {
 		repo = url
 	}
 
-	switch{
+	switch {
 	case strings.Contains(repo, GITHUB):
-		if strings.Contains(repo,"repo"){
+		if strings.Contains(repo, "repo") {
 			return GERRIT
 		} else {
 			return GITHUB

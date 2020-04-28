@@ -8,58 +8,6 @@ interactions:
     url: https://api.github.com/repos/BurntSushi/toml/commits/HEAD
     method: GET
   response:
-    body: '{"message":"Bad credentials","documentation_url":"https://developer.github.com/v3"}'
-    headers:
-      Access-Control-Allow-Origin:
-      - '*'
-      Access-Control-Expose-Headers:
-      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
-        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
-        X-GitHub-Media-Type, Deprecation, Sunset
-      Content-Length:
-      - "83"
-      Content-Security-Policy:
-      - default-src 'none'
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Tue, 21 Apr 2020 20:27:53 GMT
-      Referrer-Policy:
-      - origin-when-cross-origin, strict-origin-when-cross-origin
-      Server:
-      - GitHub.com
-      Status:
-      - 401 Unauthorized
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubdomains; preload
-      Vary:
-      - Accept-Encoding, Accept, X-Requested-With
-      X-Content-Type-Options:
-      - nosniff
-      X-Frame-Options:
-      - deny
-      X-Github-Media-Type:
-      - github.v3; format=json
-      X-Github-Request-Id:
-      - AFD4:0DC5:13CAC7:21F080:5E9F5748
-      X-Ratelimit-Limit:
-      - "60"
-      X-Ratelimit-Remaining:
-      - "51"
-      X-Ratelimit-Reset:
-      - "1587504173"
-      X-Xss-Protection:
-      - 1; mode=block
-    status: 401 Unauthorized
-    code: 401
-    duration: ""
-- request:
-    body: ""
-    form: {}
-    headers: {}
-    url: https://api.github.com/repos/BurntSushi/toml/commits/HEAD
-    method: GET
-  response:
     body: '{"sha":"3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005","node_id":"MDY6Q29tbWl0ODQyNTYyMjozMDEyYTFkYmUyZTRiZDEzOTFkNDJiMzJmMDU3N2NiN2JiYzdmMDA1","commit":{"author":{"name":"Andrew
       Gallant","email":"jamslam@gmail.com","date":"2018-08-15T10:47:33Z"},"committer":{"name":"GitHub","email":"noreply@github.com","date":"2018-08-15T10:47:33Z"},"message":"Merge
       pull request #230 from gregwebs/cmd-license-wtf\n\nswitch the licenses of cmd/
@@ -147,7 +95,7 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 21 Apr 2020 20:27:53 GMT
+      - Mon, 27 Apr 2020 19:42:18 GMT
       Etag:
       - W/"314e3cae6d16a462e34b3ccd294f41c6"
       Last-Modified:
@@ -172,7 +120,7 @@ interactions:
       X-Github-Media-Type:
       - github.v3; format=json
       X-Github-Request-Id:
-      - AFD4:0DC5:13CAD2:21F084:5E9F5749
+      - 8762:37F9:2421D44:3DD36B4:5EA7359A
       X-Oauth-Scopes:
       - admin:enterprise, admin:gpg_key, admin:org, admin:org_hook, admin:public_key,
         admin:repo_hook, delete:packages, delete_repo, gist, notifications, read:packages,
@@ -180,9 +128,9 @@ interactions:
       X-Ratelimit-Limit:
       - "5000"
       X-Ratelimit-Remaining:
-      - "4988"
+      - "4992"
       X-Ratelimit-Reset:
-      - "1587504234"
+      - "1588019656"
       X-Xss-Protection:
       - 1; mode=block
     status: 200 OK
@@ -192,7 +140,7 @@ interactions:
     body: ""
     form: {}
     headers: {}
-    url: https://api.github.com/repos/golang/net/commits/HEAD
+    url: https://api.github.com/repos/golang/net/commits/d3edc9973b7eb1fb302b0ff2c62357091cea9a30
     method: GET
   response:
     body: '{"sha":"d3edc9973b7eb1fb302b0ff2c62357091cea9a30","node_id":"MDY6Q29tbWl0Mjc1MjIyNzE6ZDNlZGM5OTczYjdlYjFmYjMwMmIwZmYyYzYyMzU3MDkxY2VhOWEzMA==","commit":{"author":{"name":"Tobias
@@ -236,7 +184,7 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 21 Apr 2020 20:27:53 GMT
+      - Mon, 27 Apr 2020 19:42:19 GMT
       Etag:
       - W/"e1a573c7253e27c5802e0c6752aae32b"
       Last-Modified:
@@ -261,7 +209,7 @@ interactions:
       X-Github-Media-Type:
       - github.v3; format=json
       X-Github-Request-Id:
-      - AFD4:0DC5:13CAE3:21F09D:5E9F5749
+      - 8762:37F9:2421D54:3DD36C6:5EA7359A
       X-Oauth-Scopes:
       - admin:enterprise, admin:gpg_key, admin:org, admin:org_hook, admin:public_key,
         admin:repo_hook, delete:packages, delete_repo, gist, notifications, read:packages,
@@ -269,9 +217,9 @@ interactions:
       X-Ratelimit-Limit:
       - "5000"
       X-Ratelimit-Remaining:
-      - "4987"
+      - "4991"
       X-Ratelimit-Reset:
-      - "1587504234"
+      - "1588019656"
       X-Xss-Protection:
       - 1; mode=block
     status: 200 OK
@@ -315,7 +263,7 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 21 Apr 2020 20:27:53 GMT
+      - Mon, 27 Apr 2020 19:42:19 GMT
       Etag:
       - W/"f17f06ce87a27a2fd1a06fed33bcde8d"
       Last-Modified:
@@ -340,7 +288,7 @@ interactions:
       X-Github-Media-Type:
       - github.v3; format=json
       X-Github-Request-Id:
-      - AFD4:0DC5:13CAF5:21F0CC:5E9F5749
+      - 8762:37F9:2421D80:3DD36EC:5EA7359B
       X-Oauth-Scopes:
       - admin:enterprise, admin:gpg_key, admin:org, admin:org_hook, admin:public_key,
         admin:repo_hook, delete:packages, delete_repo, gist, notifications, read:packages,
@@ -348,9 +296,9 @@ interactions:
       X-Ratelimit-Limit:
       - "5000"
       X-Ratelimit-Remaining:
-      - "4986"
+      - "4990"
       X-Ratelimit-Reset:
-      - "1587504233"
+      - "1588019656"
       X-Xss-Protection:
       - 1; mode=block
     status: 200 OK
@@ -379,7 +327,7 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 21 Apr 2020 20:27:53 GMT
+      - Mon, 27 Apr 2020 19:42:19 GMT
       Etag:
       - W/"14c5591ac8744b71fc5365f94734dae9"
       Last-Modified:
@@ -404,7 +352,7 @@ interactions:
       X-Github-Media-Type:
       - github.v3; format=json
       X-Github-Request-Id:
-      - AFD4:0DC5:13CB07:21F0EE:5E9F5749
+      - 8762:37F9:2421DAC:3DD3730:5EA7359B
       X-Oauth-Scopes:
       - admin:enterprise, admin:gpg_key, admin:org, admin:org_hook, admin:public_key,
         admin:repo_hook, delete:packages, delete_repo, gist, notifications, read:packages,
@@ -412,9 +360,9 @@ interactions:
       X-Ratelimit-Limit:
       - "5000"
       X-Ratelimit-Remaining:
-      - "4985"
+      - "4989"
       X-Ratelimit-Reset:
-      - "1587504233"
+      - "1588019656"
       X-Xss-Protection:
       - 1; mode=block
     status: 200 OK
@@ -514,7 +462,7 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 21 Apr 2020 20:27:53 GMT
+      - Mon, 27 Apr 2020 19:42:20 GMT
       Etag:
       - W/"314e3cae6d16a462e34b3ccd294f41c6"
       Last-Modified:
@@ -539,7 +487,7 @@ interactions:
       X-Github-Media-Type:
       - github.v3; format=json
       X-Github-Request-Id:
-      - AFD4:0DC5:13CB1E:21F10D:5E9F5749
+      - 8762:37F9:2421DC2:3DD3783:5EA7359B
       X-Oauth-Scopes:
       - admin:enterprise, admin:gpg_key, admin:org, admin:org_hook, admin:public_key,
         admin:repo_hook, delete:packages, delete_repo, gist, notifications, read:packages,
@@ -547,9 +495,9 @@ interactions:
       X-Ratelimit-Limit:
       - "5000"
       X-Ratelimit-Remaining:
-      - "4984"
+      - "4988"
       X-Ratelimit-Reset:
-      - "1587504233"
+      - "1588019656"
       X-Xss-Protection:
       - 1; mode=block
     status: 200 OK
@@ -584,7 +532,7 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 21 Apr 2020 20:27:54 GMT
+      - Mon, 27 Apr 2020 19:42:20 GMT
       Etag:
       - W/"46be89c0566f55a1967147b1d3e4aae7"
       Last-Modified:
@@ -609,7 +557,7 @@ interactions:
       X-Github-Media-Type:
       - github.v3; format=json
       X-Github-Request-Id:
-      - AFD4:0DC5:13CB31:21F13B:5E9F5749
+      - 8762:37F9:2421DDA:3DD37A7:5EA7359C
       X-Oauth-Scopes:
       - admin:enterprise, admin:gpg_key, admin:org, admin:org_hook, admin:public_key,
         admin:repo_hook, delete:packages, delete_repo, gist, notifications, read:packages,
@@ -617,9 +565,9 @@ interactions:
       X-Ratelimit-Limit:
       - "5000"
       X-Ratelimit-Remaining:
-      - "4983"
+      - "4987"
       X-Ratelimit-Reset:
-      - "1587504234"
+      - "1588019656"
       X-Xss-Protection:
       - 1; mode=block
     status: 200 OK
