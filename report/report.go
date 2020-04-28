@@ -17,17 +17,16 @@ const (
 	GERRIT = "gerrit"
 )
 
-// GenerateReport This function is used to create the dependency report
-//consider naming this build report
-func (g *Generator) GenerateReport(productName string, dependencies []models.Dependency) (*models.Report, error) {
+// BuildReport This function is used to create the dependency report
+func (g *Generator) BuildReport(productName string, dependencies []models.Dependency) (*models.Report, error) {
 	commit, commitTime, err := getCurrentCommitAndCommitTime()
 	if err != nil {
 		return nil, err
 	}
 
 	report := models.Report{
-		Product: productName,
-		Commit:  commit,
+		Product:    productName,
+		Commit:     commit,
 		CommitTime: commitTime,
 		ReportTime: time.Now().UTC().Format("2006-01-02T15:04:05Z"),
 	}
@@ -35,7 +34,7 @@ func (g *Generator) GenerateReport(productName string, dependencies []models.Dep
 	for _, dependency := range dependencies {
 		rObj, err := g.reportObjFromDependency(dependency)
 		if err != nil {
-			return nil, errors.Wrapf(err,"failed to create report object from dependency: %v", dependency)
+			return nil, errors.Wrapf(err, "failed to create report object from dependency: %v", dependency)
 		}
 
 		report.Dependencies = append(report.Dependencies, *rObj)
@@ -44,7 +43,7 @@ func (g *Generator) GenerateReport(productName string, dependencies []models.Dep
 }
 
 //FormatReport takes a report struct and formats it into pretty json
-func FormatReport(rawReport models.Report) ([]byte, error){
+func FormatReport(rawReport models.Report) ([]byte, error) {
 	prettyReport, err := json.MarshalIndent(rawReport, "", "  ")
 	if err != nil {
 		return nil, errors.Wrap(err, "unable to marshal indent report")
@@ -63,7 +62,7 @@ func getCurrentCommitAndCommitTime() (string, string, error) {
 
 	commitTimeBytes, err := exec.Command("git", "show", "-s", "--format=%cI", "HEAD").Output()
 	if err != nil {
-		return "", "", errors.Wrap(err,"Failed to get current commit time")
+		return "", "", errors.Wrap(err, "Failed to get current commit time")
 	}
 
 	commitTime := strings.TrimSpace(string(commitTimeBytes))

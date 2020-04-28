@@ -7,7 +7,7 @@ import (
 	"os/exec"
 	"strings"
 )
-
+//ParseModules runs the `go list` command and formats the output for further processing
 func ParseModules() ([]models.Module, error) {
 	var modArray []models.Module
 
@@ -34,7 +34,7 @@ func ParseModules() ([]models.Module, error) {
 
 	return modArray, nil
 }
-
+//MapModToDependency takes an array of modules as a param and converts it to an []models.dependency
 func MapModToDependency (modules []models.Module) []models.Dependency{
 	dependencies := make([]models.Dependency, len(modules))
 	for i, mod := range modules {

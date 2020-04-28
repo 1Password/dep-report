@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 )
-
+//ReportObjFromGerrit uses the data in a dependency object and creates a report object
 func ReportObjFromGerrit(dep models.Dependency, r Client) (*models.ReportObject, error){
 	var gerritRepoURL string
 	var githubRepoURL string

@@ -34,7 +34,7 @@ func main() {
 
 	g := report.NewGenerator(githubToken, productName)
 
-	rawReport, err := g.GenerateReport(productName, dependencies)
+	rawReport, err := g.BuildReport(productName, dependencies)
 	if err != nil {
 		log.Fatalf("unable to generate report: %v", err)
 	}

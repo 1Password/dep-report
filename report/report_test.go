@@ -283,9 +283,9 @@ func TestGenerateReport(t *testing.T) {
 	}
 	for _, test := range tests {
 		t.Run(test.description, func(t *testing.T) {
-			gotReport, err := g.GenerateReport(productName, test.pkg)
+			gotReport, err := g.BuildReport(productName, test.pkg)
 			if err != nil {
-				t.Errorf("GenerateReport failed with errors: %v", err)
+				t.Errorf("BuildReport failed with errors: %v", err)
 			}
 
 			if gotReport != nil {

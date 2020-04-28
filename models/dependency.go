@@ -26,10 +26,7 @@ type Pkg struct {
 	Projects []PkgObject
 }
 
-type Modules struct {
-	Mods []Module
-}
-
+//Module is a type that represents the json output of `go list`
 type Module struct {
 	Path    string    `json:"Path"`
 	Version string    `json:"Version"`
