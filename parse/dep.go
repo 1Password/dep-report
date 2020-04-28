@@ -14,7 +14,7 @@ func ReadGopkg(filepath string) (*models.Pkg, error) {
 	}
 
 	var pkg models.Pkg
-	if _, err := toml.Decode(string(pkgData), &pkg); err != nil {
+	if err := toml.Unmarshal(pkgData, &pkg); err != nil {
 		return nil, errors.Wrap(err, "Failed to json.Unmarshal pkg data")
 	}
 
