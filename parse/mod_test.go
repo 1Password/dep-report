@@ -8,10 +8,10 @@ import (
 )
 
 func TestParseModules(t *testing.T) {
-	//_, err := ParseModules()
-	//if err != nil {
-	//	t.Errorf("unable to read go.mod, %v", err)
-	//}
+	_, err := ParseModules()
+	if err != nil {
+		t.Errorf("unable to read go.mod, %v", err)
+	}
 }
 
 func TestMapModToPkg(t *testing.T) {
