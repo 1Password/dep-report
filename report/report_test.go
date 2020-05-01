@@ -1,8 +1,8 @@
 package report
 
 import (
-	"dep-report/models"
-	"dep-report/versioncontrol"
+	"github.com/1Password/dep-report/models"
+	"github.com/1Password/dep-report/versioncontrol"
 	"flag"
 	"github.com/stretchr/testify/assert"
 	"testing"

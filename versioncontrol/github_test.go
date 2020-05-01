@@ -1,7 +1,7 @@
 package versioncontrol
 
 import (
-	"dep-report/models"
+	"github.com/1Password/dep-report/models"
 	"flag"
 	"github.com/stretchr/testify/assert"
 	"testing"

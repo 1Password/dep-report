@@ -1,7 +1,7 @@
 package parse
 
 import (
-	"dep-report/models"
+	"github.com/1Password/dep-report/models"
 	"github.com/BurntSushi/toml"
 	"github.com/pkg/errors"
 	"io/ioutil"

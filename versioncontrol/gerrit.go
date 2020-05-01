@@ -1,7 +1,7 @@
 package versioncontrol
 
 import (
-	"dep-report/models"
+	"github.com/1Password/dep-report/models"
 	"encoding/json"
 	"github.com/pkg/errors"
 	"io/ioutil"

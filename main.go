@@ -1,9 +1,9 @@
 package main
 
 import (
-	"dep-report/models"
-	"dep-report/parse"
-	"dep-report/report"
+	"github.com/1Password/dep-report/models"
+	"github.com/1Password/dep-report/parse"
+	"github.com/1Password/dep-report/report"
 	"fmt"
 	"log"
 	"os"

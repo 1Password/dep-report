@@ -1,7 +1,7 @@
 package parse
 
 import (
-	"dep-report/models"
+	"github.com/1Password/dep-report/models"
 	"github.com/stretchr/testify/assert"
 	"testing"
 	"time"
