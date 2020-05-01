@@ -1,0 +1,664 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers: {}
+    url: https://api.github.com/repos/BurntSushi/toml/license
+    method: GET
+  response:
+    body: '{"name":"COPYING","path":"COPYING","sha":"01b5743200b847d124309d07aa288b8d7738fd4c","size":1079,"url":"https://api.github.com/repos/BurntSushi/toml/contents/COPYING?ref=master","html_url":"https://github.com/BurntSushi/toml/blob/master/COPYING","git_url":"https://api.github.com/repos/BurntSushi/toml/git/blobs/01b5743200b847d124309d07aa288b8d7738fd4c","download_url":"https://raw.githubusercontent.com/BurntSushi/toml/master/COPYING","type":"file","content":"VGhlIE1JVCBMaWNlbnNlIChNSVQpCgpDb3B5cmlnaHQgKGMpIDIwMTMgVE9N\nTCBhdXRob3JzCgpQZXJtaXNzaW9uIGlzIGhlcmVieSBncmFudGVkLCBmcmVl\nIG9mIGNoYXJnZSwgdG8gYW55IHBlcnNvbiBvYnRhaW5pbmcgYSBjb3B5Cm9m\nIHRoaXMgc29mdHdhcmUgYW5kIGFzc29jaWF0ZWQgZG9jdW1lbnRhdGlvbiBm\naWxlcyAodGhlICJTb2Z0d2FyZSIpLCB0byBkZWFsCmluIHRoZSBTb2Z0d2Fy\nZSB3aXRob3V0IHJlc3RyaWN0aW9uLCBpbmNsdWRpbmcgd2l0aG91dCBsaW1p\ndGF0aW9uIHRoZSByaWdodHMKdG8gdXNlLCBjb3B5LCBtb2RpZnksIG1lcmdl\nLCBwdWJsaXNoLCBkaXN0cmlidXRlLCBzdWJsaWNlbnNlLCBhbmQvb3Igc2Vs\nbApjb3BpZXMgb2YgdGhlIFNvZnR3YXJlLCBhbmQgdG8gcGVybWl0IHBlcnNv\nbnMgdG8gd2hvbSB0aGUgU29mdHdhcmUgaXMKZnVybmlzaGVkIHRvIGRvIHNv\nLCBzdWJqZWN0IHRvIHRoZSBmb2xsb3dpbmcgY29uZGl0aW9uczoKClRoZSBh\nYm92ZSBjb3B5cmlnaHQgbm90aWNlIGFuZCB0aGlzIHBlcm1pc3Npb24gbm90\naWNlIHNoYWxsIGJlIGluY2x1ZGVkIGluCmFsbCBjb3BpZXMgb3Igc3Vic3Rh\nbnRpYWwgcG9ydGlvbnMgb2YgdGhlIFNvZnR3YXJlLgoKVEhFIFNPRlRXQVJF\nIElTIFBST1ZJREVEICJBUyBJUyIsIFdJVEhPVVQgV0FSUkFOVFkgT0YgQU5Z\nIEtJTkQsIEVYUFJFU1MgT1IKSU1QTElFRCwgSU5DTFVESU5HIEJVVCBOT1Qg\nTElNSVRFRCBUTyBUSEUgV0FSUkFOVElFUyBPRiBNRVJDSEFOVEFCSUxJVFks\nCkZJVE5FU1MgRk9SIEEgUEFSVElDVUxBUiBQVVJQT1NFIEFORCBOT05JTkZS\nSU5HRU1FTlQuIElOIE5PIEVWRU5UIFNIQUxMIFRIRQpBVVRIT1JTIE9SIENP\nUFlSSUdIVCBIT0xERVJTIEJFIExJQUJMRSBGT1IgQU5ZIENMQUlNLCBEQU1B\nR0VTIE9SIE9USEVSCkxJQUJJTElUWSwgV0hFVEhFUiBJTiBBTiBBQ1RJT04g\nT0YgQ09OVFJBQ1QsIFRPUlQgT1IgT1RIRVJXSVNFLCBBUklTSU5HIEZST00s\nCk9VVCBPRiBPUiBJTiBDT05ORUNUSU9OIFdJVEggVEhFIFNPRlRXQVJFIE9S\nIFRIRSBVU0UgT1IgT1RIRVIgREVBTElOR1MgSU4KVEhFIFNPRlRXQVJFLgo=\n","encoding":"base64","_links":{"self":"https://api.github.com/repos/BurntSushi/toml/contents/COPYING?ref=master","git":"https://api.github.com/repos/BurntSushi/toml/git/blobs/01b5743200b847d124309d07aa288b8d7738fd4c","html":"https://github.com/BurntSushi/toml/blob/master/COPYING"},"license":{"key":"mit","name":"MIT
+      License","spdx_id":"MIT","url":"https://api.github.com/licenses/mit","node_id":"MDc6TGljZW5zZTEz"}}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
+        X-GitHub-Media-Type, Deprecation, Sunset
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Content-Security-Policy:
+      - default-src 'none'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 21 Apr 2020 04:55:22 GMT
+      Etag:
+      - W/"14c5591ac8744b71fc5365f94734dae9"
+      Last-Modified:
+      - Wed, 15 Aug 2018 10:47:33 GMT
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Server:
+      - GitHub.com
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding, Accept, X-Requested-With
+      X-Accepted-Oauth-Scopes:
+      - ""
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Github-Request-Id:
+      - 96EC:7794:778672:E12F59:5E9E7CBA
+      X-Oauth-Scopes:
+      - admin:enterprise, admin:gpg_key, admin:org, admin:org_hook, admin:public_key,
+        admin:repo_hook, delete:packages, delete_repo, gist, notifications, read:packages,
+        repo, user, workflow, write:discussion, write:packages
+      X-Ratelimit-Limit:
+      - "5000"
+      X-Ratelimit-Remaining:
+      - "4991"
+      X-Ratelimit-Reset:
+      - "1587448311"
+      X-Xss-Protection:
+      - 1; mode=block
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers: {}
+    url: https://api.github.com/repos/BurntSushi/toml/commits/3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005
+    method: GET
+  response:
+    body: '{"sha":"3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005","node_id":"MDY6Q29tbWl0ODQyNTYyMjozMDEyYTFkYmUyZTRiZDEzOTFkNDJiMzJmMDU3N2NiN2JiYzdmMDA1","commit":{"author":{"name":"Andrew
+      Gallant","email":"jamslam@gmail.com","date":"2018-08-15T10:47:33Z"},"committer":{"name":"GitHub","email":"noreply@github.com","date":"2018-08-15T10:47:33Z"},"message":"Merge
+      pull request #230 from gregwebs/cmd-license-wtf\n\nswitch the licenses of cmd/
+      to be the same as the root","tree":{"sha":"ed84a63bc80d3fabbf263219f5517c3822badbaa","url":"https://api.github.com/repos/BurntSushi/toml/git/trees/ed84a63bc80d3fabbf263219f5517c3822badbaa"},"url":"https://api.github.com/repos/BurntSushi/toml/git/commits/3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005","comment_count":0,"verification":{"verified":true,"reason":"valid","signature":"-----BEGIN
+      PGP SIGNATURE-----\n\nwsBcBAABCAAQBQJbdATFCRBK7hj4Ov3rIwAAdHIIAExSVSzWUtwraAu65mp1bP56\ngSha8VJldHKE+o7Fl89S71S6Zpa87kZIhMuUB3nGVp7pyCnMZHUMOhoaNcEuRJ3J\n//y2bGslHQs+5HVgI8w8R8qHaR5VArfM1WRxvAR8J3iNpaGTWR/boLB1vqZE3ecd\nLB6HUu6kc3+1vHpM1Fcq5E3MOf3rFgaXueJpSJmbklIHe/ocHoTeFVhXGSYHKD7/\nUIePHdEdsL5a+f9awyvGm/WaGJPLqNX0Ho6a33NunddV4CeKqn6ZAgvjUuatxrgR\nRUc54zPds2onjIb7hBDnMzQLGnKie4xUyhEbfy4kSppreGA5cXZNEj4BTYHBfcw=\n=ZnJu\n-----END
+      PGP SIGNATURE-----\n","payload":"tree ed84a63bc80d3fabbf263219f5517c3822badbaa\nparent
+      a368813c5e648fee92e5f6c30e3944ff9d5e8895\nparent fce9655971ea449643e930ea54cc229adba48fd7\nauthor
+      Andrew Gallant <jamslam@gmail.com> 1534330053 -0700\ncommitter GitHub <noreply@github.com>
+      1534330053 -0700\n\nMerge pull request #230 from gregwebs/cmd-license-wtf\n\nswitch
+      the licenses of cmd/ to be the same as the root"}},"url":"https://api.github.com/repos/BurntSushi/toml/commits/3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005","html_url":"https://github.com/BurntSushi/toml/commit/3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005","comments_url":"https://api.github.com/repos/BurntSushi/toml/commits/3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005/comments","author":{"login":"BurntSushi","id":456674,"node_id":"MDQ6VXNlcjQ1NjY3NA==","avatar_url":"https://avatars3.githubusercontent.com/u/456674?v=4","gravatar_id":"","url":"https://api.github.com/users/BurntSushi","html_url":"https://github.com/BurntSushi","followers_url":"https://api.github.com/users/BurntSushi/followers","following_url":"https://api.github.com/users/BurntSushi/following{/other_user}","gists_url":"https://api.github.com/users/BurntSushi/gists{/gist_id}","starred_url":"https://api.github.com/users/BurntSushi/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/BurntSushi/subscriptions","organizations_url":"https://api.github.com/users/BurntSushi/orgs","repos_url":"https://api.github.com/users/BurntSushi/repos","events_url":"https://api.github.com/users/BurntSushi/events{/privacy}","received_events_url":"https://api.github.com/users/BurntSushi/received_events","type":"User","site_admin":false},"committer":{"login":"web-flow","id":19864447,"node_id":"MDQ6VXNlcjE5ODY0NDQ3","avatar_url":"https://avatars3.githubusercontent.com/u/19864447?v=4","gravatar_id":"","url":"https://api.github.com/users/web-flow","html_url":"https://github.com/web-flow","followers_url":"https://api.github.com/users/web-flow/followers","following_url":"https://api.github.com/users/web-flow/following{/other_user}","gists_url":"https://api.github.com/users/web-flow/gists{/gist_id}","starred_url":"https://api.github.com/users/web-flow/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/web-flow/subscriptions","organizations_url":"https://api.github.com/users/web-flow/orgs","repos_url":"https://api.github.com/users/web-flow/repos","events_url":"https://api.github.com/users/web-flow/events{/privacy}","received_events_url":"https://api.github.com/users/web-flow/received_events","type":"User","site_admin":false},"parents":[{"sha":"a368813c5e648fee92e5f6c30e3944ff9d5e8895","url":"https://api.github.com/repos/BurntSushi/toml/commits/a368813c5e648fee92e5f6c30e3944ff9d5e8895","html_url":"https://github.com/BurntSushi/toml/commit/a368813c5e648fee92e5f6c30e3944ff9d5e8895"},{"sha":"fce9655971ea449643e930ea54cc229adba48fd7","url":"https://api.github.com/repos/BurntSushi/toml/commits/fce9655971ea449643e930ea54cc229adba48fd7","html_url":"https://github.com/BurntSushi/toml/commit/fce9655971ea449643e930ea54cc229adba48fd7"}],"stats":{"total":81,"additions":51,"deletions":30},"files":[{"sha":"01b5743200b847d124309d07aa288b8d7738fd4c","filename":"cmd/toml-test-decoder/COPYING","status":"modified","additions":17,"deletions":10,"changes":27,"blob_url":"https://github.com/BurntSushi/toml/blob/3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005/cmd/toml-test-decoder/COPYING","raw_url":"https://github.com/BurntSushi/toml/raw/3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005/cmd/toml-test-decoder/COPYING","contents_url":"https://api.github.com/repos/BurntSushi/toml/contents/cmd/toml-test-decoder/COPYING?ref=3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005","patch":"@@
+      -1,14 +1,21 @@\n-            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE\n-                    Version
+      2, December 2004\n+The MIT License (MIT)\n \n- Copyright (C) 2004 Sam Hocevar
+      <sam@hocevar.net>\n+Copyright (c) 2013 TOML authors\n \n- Everyone is permitted
+      to copy and distribute verbatim or modified\n- copies of this license document,
+      and changing it is allowed as long\n- as the name is changed.\n+Permission is
+      hereby granted, free of charge, to any person obtaining a copy\n+of this software
+      and associated documentation files (the \"Software\"), to deal\n+in the Software
+      without restriction, including without limitation the rights\n+to use, copy,
+      modify, merge, publish, distribute, sublicense, and/or sell\n+copies of the
+      Software, and to permit persons to whom the Software is\n+furnished to do so,
+      subject to the following conditions:\n \n-            DO WHAT THE FUCK YOU WANT
+      TO PUBLIC LICENSE\n-   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION\n-\n-  0.
+      You just DO WHAT THE FUCK YOU WANT TO.\n+The above copyright notice and this
+      permission notice shall be included in\n+all copies or substantial portions
+      of the Software.\n \n+THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF
+      ANY KIND, EXPRESS OR\n+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+      OF MERCHANTABILITY,\n+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+      IN NO EVENT SHALL THE\n+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+      DAMAGES OR OTHER\n+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+      ARISING FROM,\n+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+      DEALINGS IN\n+THE SOFTWARE."},{"sha":"01b5743200b847d124309d07aa288b8d7738fd4c","filename":"cmd/toml-test-encoder/COPYING","status":"modified","additions":17,"deletions":10,"changes":27,"blob_url":"https://github.com/BurntSushi/toml/blob/3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005/cmd/toml-test-encoder/COPYING","raw_url":"https://github.com/BurntSushi/toml/raw/3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005/cmd/toml-test-encoder/COPYING","contents_url":"https://api.github.com/repos/BurntSushi/toml/contents/cmd/toml-test-encoder/COPYING?ref=3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005","patch":"@@
+      -1,14 +1,21 @@\n-            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE\n-                    Version
+      2, December 2004\n+The MIT License (MIT)\n \n- Copyright (C) 2004 Sam Hocevar
+      <sam@hocevar.net>\n+Copyright (c) 2013 TOML authors\n \n- Everyone is permitted
+      to copy and distribute verbatim or modified\n- copies of this license document,
+      and changing it is allowed as long\n- as the name is changed.\n+Permission is
+      hereby granted, free of charge, to any person obtaining a copy\n+of this software
+      and associated documentation files (the \"Software\"), to deal\n+in the Software
+      without restriction, including without limitation the rights\n+to use, copy,
+      modify, merge, publish, distribute, sublicense, and/or sell\n+copies of the
+      Software, and to permit persons to whom the Software is\n+furnished to do so,
+      subject to the following conditions:\n \n-            DO WHAT THE FUCK YOU WANT
+      TO PUBLIC LICENSE\n-   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION\n-\n-  0.
+      You just DO WHAT THE FUCK YOU WANT TO.\n+The above copyright notice and this
+      permission notice shall be included in\n+all copies or substantial portions
+      of the Software.\n \n+THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF
+      ANY KIND, EXPRESS OR\n+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+      OF MERCHANTABILITY,\n+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+      IN NO EVENT SHALL THE\n+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+      DAMAGES OR OTHER\n+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+      ARISING FROM,\n+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+      DEALINGS IN\n+THE SOFTWARE."},{"sha":"01b5743200b847d124309d07aa288b8d7738fd4c","filename":"cmd/tomlv/COPYING","status":"modified","additions":17,"deletions":10,"changes":27,"blob_url":"https://github.com/BurntSushi/toml/blob/3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005/cmd/tomlv/COPYING","raw_url":"https://github.com/BurntSushi/toml/raw/3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005/cmd/tomlv/COPYING","contents_url":"https://api.github.com/repos/BurntSushi/toml/contents/cmd/tomlv/COPYING?ref=3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005","patch":"@@
+      -1,14 +1,21 @@\n-            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE\n-                    Version
+      2, December 2004\n+The MIT License (MIT)\n \n- Copyright (C) 2004 Sam Hocevar
+      <sam@hocevar.net>\n+Copyright (c) 2013 TOML authors\n \n- Everyone is permitted
+      to copy and distribute verbatim or modified\n- copies of this license document,
+      and changing it is allowed as long\n- as the name is changed.\n+Permission is
+      hereby granted, free of charge, to any person obtaining a copy\n+of this software
+      and associated documentation files (the \"Software\"), to deal\n+in the Software
+      without restriction, including without limitation the rights\n+to use, copy,
+      modify, merge, publish, distribute, sublicense, and/or sell\n+copies of the
+      Software, and to permit persons to whom the Software is\n+furnished to do so,
+      subject to the following conditions:\n \n-            DO WHAT THE FUCK YOU WANT
+      TO PUBLIC LICENSE\n-   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION\n-\n-  0.
+      You just DO WHAT THE FUCK YOU WANT TO.\n+The above copyright notice and this
+      permission notice shall be included in\n+all copies or substantial portions
+      of the Software.\n \n+THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF
+      ANY KIND, EXPRESS OR\n+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+      OF MERCHANTABILITY,\n+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+      IN NO EVENT SHALL THE\n+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+      DAMAGES OR OTHER\n+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+      ARISING FROM,\n+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+      DEALINGS IN\n+THE SOFTWARE."}]}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
+        X-GitHub-Media-Type, Deprecation, Sunset
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Content-Security-Policy:
+      - default-src 'none'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 21 Apr 2020 04:55:22 GMT
+      Etag:
+      - W/"314e3cae6d16a462e34b3ccd294f41c6"
+      Last-Modified:
+      - Wed, 15 Aug 2018 10:47:33 GMT
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Server:
+      - GitHub.com
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding, Accept, X-Requested-With
+      X-Accepted-Oauth-Scopes:
+      - ""
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Github-Request-Id:
+      - 96EC:7794:778676:E12F5C:5E9E7CBA
+      X-Oauth-Scopes:
+      - admin:enterprise, admin:gpg_key, admin:org, admin:org_hook, admin:public_key,
+        admin:repo_hook, delete:packages, delete_repo, gist, notifications, read:packages,
+        repo, user, workflow, write:discussion, write:packages
+      X-Ratelimit-Limit:
+      - "5000"
+      X-Ratelimit-Remaining:
+      - "4990"
+      X-Ratelimit-Reset:
+      - "1587448311"
+      X-Xss-Protection:
+      - 1; mode=block
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers: {}
+    url: https://api.github.com/repos/BurntSushi/toml/commits/HEAD
+    method: GET
+  response:
+    body: '{"sha":"3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005","node_id":"MDY6Q29tbWl0ODQyNTYyMjozMDEyYTFkYmUyZTRiZDEzOTFkNDJiMzJmMDU3N2NiN2JiYzdmMDA1","commit":{"author":{"name":"Andrew
+      Gallant","email":"jamslam@gmail.com","date":"2018-08-15T10:47:33Z"},"committer":{"name":"GitHub","email":"noreply@github.com","date":"2018-08-15T10:47:33Z"},"message":"Merge
+      pull request #230 from gregwebs/cmd-license-wtf\n\nswitch the licenses of cmd/
+      to be the same as the root","tree":{"sha":"ed84a63bc80d3fabbf263219f5517c3822badbaa","url":"https://api.github.com/repos/BurntSushi/toml/git/trees/ed84a63bc80d3fabbf263219f5517c3822badbaa"},"url":"https://api.github.com/repos/BurntSushi/toml/git/commits/3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005","comment_count":0,"verification":{"verified":true,"reason":"valid","signature":"-----BEGIN
+      PGP SIGNATURE-----\n\nwsBcBAABCAAQBQJbdATFCRBK7hj4Ov3rIwAAdHIIAExSVSzWUtwraAu65mp1bP56\ngSha8VJldHKE+o7Fl89S71S6Zpa87kZIhMuUB3nGVp7pyCnMZHUMOhoaNcEuRJ3J\n//y2bGslHQs+5HVgI8w8R8qHaR5VArfM1WRxvAR8J3iNpaGTWR/boLB1vqZE3ecd\nLB6HUu6kc3+1vHpM1Fcq5E3MOf3rFgaXueJpSJmbklIHe/ocHoTeFVhXGSYHKD7/\nUIePHdEdsL5a+f9awyvGm/WaGJPLqNX0Ho6a33NunddV4CeKqn6ZAgvjUuatxrgR\nRUc54zPds2onjIb7hBDnMzQLGnKie4xUyhEbfy4kSppreGA5cXZNEj4BTYHBfcw=\n=ZnJu\n-----END
+      PGP SIGNATURE-----\n","payload":"tree ed84a63bc80d3fabbf263219f5517c3822badbaa\nparent
+      a368813c5e648fee92e5f6c30e3944ff9d5e8895\nparent fce9655971ea449643e930ea54cc229adba48fd7\nauthor
+      Andrew Gallant <jamslam@gmail.com> 1534330053 -0700\ncommitter GitHub <noreply@github.com>
+      1534330053 -0700\n\nMerge pull request #230 from gregwebs/cmd-license-wtf\n\nswitch
+      the licenses of cmd/ to be the same as the root"}},"url":"https://api.github.com/repos/BurntSushi/toml/commits/3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005","html_url":"https://github.com/BurntSushi/toml/commit/3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005","comments_url":"https://api.github.com/repos/BurntSushi/toml/commits/3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005/comments","author":{"login":"BurntSushi","id":456674,"node_id":"MDQ6VXNlcjQ1NjY3NA==","avatar_url":"https://avatars3.githubusercontent.com/u/456674?v=4","gravatar_id":"","url":"https://api.github.com/users/BurntSushi","html_url":"https://github.com/BurntSushi","followers_url":"https://api.github.com/users/BurntSushi/followers","following_url":"https://api.github.com/users/BurntSushi/following{/other_user}","gists_url":"https://api.github.com/users/BurntSushi/gists{/gist_id}","starred_url":"https://api.github.com/users/BurntSushi/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/BurntSushi/subscriptions","organizations_url":"https://api.github.com/users/BurntSushi/orgs","repos_url":"https://api.github.com/users/BurntSushi/repos","events_url":"https://api.github.com/users/BurntSushi/events{/privacy}","received_events_url":"https://api.github.com/users/BurntSushi/received_events","type":"User","site_admin":false},"committer":{"login":"web-flow","id":19864447,"node_id":"MDQ6VXNlcjE5ODY0NDQ3","avatar_url":"https://avatars3.githubusercontent.com/u/19864447?v=4","gravatar_id":"","url":"https://api.github.com/users/web-flow","html_url":"https://github.com/web-flow","followers_url":"https://api.github.com/users/web-flow/followers","following_url":"https://api.github.com/users/web-flow/following{/other_user}","gists_url":"https://api.github.com/users/web-flow/gists{/gist_id}","starred_url":"https://api.github.com/users/web-flow/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/web-flow/subscriptions","organizations_url":"https://api.github.com/users/web-flow/orgs","repos_url":"https://api.github.com/users/web-flow/repos","events_url":"https://api.github.com/users/web-flow/events{/privacy}","received_events_url":"https://api.github.com/users/web-flow/received_events","type":"User","site_admin":false},"parents":[{"sha":"a368813c5e648fee92e5f6c30e3944ff9d5e8895","url":"https://api.github.com/repos/BurntSushi/toml/commits/a368813c5e648fee92e5f6c30e3944ff9d5e8895","html_url":"https://github.com/BurntSushi/toml/commit/a368813c5e648fee92e5f6c30e3944ff9d5e8895"},{"sha":"fce9655971ea449643e930ea54cc229adba48fd7","url":"https://api.github.com/repos/BurntSushi/toml/commits/fce9655971ea449643e930ea54cc229adba48fd7","html_url":"https://github.com/BurntSushi/toml/commit/fce9655971ea449643e930ea54cc229adba48fd7"}],"stats":{"total":81,"additions":51,"deletions":30},"files":[{"sha":"01b5743200b847d124309d07aa288b8d7738fd4c","filename":"cmd/toml-test-decoder/COPYING","status":"modified","additions":17,"deletions":10,"changes":27,"blob_url":"https://github.com/BurntSushi/toml/blob/3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005/cmd/toml-test-decoder/COPYING","raw_url":"https://github.com/BurntSushi/toml/raw/3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005/cmd/toml-test-decoder/COPYING","contents_url":"https://api.github.com/repos/BurntSushi/toml/contents/cmd/toml-test-decoder/COPYING?ref=3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005","patch":"@@
+      -1,14 +1,21 @@\n-            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE\n-                    Version
+      2, December 2004\n+The MIT License (MIT)\n \n- Copyright (C) 2004 Sam Hocevar
+      <sam@hocevar.net>\n+Copyright (c) 2013 TOML authors\n \n- Everyone is permitted
+      to copy and distribute verbatim or modified\n- copies of this license document,
+      and changing it is allowed as long\n- as the name is changed.\n+Permission is
+      hereby granted, free of charge, to any person obtaining a copy\n+of this software
+      and associated documentation files (the \"Software\"), to deal\n+in the Software
+      without restriction, including without limitation the rights\n+to use, copy,
+      modify, merge, publish, distribute, sublicense, and/or sell\n+copies of the
+      Software, and to permit persons to whom the Software is\n+furnished to do so,
+      subject to the following conditions:\n \n-            DO WHAT THE FUCK YOU WANT
+      TO PUBLIC LICENSE\n-   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION\n-\n-  0.
+      You just DO WHAT THE FUCK YOU WANT TO.\n+The above copyright notice and this
+      permission notice shall be included in\n+all copies or substantial portions
+      of the Software.\n \n+THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF
+      ANY KIND, EXPRESS OR\n+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+      OF MERCHANTABILITY,\n+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+      IN NO EVENT SHALL THE\n+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+      DAMAGES OR OTHER\n+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+      ARISING FROM,\n+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+      DEALINGS IN\n+THE SOFTWARE."},{"sha":"01b5743200b847d124309d07aa288b8d7738fd4c","filename":"cmd/toml-test-encoder/COPYING","status":"modified","additions":17,"deletions":10,"changes":27,"blob_url":"https://github.com/BurntSushi/toml/blob/3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005/cmd/toml-test-encoder/COPYING","raw_url":"https://github.com/BurntSushi/toml/raw/3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005/cmd/toml-test-encoder/COPYING","contents_url":"https://api.github.com/repos/BurntSushi/toml/contents/cmd/toml-test-encoder/COPYING?ref=3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005","patch":"@@
+      -1,14 +1,21 @@\n-            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE\n-                    Version
+      2, December 2004\n+The MIT License (MIT)\n \n- Copyright (C) 2004 Sam Hocevar
+      <sam@hocevar.net>\n+Copyright (c) 2013 TOML authors\n \n- Everyone is permitted
+      to copy and distribute verbatim or modified\n- copies of this license document,
+      and changing it is allowed as long\n- as the name is changed.\n+Permission is
+      hereby granted, free of charge, to any person obtaining a copy\n+of this software
+      and associated documentation files (the \"Software\"), to deal\n+in the Software
+      without restriction, including without limitation the rights\n+to use, copy,
+      modify, merge, publish, distribute, sublicense, and/or sell\n+copies of the
+      Software, and to permit persons to whom the Software is\n+furnished to do so,
+      subject to the following conditions:\n \n-            DO WHAT THE FUCK YOU WANT
+      TO PUBLIC LICENSE\n-   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION\n-\n-  0.
+      You just DO WHAT THE FUCK YOU WANT TO.\n+The above copyright notice and this
+      permission notice shall be included in\n+all copies or substantial portions
+      of the Software.\n \n+THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF
+      ANY KIND, EXPRESS OR\n+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+      OF MERCHANTABILITY,\n+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+      IN NO EVENT SHALL THE\n+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+      DAMAGES OR OTHER\n+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+      ARISING FROM,\n+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+      DEALINGS IN\n+THE SOFTWARE."},{"sha":"01b5743200b847d124309d07aa288b8d7738fd4c","filename":"cmd/tomlv/COPYING","status":"modified","additions":17,"deletions":10,"changes":27,"blob_url":"https://github.com/BurntSushi/toml/blob/3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005/cmd/tomlv/COPYING","raw_url":"https://github.com/BurntSushi/toml/raw/3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005/cmd/tomlv/COPYING","contents_url":"https://api.github.com/repos/BurntSushi/toml/contents/cmd/tomlv/COPYING?ref=3012a1dbe2e4bd1391d42b32f0577cb7bbc7f005","patch":"@@
+      -1,14 +1,21 @@\n-            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE\n-                    Version
+      2, December 2004\n+The MIT License (MIT)\n \n- Copyright (C) 2004 Sam Hocevar
+      <sam@hocevar.net>\n+Copyright (c) 2013 TOML authors\n \n- Everyone is permitted
+      to copy and distribute verbatim or modified\n- copies of this license document,
+      and changing it is allowed as long\n- as the name is changed.\n+Permission is
+      hereby granted, free of charge, to any person obtaining a copy\n+of this software
+      and associated documentation files (the \"Software\"), to deal\n+in the Software
+      without restriction, including without limitation the rights\n+to use, copy,
+      modify, merge, publish, distribute, sublicense, and/or sell\n+copies of the
+      Software, and to permit persons to whom the Software is\n+furnished to do so,
+      subject to the following conditions:\n \n-            DO WHAT THE FUCK YOU WANT
+      TO PUBLIC LICENSE\n-   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION\n-\n-  0.
+      You just DO WHAT THE FUCK YOU WANT TO.\n+The above copyright notice and this
+      permission notice shall be included in\n+all copies or substantial portions
+      of the Software.\n \n+THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF
+      ANY KIND, EXPRESS OR\n+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+      OF MERCHANTABILITY,\n+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+      IN NO EVENT SHALL THE\n+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+      DAMAGES OR OTHER\n+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+      ARISING FROM,\n+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+      DEALINGS IN\n+THE SOFTWARE."}]}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
+        X-GitHub-Media-Type, Deprecation, Sunset
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Content-Security-Policy:
+      - default-src 'none'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 21 Apr 2020 04:55:22 GMT
+      Etag:
+      - W/"314e3cae6d16a462e34b3ccd294f41c6"
+      Last-Modified:
+      - Wed, 15 Aug 2018 10:47:33 GMT
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Server:
+      - GitHub.com
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding, Accept, X-Requested-With
+      X-Accepted-Oauth-Scopes:
+      - ""
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Github-Request-Id:
+      - 96EC:7794:77867B:E12F67:5E9E7CBA
+      X-Oauth-Scopes:
+      - admin:enterprise, admin:gpg_key, admin:org, admin:org_hook, admin:public_key,
+        admin:repo_hook, delete:packages, delete_repo, gist, notifications, read:packages,
+        repo, user, workflow, write:discussion, write:packages
+      X-Ratelimit-Limit:
+      - "5000"
+      X-Ratelimit-Remaining:
+      - "4989"
+      X-Ratelimit-Reset:
+      - "1587448311"
+      X-Xss-Protection:
+      - 1; mode=block
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers: {}
+    url: https://api.github.com/repos/BurntSushi/toml/releases/latest
+    method: GET
+  response:
+    body: '{"message":"Not Found","documentation_url":"https://developer.github.com/v3/repos/releases/#get-the-latest-release"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
+        X-GitHub-Media-Type, Deprecation, Sunset
+      Content-Security-Policy:
+      - default-src 'none'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 21 Apr 2020 04:55:23 GMT
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Server:
+      - GitHub.com
+      Status:
+      - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Vary:
+      - Accept-Encoding, Accept, X-Requested-With
+      X-Accepted-Oauth-Scopes:
+      - repo
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Github-Request-Id:
+      - 96EC:7794:77867E:E12F71:5E9E7CBA
+      X-Oauth-Scopes:
+      - admin:enterprise, admin:gpg_key, admin:org, admin:org_hook, admin:public_key,
+        admin:repo_hook, delete:packages, delete_repo, gist, notifications, read:packages,
+        repo, user, workflow, write:discussion, write:packages
+      X-Ratelimit-Limit:
+      - "5000"
+      X-Ratelimit-Remaining:
+      - "4988"
+      X-Ratelimit-Reset:
+      - "1587448312"
+      X-Xss-Protection:
+      - 1; mode=block
+    status: 404 Not Found
+    code: 404
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers: {}
+    url: https://api.github.com/repos/pkg/profile/license
+    method: GET
+  response:
+    body: '{"name":"LICENSE","path":"LICENSE","sha":"f747a8411efce8c9fdce699fe27e94da258767a4","size":1292,"url":"https://api.github.com/repos/pkg/profile/contents/LICENSE?ref=master","html_url":"https://github.com/pkg/profile/blob/master/LICENSE","git_url":"https://api.github.com/repos/pkg/profile/git/blobs/f747a8411efce8c9fdce699fe27e94da258767a4","download_url":"https://raw.githubusercontent.com/pkg/profile/master/LICENSE","type":"file","content":"Q29weXJpZ2h0IChjKSAyMDEzIERhdmUgQ2hlbmV5LiBBbGwgcmlnaHRzIHJl\nc2VydmVkLgoKUmVkaXN0cmlidXRpb24gYW5kIHVzZSBpbiBzb3VyY2UgYW5k\nIGJpbmFyeSBmb3Jtcywgd2l0aCBvciB3aXRob3V0Cm1vZGlmaWNhdGlvbiwg\nYXJlIHBlcm1pdHRlZCBwcm92aWRlZCB0aGF0IHRoZSBmb2xsb3dpbmcgY29u\nZGl0aW9ucyBhcmUKbWV0OgoKICAgKiBSZWRpc3RyaWJ1dGlvbnMgb2Ygc291\ncmNlIGNvZGUgbXVzdCByZXRhaW4gdGhlIGFib3ZlIGNvcHlyaWdodApub3Rp\nY2UsIHRoaXMgbGlzdCBvZiBjb25kaXRpb25zIGFuZCB0aGUgZm9sbG93aW5n\nIGRpc2NsYWltZXIuCiAgICogUmVkaXN0cmlidXRpb25zIGluIGJpbmFyeSBm\nb3JtIG11c3QgcmVwcm9kdWNlIHRoZSBhYm92ZQpjb3B5cmlnaHQgbm90aWNl\nLCB0aGlzIGxpc3Qgb2YgY29uZGl0aW9ucyBhbmQgdGhlIGZvbGxvd2luZyBk\naXNjbGFpbWVyCmluIHRoZSBkb2N1bWVudGF0aW9uIGFuZC9vciBvdGhlciBt\nYXRlcmlhbHMgcHJvdmlkZWQgd2l0aCB0aGUKZGlzdHJpYnV0aW9uLgoKVEhJ\nUyBTT0ZUV0FSRSBJUyBQUk9WSURFRCBCWSBUSEUgQ09QWVJJR0hUIEhPTERF\nUlMgQU5EIENPTlRSSUJVVE9SUwoiQVMgSVMiIEFORCBBTlkgRVhQUkVTUyBP\nUiBJTVBMSUVEIFdBUlJBTlRJRVMsIElOQ0xVRElORywgQlVUIE5PVApMSU1J\nVEVEIFRPLCBUSEUgSU1QTElFRCBXQVJSQU5USUVTIE9GIE1FUkNIQU5UQUJJ\nTElUWSBBTkQgRklUTkVTUyBGT1IKQSBQQVJUSUNVTEFSIFBVUlBPU0UgQVJF\nIERJU0NMQUlNRUQuIElOIE5PIEVWRU5UIFNIQUxMIFRIRSBDT1BZUklHSFQK\nT1dORVIgT1IgQ09OVFJJQlVUT1JTIEJFIExJQUJMRSBGT1IgQU5ZIERJUkVD\nVCwgSU5ESVJFQ1QsIElOQ0lERU5UQUwsClNQRUNJQUwsIEVYRU1QTEFSWSwg\nT1IgQ09OU0VRVUVOVElBTCBEQU1BR0VTIChJTkNMVURJTkcsIEJVVCBOT1QK\nTElNSVRFRCBUTywgUFJPQ1VSRU1FTlQgT0YgU1VCU1RJVFVURSBHT09EUyBP\nUiBTRVJWSUNFUzsgTE9TUyBPRiBVU0UsCkRBVEEsIE9SIFBST0ZJVFM7IE9S\nIEJVU0lORVNTIElOVEVSUlVQVElPTikgSE9XRVZFUiBDQVVTRUQgQU5EIE9O\nIEFOWQpUSEVPUlkgT0YgTElBQklMSVRZLCBXSEVUSEVSIElOIENPTlRSQUNU\nLCBTVFJJQ1QgTElBQklMSVRZLCBPUiBUT1JUCihJTkNMVURJTkcgTkVHTElH\nRU5DRSBPUiBPVEhFUldJU0UpIEFSSVNJTkcgSU4gQU5ZIFdBWSBPVVQgT0Yg\nVEhFIFVTRQpPRiBUSElTIFNPRlRXQVJFLCBFVkVOIElGIEFEVklTRUQgT0Yg\nVEhFIFBPU1NJQklMSVRZIE9GIFNVQ0ggREFNQUdFLgo=\n","encoding":"base64","_links":{"self":"https://api.github.com/repos/pkg/profile/contents/LICENSE?ref=master","git":"https://api.github.com/repos/pkg/profile/git/blobs/f747a8411efce8c9fdce699fe27e94da258767a4","html":"https://github.com/pkg/profile/blob/master/LICENSE"},"license":{"key":"bsd-2-clause","name":"BSD
+      2-Clause \"Simplified\" License","spdx_id":"BSD-2-Clause","url":"https://api.github.com/licenses/bsd-2-clause","node_id":"MDc6TGljZW5zZTQ="}}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
+        X-GitHub-Media-Type, Deprecation, Sunset
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Content-Security-Policy:
+      - default-src 'none'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 21 Apr 2020 04:55:23 GMT
+      Etag:
+      - W/"741f0913a1742634eac96e96128614c0"
+      Last-Modified:
+      - Thu, 21 Nov 2019 01:09:46 GMT
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Server:
+      - GitHub.com
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding, Accept, X-Requested-With
+      X-Accepted-Oauth-Scopes:
+      - ""
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Github-Request-Id:
+      - 96EC:7794:77867F:E12F74:5E9E7CBB
+      X-Oauth-Scopes:
+      - admin:enterprise, admin:gpg_key, admin:org, admin:org_hook, admin:public_key,
+        admin:repo_hook, delete:packages, delete_repo, gist, notifications, read:packages,
+        repo, user, workflow, write:discussion, write:packages
+      X-Ratelimit-Limit:
+      - "5000"
+      X-Ratelimit-Remaining:
+      - "4987"
+      X-Ratelimit-Reset:
+      - "1587448311"
+      X-Xss-Protection:
+      - 1; mode=block
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers: {}
+    url: https://api.github.com/repos/pkg/profile/commits/acd64d450fd45fb2afa41f833f3788c8a7797219
+    method: GET
+  response:
+    body: '{"sha":"acd64d450fd45fb2afa41f833f3788c8a7797219","node_id":"MDY6Q29tbWl0MjU1NTU0ODY6YWNkNjRkNDUwZmQ0NWZiMmFmYTQxZjgzM2YzNzg4YzhhNzc5NzIxOQ==","commit":{"author":{"name":"Dave
+      Cheney","email":"dave@cheney.net","date":"2019-11-21T01:09:46Z"},"committer":{"name":"GitHub","email":"noreply@github.com","date":"2019-11-21T01:09:46Z"},"message":"Merge
+      pull request #52 from pkg/go-mod-init\n\ngo mod init","tree":{"sha":"a2a4fd401b57ccbe6e70bb00761cd1c5ba2b6ccb","url":"https://api.github.com/repos/pkg/profile/git/trees/a2a4fd401b57ccbe6e70bb00761cd1c5ba2b6ccb"},"url":"https://api.github.com/repos/pkg/profile/git/commits/acd64d450fd45fb2afa41f833f3788c8a7797219","comment_count":0,"verification":{"verified":true,"reason":"valid","signature":"-----BEGIN
+      PGP SIGNATURE-----\n\nwsBcBAABCAAQBQJd1ePaCRBK7hj4Ov3rIwAAdHIIAAQ2NNPo79+LTo8Z+prcWFS1\nYHN6eLiG9GV3kuF3DY/SBEcQ8hl3Q6qp2PK/2KuuvmsxsNzZvzm90prd4jFnh7JA\nFDXfeUVHsqkgkcrgZma5kZVHwZxJsDcnbuZQXLPxd3xcoTPOh4drlR5AlUk3DgJq\nmqVbcwB43kxNIGCTyDckVQObUnDDQW8JX8kGTFWnGg8CvE0keEYADlsr5xB+QxvX\n40IUEo2UDU+eig0LXdvrlOohrrJY1gAQYLK8C4MYayczEM6SlOMHHLBtzBKMGK14\nt0Ndo0hLBeyr4BTKTEvr1/t7mkE48dZEXdC8YVT1gIhH7CCZ7ESe4JeiJTj65fs=\n=0nSh\n-----END
+      PGP SIGNATURE-----\n","payload":"tree a2a4fd401b57ccbe6e70bb00761cd1c5ba2b6ccb\nparent
+      e6812cd8b6726b9ddb25bd23b39e6f711ff5840b\nparent 6be5ee844c3cf2d8bc90aab9993a248cfa406996\nauthor
+      Dave Cheney <dave@cheney.net> 1574298586 +1100\ncommitter GitHub <noreply@github.com>
+      1574298586 +1100\n\nMerge pull request #52 from pkg/go-mod-init\n\ngo mod init"}},"url":"https://api.github.com/repos/pkg/profile/commits/acd64d450fd45fb2afa41f833f3788c8a7797219","html_url":"https://github.com/pkg/profile/commit/acd64d450fd45fb2afa41f833f3788c8a7797219","comments_url":"https://api.github.com/repos/pkg/profile/commits/acd64d450fd45fb2afa41f833f3788c8a7797219/comments","author":{"login":"davecheney","id":7171,"node_id":"MDQ6VXNlcjcxNzE=","avatar_url":"https://avatars0.githubusercontent.com/u/7171?v=4","gravatar_id":"","url":"https://api.github.com/users/davecheney","html_url":"https://github.com/davecheney","followers_url":"https://api.github.com/users/davecheney/followers","following_url":"https://api.github.com/users/davecheney/following{/other_user}","gists_url":"https://api.github.com/users/davecheney/gists{/gist_id}","starred_url":"https://api.github.com/users/davecheney/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/davecheney/subscriptions","organizations_url":"https://api.github.com/users/davecheney/orgs","repos_url":"https://api.github.com/users/davecheney/repos","events_url":"https://api.github.com/users/davecheney/events{/privacy}","received_events_url":"https://api.github.com/users/davecheney/received_events","type":"User","site_admin":true},"committer":{"login":"web-flow","id":19864447,"node_id":"MDQ6VXNlcjE5ODY0NDQ3","avatar_url":"https://avatars3.githubusercontent.com/u/19864447?v=4","gravatar_id":"","url":"https://api.github.com/users/web-flow","html_url":"https://github.com/web-flow","followers_url":"https://api.github.com/users/web-flow/followers","following_url":"https://api.github.com/users/web-flow/following{/other_user}","gists_url":"https://api.github.com/users/web-flow/gists{/gist_id}","starred_url":"https://api.github.com/users/web-flow/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/web-flow/subscriptions","organizations_url":"https://api.github.com/users/web-flow/orgs","repos_url":"https://api.github.com/users/web-flow/repos","events_url":"https://api.github.com/users/web-flow/events{/privacy}","received_events_url":"https://api.github.com/users/web-flow/received_events","type":"User","site_admin":false},"parents":[{"sha":"e6812cd8b6726b9ddb25bd23b39e6f711ff5840b","url":"https://api.github.com/repos/pkg/profile/commits/e6812cd8b6726b9ddb25bd23b39e6f711ff5840b","html_url":"https://github.com/pkg/profile/commit/e6812cd8b6726b9ddb25bd23b39e6f711ff5840b"},{"sha":"6be5ee844c3cf2d8bc90aab9993a248cfa406996","url":"https://api.github.com/repos/pkg/profile/commits/6be5ee844c3cf2d8bc90aab9993a248cfa406996","html_url":"https://github.com/pkg/profile/commit/6be5ee844c3cf2d8bc90aab9993a248cfa406996"}],"stats":{"total":3,"additions":3,"deletions":0},"files":[{"sha":"2d82f3d846fc2e0e37d1e97ad5adf8a1c6057e42","filename":"go.mod","status":"added","additions":3,"deletions":0,"changes":3,"blob_url":"https://github.com/pkg/profile/blob/acd64d450fd45fb2afa41f833f3788c8a7797219/go.mod","raw_url":"https://github.com/pkg/profile/raw/acd64d450fd45fb2afa41f833f3788c8a7797219/go.mod","contents_url":"https://api.github.com/repos/pkg/profile/contents/go.mod?ref=acd64d450fd45fb2afa41f833f3788c8a7797219","patch":"@@
+      -0,0 +1,3 @@\n+module github.com/pkg/profile\n+\n+go 1.12"}]}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
+        X-GitHub-Media-Type, Deprecation, Sunset
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Content-Security-Policy:
+      - default-src 'none'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 21 Apr 2020 04:55:23 GMT
+      Etag:
+      - W/"37b072629efe01a897d63828a013005c"
+      Last-Modified:
+      - Thu, 21 Nov 2019 01:09:46 GMT
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Server:
+      - GitHub.com
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding, Accept, X-Requested-With
+      X-Accepted-Oauth-Scopes:
+      - ""
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Github-Request-Id:
+      - 96EC:7794:778684:E12F7D:5E9E7CBB
+      X-Oauth-Scopes:
+      - admin:enterprise, admin:gpg_key, admin:org, admin:org_hook, admin:public_key,
+        admin:repo_hook, delete:packages, delete_repo, gist, notifications, read:packages,
+        repo, user, workflow, write:discussion, write:packages
+      X-Ratelimit-Limit:
+      - "5000"
+      X-Ratelimit-Remaining:
+      - "4986"
+      X-Ratelimit-Reset:
+      - "1587448311"
+      X-Xss-Protection:
+      - 1; mode=block
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers: {}
+    url: https://api.github.com/repos/pkg/profile/commits/HEAD
+    method: GET
+  response:
+    body: '{"sha":"acd64d450fd45fb2afa41f833f3788c8a7797219","node_id":"MDY6Q29tbWl0MjU1NTU0ODY6YWNkNjRkNDUwZmQ0NWZiMmFmYTQxZjgzM2YzNzg4YzhhNzc5NzIxOQ==","commit":{"author":{"name":"Dave
+      Cheney","email":"dave@cheney.net","date":"2019-11-21T01:09:46Z"},"committer":{"name":"GitHub","email":"noreply@github.com","date":"2019-11-21T01:09:46Z"},"message":"Merge
+      pull request #52 from pkg/go-mod-init\n\ngo mod init","tree":{"sha":"a2a4fd401b57ccbe6e70bb00761cd1c5ba2b6ccb","url":"https://api.github.com/repos/pkg/profile/git/trees/a2a4fd401b57ccbe6e70bb00761cd1c5ba2b6ccb"},"url":"https://api.github.com/repos/pkg/profile/git/commits/acd64d450fd45fb2afa41f833f3788c8a7797219","comment_count":0,"verification":{"verified":true,"reason":"valid","signature":"-----BEGIN
+      PGP SIGNATURE-----\n\nwsBcBAABCAAQBQJd1ePaCRBK7hj4Ov3rIwAAdHIIAAQ2NNPo79+LTo8Z+prcWFS1\nYHN6eLiG9GV3kuF3DY/SBEcQ8hl3Q6qp2PK/2KuuvmsxsNzZvzm90prd4jFnh7JA\nFDXfeUVHsqkgkcrgZma5kZVHwZxJsDcnbuZQXLPxd3xcoTPOh4drlR5AlUk3DgJq\nmqVbcwB43kxNIGCTyDckVQObUnDDQW8JX8kGTFWnGg8CvE0keEYADlsr5xB+QxvX\n40IUEo2UDU+eig0LXdvrlOohrrJY1gAQYLK8C4MYayczEM6SlOMHHLBtzBKMGK14\nt0Ndo0hLBeyr4BTKTEvr1/t7mkE48dZEXdC8YVT1gIhH7CCZ7ESe4JeiJTj65fs=\n=0nSh\n-----END
+      PGP SIGNATURE-----\n","payload":"tree a2a4fd401b57ccbe6e70bb00761cd1c5ba2b6ccb\nparent
+      e6812cd8b6726b9ddb25bd23b39e6f711ff5840b\nparent 6be5ee844c3cf2d8bc90aab9993a248cfa406996\nauthor
+      Dave Cheney <dave@cheney.net> 1574298586 +1100\ncommitter GitHub <noreply@github.com>
+      1574298586 +1100\n\nMerge pull request #52 from pkg/go-mod-init\n\ngo mod init"}},"url":"https://api.github.com/repos/pkg/profile/commits/acd64d450fd45fb2afa41f833f3788c8a7797219","html_url":"https://github.com/pkg/profile/commit/acd64d450fd45fb2afa41f833f3788c8a7797219","comments_url":"https://api.github.com/repos/pkg/profile/commits/acd64d450fd45fb2afa41f833f3788c8a7797219/comments","author":{"login":"davecheney","id":7171,"node_id":"MDQ6VXNlcjcxNzE=","avatar_url":"https://avatars0.githubusercontent.com/u/7171?v=4","gravatar_id":"","url":"https://api.github.com/users/davecheney","html_url":"https://github.com/davecheney","followers_url":"https://api.github.com/users/davecheney/followers","following_url":"https://api.github.com/users/davecheney/following{/other_user}","gists_url":"https://api.github.com/users/davecheney/gists{/gist_id}","starred_url":"https://api.github.com/users/davecheney/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/davecheney/subscriptions","organizations_url":"https://api.github.com/users/davecheney/orgs","repos_url":"https://api.github.com/users/davecheney/repos","events_url":"https://api.github.com/users/davecheney/events{/privacy}","received_events_url":"https://api.github.com/users/davecheney/received_events","type":"User","site_admin":true},"committer":{"login":"web-flow","id":19864447,"node_id":"MDQ6VXNlcjE5ODY0NDQ3","avatar_url":"https://avatars3.githubusercontent.com/u/19864447?v=4","gravatar_id":"","url":"https://api.github.com/users/web-flow","html_url":"https://github.com/web-flow","followers_url":"https://api.github.com/users/web-flow/followers","following_url":"https://api.github.com/users/web-flow/following{/other_user}","gists_url":"https://api.github.com/users/web-flow/gists{/gist_id}","starred_url":"https://api.github.com/users/web-flow/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/web-flow/subscriptions","organizations_url":"https://api.github.com/users/web-flow/orgs","repos_url":"https://api.github.com/users/web-flow/repos","events_url":"https://api.github.com/users/web-flow/events{/privacy}","received_events_url":"https://api.github.com/users/web-flow/received_events","type":"User","site_admin":false},"parents":[{"sha":"e6812cd8b6726b9ddb25bd23b39e6f711ff5840b","url":"https://api.github.com/repos/pkg/profile/commits/e6812cd8b6726b9ddb25bd23b39e6f711ff5840b","html_url":"https://github.com/pkg/profile/commit/e6812cd8b6726b9ddb25bd23b39e6f711ff5840b"},{"sha":"6be5ee844c3cf2d8bc90aab9993a248cfa406996","url":"https://api.github.com/repos/pkg/profile/commits/6be5ee844c3cf2d8bc90aab9993a248cfa406996","html_url":"https://github.com/pkg/profile/commit/6be5ee844c3cf2d8bc90aab9993a248cfa406996"}],"stats":{"total":3,"additions":3,"deletions":0},"files":[{"sha":"2d82f3d846fc2e0e37d1e97ad5adf8a1c6057e42","filename":"go.mod","status":"added","additions":3,"deletions":0,"changes":3,"blob_url":"https://github.com/pkg/profile/blob/acd64d450fd45fb2afa41f833f3788c8a7797219/go.mod","raw_url":"https://github.com/pkg/profile/raw/acd64d450fd45fb2afa41f833f3788c8a7797219/go.mod","contents_url":"https://api.github.com/repos/pkg/profile/contents/go.mod?ref=acd64d450fd45fb2afa41f833f3788c8a7797219","patch":"@@
+      -0,0 +1,3 @@\n+module github.com/pkg/profile\n+\n+go 1.12"}]}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
+        X-GitHub-Media-Type, Deprecation, Sunset
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Content-Security-Policy:
+      - default-src 'none'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 21 Apr 2020 04:55:23 GMT
+      Etag:
+      - W/"37b072629efe01a897d63828a013005c"
+      Last-Modified:
+      - Thu, 21 Nov 2019 01:09:46 GMT
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Server:
+      - GitHub.com
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding, Accept, X-Requested-With
+      X-Accepted-Oauth-Scopes:
+      - ""
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Github-Request-Id:
+      - 96EC:7794:778687:E12F84:5E9E7CBB
+      X-Oauth-Scopes:
+      - admin:enterprise, admin:gpg_key, admin:org, admin:org_hook, admin:public_key,
+        admin:repo_hook, delete:packages, delete_repo, gist, notifications, read:packages,
+        repo, user, workflow, write:discussion, write:packages
+      X-Ratelimit-Limit:
+      - "5000"
+      X-Ratelimit-Remaining:
+      - "4985"
+      X-Ratelimit-Reset:
+      - "1587448311"
+      X-Xss-Protection:
+      - 1; mode=block
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers: {}
+    url: https://api.github.com/repos/pkg/profile/releases/latest
+    method: GET
+  response:
+    body: '{"url":"https://api.github.com/repos/pkg/profile/releases/21639011","assets_url":"https://api.github.com/repos/pkg/profile/releases/21639011/assets","upload_url":"https://uploads.github.com/repos/pkg/profile/releases/21639011/assets{?name,label}","html_url":"https://github.com/pkg/profile/releases/tag/v1.4.0","id":21639011,"node_id":"MDc6UmVsZWFzZTIxNjM5MDEx","tag_name":"v1.4.0","target_commitish":"master","name":"pkg/profile
+      1.4.0","draft":false,"author":{"login":"davecheney","id":7171,"node_id":"MDQ6VXNlcjcxNzE=","avatar_url":"https://avatars0.githubusercontent.com/u/7171?v=4","gravatar_id":"","url":"https://api.github.com/users/davecheney","html_url":"https://github.com/davecheney","followers_url":"https://api.github.com/users/davecheney/followers","following_url":"https://api.github.com/users/davecheney/following{/other_user}","gists_url":"https://api.github.com/users/davecheney/gists{/gist_id}","starred_url":"https://api.github.com/users/davecheney/starred{/owner}{/repo}","subscriptions_url":"https://api.github.com/users/davecheney/subscriptions","organizations_url":"https://api.github.com/users/davecheney/orgs","repos_url":"https://api.github.com/users/davecheney/repos","events_url":"https://api.github.com/users/davecheney/events{/privacy}","received_events_url":"https://api.github.com/users/davecheney/received_events","type":"User","site_admin":true},"prerelease":false,"created_at":"2019-11-21T01:09:46Z","published_at":"2019-11-21T01:10:25Z","assets":[],"tarball_url":"https://api.github.com/repos/pkg/profile/tarball/v1.4.0","zipball_url":"https://api.github.com/repos/pkg/profile/zipball/v1.4.0","body":"Added
+      goroutine profiling, thanks @moio"}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Expose-Headers:
+      - ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining,
+        X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval,
+        X-GitHub-Media-Type, Deprecation, Sunset
+      Cache-Control:
+      - private, max-age=60, s-maxage=60
+      Content-Security-Policy:
+      - default-src 'none'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 21 Apr 2020 04:55:23 GMT
+      Etag:
+      - W/"dc1fe9ee33480b2f5887b6e553dee4eb"
+      Last-Modified:
+      - Thu, 21 Nov 2019 01:11:28 GMT
+      Referrer-Policy:
+      - origin-when-cross-origin, strict-origin-when-cross-origin
+      Server:
+      - GitHub.com
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubdomains; preload
+      Vary:
+      - Accept, Authorization, Cookie, X-GitHub-OTP
+      - Accept-Encoding, Accept, X-Requested-With
+      X-Accepted-Oauth-Scopes:
+      - repo
+      X-Content-Type-Options:
+      - nosniff
+      X-Frame-Options:
+      - deny
+      X-Github-Media-Type:
+      - github.v3; format=json
+      X-Github-Request-Id:
+      - 96EC:7794:77868A:E12F8C:5E9E7CBB
+      X-Oauth-Scopes:
+      - admin:enterprise, admin:gpg_key, admin:org, admin:org_hook, admin:public_key,
+        admin:repo_hook, delete:packages, delete_repo, gist, notifications, read:packages,
+        repo, user, workflow, write:discussion, write:packages
+      X-Ratelimit-Limit:
+      - "5000"
+      X-Ratelimit-Remaining:
+      - "4984"
+      X-Ratelimit-Reset:
+      - "1587448311"
+      X-Xss-Protection:
+      - 1; mode=block
+    status: 200 OK
+    code: 200
+    duration: ""
