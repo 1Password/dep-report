@@ -1,7 +1,7 @@
 package report
 
 import (
-	"dep-report/versioncontrol"
+	"github.com/1Password/dep-report/versioncontrol"
 	"net/http"
 	"time"
 )

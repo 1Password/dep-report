@@ -1,6 +1,6 @@
 package versioncontrol
 
-import "dep-report/models"
+import "github.com/1Password/dep-report/models"
 
 func ReportObjFromGitlab(dep models.Dependency) (*models.ReportObject, error) {
 	reportObject := models.ReportObject{

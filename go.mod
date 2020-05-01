@@ -1,4 +1,4 @@
-module dep-report
+module github.com/1Password/dep-report
 
 go 1.14
 
