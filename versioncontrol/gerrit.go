@@ -3,7 +3,6 @@ package versioncontrol
 import (
 	"dep-report/models"
 	"encoding/json"
-	"fmt"
 	"github.com/pkg/errors"
 	"io/ioutil"
 	"net/http"
@@ -96,10 +95,6 @@ func ReportObjFromGerrit(dep models.Dependency, r Client) (*models.ReportObject,
 	reportObject.License, ok = licenseForRepo[dep.Name]
 	if !ok {
 		reportObject.License = "Unknown license"
-<<<<<<< HEAD
-		fmt.Printf("License info for %s not provided", dep.Name)
-=======
->>>>>>> kb/support-go-modules-3
 	}
 
 	return &reportObject, nil
