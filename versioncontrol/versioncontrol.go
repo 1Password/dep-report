@@ -6,4 +6,6 @@ import "net/http"
 type Client struct {
 	HttpClient *http.Client
 	Token string
+	//This webhook url is used to notify us when we fail to get a dependency's license
+	SlackWebhook string
 }

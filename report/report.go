@@ -1,9 +1,10 @@
 package report
 
 import (
+	"encoding/json"
 	"github.com/1Password/dep-report/models"
 	"github.com/1Password/dep-report/versioncontrol"
-	"encoding/json"
+	"github.com/1Password/dep-report/versioncontrol/slack"
 	"github.com/pkg/errors"
 	"log"
 	"os/exec"
@@ -78,7 +79,7 @@ func (g Generator) reportObjFromDependency(dep models.Dependency) (*models.Repor
 
 	switch dep.Source {
 	case GITHUB:
-		reportObject, err = versioncontrol.ReportObjFromGithub(dep, g.request)
+		reportObject, err = versioncontrol.ReportObjFromGithub(dep, g.client)
 		if err != nil {
 			return nil, errors.Wrapf(err, "unable to generate reportObject from dependency %s", dep.Name)
 		}
@@ -88,8 +89,13 @@ func (g Generator) reportObjFromDependency(dep models.Dependency) (*models.Repor
 			return nil, errors.Wrapf(err, "unable to generate reportObject from dependency %s", dep.Name)
 		}
 	case GERRIT:
-		reportObject, err = versioncontrol.ReportObjFromGerrit(dep, g.request)
+		reportObject, err = versioncontrol.ReportObjFromGerrit(dep, g.client)
 		if err != nil {
+			if strings.Contains(err.Error(), "unable to retrieve license for"){
+				if err := slack.FailureNotify(g.productName, dep.Name, g.client.SlackWebhook); err != nil {
+					return nil, errors.Wrapf(err, "unable to generate reportObject from dependency %s", dep.Name)
+				}
+			}
 			return nil, errors.Wrapf(err, "unable to generate reportObject from dependency %s", dep.Name)
 		}
 	default:

@@ -19,7 +19,7 @@ func TestGenerateReport(t *testing.T) {
 	defer r.Stop()
 
 	g := Generator{
-		request: versioncontrol.Client{
+		client: versioncontrol.Client{
 			HttpClient: c,
 			Token:      *githubToken,
 		},
