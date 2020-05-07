@@ -40,7 +40,7 @@ func main() {
 
 	g := report.NewGenerator(githubToken, productName, slackWebhookURL)
 
-	rawReport, err := g.BuildReport(productName, dependencies)
+	rawReport, err := g.BuildReport(dependencies)
 	if err != nil {
 		log.Fatalf("unable to generate report: %v", err)
 	}

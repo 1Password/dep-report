@@ -1,9 +1,9 @@
 package report
 
 import (
+	"flag"
 	"github.com/1Password/dep-report/models"
 	"github.com/1Password/dep-report/versioncontrol"
-	"flag"
 	"github.com/stretchr/testify/assert"
 	"testing"
 	"time"
@@ -19,13 +19,12 @@ func TestGenerateReport(t *testing.T) {
 	defer r.Stop()
 
 	g := Generator{
+		productName: "dep-report",
 		client: versioncontrol.Client{
 			HttpClient: c,
 			Token:      *githubToken,
 		},
 	}
-
-	productName := "dep-report"
 
 	tests := []struct {
 		description string
@@ -283,7 +282,7 @@ func TestGenerateReport(t *testing.T) {
 	}
 	for _, test := range tests {
 		t.Run(test.description, func(t *testing.T) {
-			gotReport, err := g.BuildReport(productName, test.pkg)
+			gotReport, err := g.BuildReport(test.pkg)
 			if err != nil {
 				t.Errorf("BuildReport failed with errors: %v", err)
 			}

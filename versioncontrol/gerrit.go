@@ -2,6 +2,7 @@ package versioncontrol
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/1Password/dep-report/models"
 	"github.com/pkg/errors"
 	"io/ioutil"
@@ -95,7 +96,7 @@ func ReportObjFromGerrit(dep models.Dependency, r Client) (*models.ReportObject,
 	reportObject.License, ok = licenseForRepo[dep.Name]
 	if !ok {
 		reportObject.License = "Unknown license"
-		return &reportObject, errors.Wrapf(err, "unable to retrieve license for %s", dep.Name)
+		return &reportObject, errors.New(fmt.Sprintf("unable to retrieve license for %s", dep.Name))
 	}
 
 	return &reportObject, nil
