@@ -7,6 +7,9 @@ github.com/davecgh/go-spew/spew
 ## explicit
 github.com/dnaeon/go-vcr/cassette
 github.com/dnaeon/go-vcr/recorder
+# github.com/jarcoal/httpmock v1.0.5
+## explicit
+github.com/jarcoal/httpmock
 # github.com/kr/pretty v0.1.0
 ## explicit
 # github.com/pkg/errors v0.8.1
