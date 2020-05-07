@@ -5,11 +5,12 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/pkg/errors"
+	"io/ioutil"
 	"net/http"
 	"time"
 )
 
-type SlackRequestBody struct {
+type slackRequestBody struct {
 	Text string `json:"text"`
 }
 
@@ -25,7 +26,7 @@ func FailureNotify(product string, dep string, webhookURL string) error{
 }
 
 func sendSlackNotification(webhookURL string, msg string) error{
-	slackBody, _ := json.Marshal(SlackRequestBody{Text: msg})
+	slackBody, _ := json.Marshal(slackRequestBody{Text: msg})
 	req, err := http.NewRequest(http.MethodPost, webhookURL, bytes.NewBuffer(slackBody))
 	if err != nil {
 		return errors.Wrap(err, "unable to prepare request")
@@ -39,10 +40,14 @@ func sendSlackNotification(webhookURL string, msg string) error{
 		return errors.Wrap(err, "unable to make request to slack webhook")
 	}
 
-	buf := new(bytes.Buffer)
-	buf.ReadFrom(resp.Body)
-	if buf.String() != "ok" {
-		return fmt.Errorf("non-ok response returned from Slack: %v", buf.String())
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return errors.Wrapf(err, "unable to read slack response body")
 	}
+
+	if string(body) != "ok" {
+		return fmt.Errorf("non-ok response returned from Slack: %v", string(body))
+	}
+
 	return nil
 }

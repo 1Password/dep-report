@@ -27,9 +27,10 @@ func main() {
 		productName = "b5server"
 	}
 
-	slackWebhookURL := os.Getenv("SLACK_WEBHOOK_URL")
+	//This env variable is required in order for us to report license failures to slack
+	slackWebhookURL := os.Getenv("DEP_WEBHOOK")
 	if slackWebhookURL == "" {
-		log.Fatal("missing env variable: Slack Webhook URL")
+		log.Fatal("missing env variable: DEP_WEBHOOK")
 	}
 
 	dependencies, err := getDependencyFile()
