@@ -1,0 +1,24 @@
+)]}'
+{
+"commit": "06d492aade888ab8698aad35476286b7b555c961",
+"parents": [
+{
+"commit": "929e72ca90deac4784bbe451caf10faa5b256ebe",
+"subject": "message/pipeline: detect unknown keys"
+}
+],
+"author": {
+"name": "Jeremy Faller",
+"email": "jeremy@golang.org",
+"date": "2020-02-26 17:37:29.000000000",
+"tz": -300
+},
+"committer": {
+"name": "Jeremy Faller",
+"email": "jeremy@golang.org",
+"date": "2020-03-06 15:41:05.000000000",
+"tz": 0
+},
+"subject": "unicode/norm: look for symbols in TestLinking",
+"message": "unicode/norm: look for symbols in TestLinking\n\nPreviously, we just inspected sizes to tell if the linker was stripping\nunnecessary bits, so, actually look for symbols.\n\nFixes golang/go#34209\n\nChange-Id: Iec355ac46a967aeca9c0c1a950ead6b563c5e84e\nReviewed-on: https://go-review.googlesource.com/c/fake/+/221104\nRun-TryBot: Jeremy Faller \u003cjeremy@golang.org\u003e\nTryBot-Result: Gobot Gobot \u003cgobot@golang.org\u003e\nReviewed-by: Marcel van Lohuizen \u003cmpvl@golang.org\u003e\n"
+}

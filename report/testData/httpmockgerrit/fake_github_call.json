@@ -1,0 +1,98 @@
+{
+  "sha": "342b2e1fbaa52c93f31447ad2c6abc048c63e475",
+  "node_id": "MDY6Q29tbWl0MTk2MDg1MjI6YTZiODhjZjM0YTQ5MTQ5OGU0YzdkMTVjMTA3YTMxMDU4NjkzZTJjYg==",
+  "commit": {
+    "author": {
+      "name": "CodyOss",
+      "email": "codyoss@google.com",
+      "date": "2020-03-05T17:51:45Z"
+    },
+    "committer": {
+      "name": "CodyOss",
+      "email": "codyoss@google.com",
+      "date": "2020-03-05T18:01:17Z"
+    },
+    "message": "all:release v0.54.0\n\nThis commit will be tagged v0.54.0.\n\nChange-Id: I2b414c83f9582135aab3179f226b403af4b2cd27\nReviewed-on:https://code-review.googlesource.com/c/gocloud/+/52912\nReviewed-by: Noah Dietz<ndietz@google.com>",
+    "tree": {
+      "sha": "342b2e1fbaa52c93f31447ad2c6abc048c63e475",
+      "url": "https://api.github.com/repos/googleapis/google-cloud-go/git/trees/44653eb658159445bb252820106ead2871bbf240"
+    },
+    "url": "https://api.github.com/repos/googleapis/google-cloud-go/git/commits/a6b88cf34a491498e4c7d15c107a31058693e2cb",
+    "comment_count": 0,
+    "verification": {
+      "verified": false,
+      "reason": "unsigned",
+      "signature": null,
+      "payload": null
+    }
+  },
+  "url": "https://api.github.com/repos/googleapis/google-cloud-go/commits/342b2e1fbaa52c93f31447ad2c6abc048c63e475",
+  "html_url": "https://github.com/googleapis/google-cloud-go/commit/342b2e1fbaa52c93f31447ad2c6abc048c63e475",
+  "comments_url": "https://api.github.com/repos/googleapis/google-cloud-go/commits/342b2e1fbaa52c93f31447ad2c6abc048c63e475/comments",
+  "author": {
+    "login": "codyoss",
+    "id": 6331106,
+    "node_id": "MDQ6VXNlcjYzMzExMDY=",
+    "avatar_url": "https://avatars0.githubusercontent.com/u/6331106?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/codyoss",
+    "html_url": "https://github.com/codyoss",
+    "followers_url": "https://api.github.com/users/codyoss/followers",
+    "following_url": "https://api.github.com/users/codyoss/following{/other_user}",
+    "gists_url": "https://api.github.com/users/codyoss/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/codyoss/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/codyoss/subscriptions",
+    "organizations_url": "https://api.github.com/users/codyoss/orgs",
+    "repos_url": "https://api.github.com/users/codyoss/repos",
+    "events_url": "https://api.github.com/users/codyoss/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/codyoss/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "committer": {
+    "login": "codyoss",
+    "id": 6331106,
+    "node_id": "MDQ6VXNlcjYzMzExMDY=",
+    "avatar_url": "https://avatars0.githubusercontent.com/u/6331106?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/codyoss",
+    "html_url": "https://github.com/codyoss",
+    "followers_url": "https://api.github.com/users/codyoss/followers",
+    "following_url": "https://api.github.com/users/codyoss/following{/other_user}",
+    "gists_url": "https://api.github.com/users/codyoss/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/codyoss/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/codyoss/subscriptions",
+    "organizations_url": "https://api.github.com/users/codyoss/orgs",
+    "repos_url": "https://api.github.com/users/codyoss/repos",
+    "events_url": "https://api.github.com/users/codyoss/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/codyoss/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "parents": [
+    {
+      "sha": "39bd8dac9fa47f3de153e1c8d9089a41c0c4cfa1",
+      "url": "https://api.github.com/repos/googleapis/google-cloud-go/commits/39bd8dac9fa47f3de153e1c8d9089a41c0c4cfa1",
+      "html_url": "https://github.com/googleapis/google-cloud-go/commit/39bd8dac9fa47f3de153e1c8d9089a41c0c4cfa1"
+    }
+  ],
+  "stats": {
+    "total": 12,
+    "additions": 12,
+    "deletions": 0
+  },
+  "files": [
+    {
+      "sha": "3fa4900b71c2405cd0dba8a3de33ddc8e52aef95",
+      "filename": "CHANGES.md",
+      "status": "modified",
+      "additions": 12,
+      "deletions": 0,
+      "changes": 12,
+      "blob_url": "https://github.com/googleapis/google-cloud-go/blob/a6b88cf34a491498e4c7d15c107a31058693e2cb/CHANGES.md",
+      "raw_url": "https://github.com/googleapis/google-cloud-go/raw/a6b88cf34a491498e4c7d15c107a31058693e2cb/CHANGES.md",
+      "contents_url": "https://api.github.com/repos/googleapis/google-cloud-go/contents/CHANGES.md?ref=a6b88cf34a491498e4c7d15c107a31058693e2cb",
+      "patch": "@@-1,5 +1,17 @@\n # Changes\n \n+## v0.54.0\n+\n+- all:\n+  - remove unused golang.org/x/exp from mod file\n+  - update godoc.org links to pkg.go.dev\n+- compute/metadata:\n+  - use defaultClient when http.Client is nil\n+  - remove subscribeClient\n+- iam:\n+  - add support for v3 policy and IAM conditions\n+- Various updates to autogenerated clients.\n+\n ## v0.53.0\n \n - all: most clients now use transport/grpc.DialPool rather than Dial (see #1777 for outliers)."
+    }
+  ]
+}

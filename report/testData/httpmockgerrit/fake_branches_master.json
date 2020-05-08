@@ -1,0 +1,12 @@
+)]}'
+{
+"web_links": [
+{
+"name": "gitiles",
+"url": "https://go.googlesource.com/fake/+/refs/heads/master",
+"target": "_blank"
+}
+],
+"ref": "refs/heads/master",
+"revision": "06d492aade888ab8698aad35476286b7b555c961"
+}

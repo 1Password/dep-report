@@ -1,10 +1,15 @@
 package report
 
 import (
+	"errors"
 	"flag"
+	"fmt"
 	"github.com/1Password/dep-report/models"
 	"github.com/1Password/dep-report/versioncontrol"
+	"github.com/jarcoal/httpmock"
 	"github.com/stretchr/testify/assert"
+	"io/ioutil"
+	"path/filepath"
 	"testing"
 	"time"
 )
@@ -295,4 +300,97 @@ func TestGenerateReport(t *testing.T) {
 			assert.EqualValues(t, test.wantReport, *gotReport)
 		})
 	}
+}
+
+func TestReportObjFromDependency(t *testing.T) {
+	httpmock.Activate()
+	defer httpmock.DeactivateAndReset()
+
+	//mock endpoints for slack
+	httpmock.RegisterResponder("POST", "https://hooks.slack.com/services/test/test/test", httpmock.NewStringResponder(200, "ok"))
+	httpmock.RegisterResponder("POST", "https://hooks.slack.com/services/test/test/fail", httpmock.NewStringResponder(404, "no_team"))
+
+	//mock endpoints for gerrit
+	filenames, err := filepath.Glob("./testData/httpmockgerrit/*.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	responses, err := readMockHttpResponses(filenames)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	//commits installed url
+	httpmock.RegisterResponder("GET", "https://go-review.googlesource.com/projects/fake/commits/342b2e1fbaa52c93f31447ad2c6abc048c63e475", httpmock.NewBytesResponder(200, responses["fake_commits_installed.json"]))
+	//github call
+	httpmock.RegisterResponder("GET", "https://api.github.com/repos/golang/fake/commits/0ec3e9974c59", httpmock.NewBytesResponder(200, responses["fake_github_call.json"]))
+	//commits latest url
+	httpmock.RegisterResponder("GET", "https://go-review.googlesource.com/projects/fake/commits/06d492aade888ab8698aad35476286b7b555c961", httpmock.NewBytesResponder(200, responses["fake_commits_latest.json"]))
+	//branches master url
+	httpmock.RegisterResponder("GET", "https://go-review.googlesource.com/projects/fake/branches/master", httpmock.NewBytesResponder(200, responses["fake_branches_master.json"]))
+	//tags url
+	httpmock.RegisterResponder("GET", "https://go-review.googlesource.com/projects/fake/tags", httpmock.NewBytesResponder(200, responses["fake_tags.json"]))
+
+	tests := []struct {
+		description string
+		generator   Generator
+		dep         models.Dependency
+		wantErr     error
+	}{
+		//{
+		//	description: "case where license is found, happy path",
+		//	generator:   *NewGenerator(*githubToken, "test", "https://hooks.slack.com/services/test/test/test"),
+		//	dep: models.Dependency{
+		//		Source:   "",
+		//		Revision: "0ec3e9974c59",
+		//		Name:     "golang.org/x/crypto",
+		//	},
+		//},
+		{
+			description: "case where license is not found, slack notification is successful",
+			generator:   *NewGenerator(*githubToken, "test", "https://hooks.slack.com/services/test/test/test"),
+			dep: models.Dependency{
+				Source:   "",
+				Revision: "0ec3e9974c59",
+				Name:     "golang.org/x/fake",
+			},
+		},
+		{
+			description: "case where license is not found, slack notification fails",
+			generator:   *NewGenerator(*githubToken, "test", "https://hooks.slack.com/services/test/test/fail"),
+			dep: models.Dependency{
+				Source:   "",
+				Revision: "0ec3e9974c59",
+				Name:     "golang.org/x/fake",
+			},
+			wantErr: errors.New("unable to generate reportObject from dependency golang.org/x/fake: unable to post failure notification to slack, product: test, dependency: golang.org/x/fake: non-ok response returned from Slack: 404 no_team"),
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.description, func(t *testing.T) {
+			reportObj, err := test.generator.reportObjFromDependency(test.dep)
+			if err != nil {
+				if test.wantErr != nil {
+					assert.EqualError(t, err, test.wantErr.Error())
+				} else {
+					t.Error(err)
+				}
+			}
+			fmt.Println(reportObj)
+		})
+	}
+}
+
+func readMockHttpResponses(filenames []string) (map[string][]byte, error) {
+	resps := make(map[string][]byte, len(filenames))
+	for _, filename := range filenames {
+		bytes, err := ioutil.ReadFile(filename)
+		if err != nil {
+			return nil, err
+		}
+		resps[filepath.Base(filename)] = bytes
+	}
+	return resps, nil
 }

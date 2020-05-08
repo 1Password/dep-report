@@ -92,7 +92,7 @@ func (g Generator) reportObjFromDependency(dep models.Dependency) (*models.Repor
 		reportObject, err = versioncontrol.ReportObjFromGerrit(dep, g.client)
 		if err != nil {
 			//if the error is from the slack notification, we want to attempt to notify via slack
-			if strings.Contains(err.Error(), "unable to retrieve license for"){
+			if strings.Contains(err.Error(), "unable to retrieve license for") {
 				//if the slack notification fails, we need to return an error and fail the pipeline
 				if err := slack.FailureNotify(g.productName, dep.Name, g.client.SlackWebhook); err != nil {
 					return nil, errors.Wrapf(err, "unable to generate reportObject from dependency %s", dep.Name)
