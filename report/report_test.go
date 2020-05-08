@@ -364,7 +364,7 @@ func TestReportObjFromDependency(t *testing.T) {
 				Revision: "0ec3e9974c59",
 				Name:     "golang.org/x/fake",
 			},
-			wantErr: errors.New("unable to generate reportObject from dependency golang.org/x/fake: unable to post failure notification to slack, product: test, dependency: golang.org/x/fake: non-ok response returned from Slack: 404 no_team"),
+			wantErr: errors.New("unable to generate reportObject from dependency golang.org/x/fake: unable to post failure notification to slack, product: test, dependency: golang.org/x/fake: non-ok response returned from Slack: no_team"),
 		},
 	}
 
