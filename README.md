@@ -14,8 +14,3 @@ The code for this is defined at `/.github/workflows/go.yml`.
 Based on guidance from security, we need to take action between releases when a dependency license fails to be provided in the report.
 The existing logic allows a release pipeline to pass, but notifies us in the slack channel "dep-issues" so that we can create an issue and correct the problem ASAP.
 If the slack notification fails, the pipeline fails.
- 
-###Merging changes
-When we merge changes to this tool, there are a couple of steps required to make the changes available to our CI pipelines.
-- Build/tag/push the docker image "registry.1password.io/dev/b5/op/scan:{dateTag}"
-- Update respective CI pipeline definitions to use the new image (make an issue for teams not involved in the dep-report changes)
