@@ -22,6 +22,7 @@ func TestReportObjFromGerrit(t *testing.T) {
 		description      string
 		dependency       models.Dependency
 		wantReportObject *models.ReportObject
+		wantErr 		 error
 	}{
 		{
 			description: "should successfully return report object when dependency is from go.mod and has pseudo version",
@@ -135,13 +136,18 @@ func TestReportObjFromGerrit(t *testing.T) {
 					Version: "",
 				},
 			},
+			wantErr: ErrNoLicense,
 		},
 	}
 	for _, test := range tests {
 		t.Run(test.description, func(t *testing.T) {
 			reportObject, err := ReportObjFromGerrit(test.dependency, request)
 			if err != nil {
-				t.Errorf("unable to compile report for gerrit: %v", err)
+				if test.wantErr != nil {
+					assert.EqualError(t, err, test.wantErr.Error())
+				} else {
+					t.Errorf("unable to compile report for gerrit: %v", err)
+				}
 			}
 			assert.EqualValues(t, test.wantReportObject, reportObject)
 		})

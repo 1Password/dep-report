@@ -1,9 +1,10 @@
 package report
 
 import (
+	"encoding/json"
 	"github.com/1Password/dep-report/models"
 	"github.com/1Password/dep-report/versioncontrol"
-	"encoding/json"
+	"github.com/1Password/dep-report/versioncontrol/slack"
 	"github.com/pkg/errors"
 	"log"
 	"os/exec"
@@ -18,14 +19,14 @@ const (
 )
 
 // BuildReport This function is used to create the dependency report
-func (g *Generator) BuildReport(productName string, dependencies []models.Dependency) (*models.Report, error) {
+func (g *Generator) BuildReport(dependencies []models.Dependency) (*models.Report, error) {
 	commit, commitTime, err := getCurrentCommitAndCommitTime()
 	if err != nil {
 		return nil, err
 	}
 
 	report := models.Report{
-		Product:    productName,
+		Product:    g.productName,
 		Commit:     commit,
 		CommitTime: commitTime,
 		ReportTime: time.Now().UTC().Format("2006-01-02T15:04:05Z"),
@@ -78,7 +79,7 @@ func (g Generator) reportObjFromDependency(dep models.Dependency) (*models.Repor
 
 	switch dep.Source {
 	case GITHUB:
-		reportObject, err = versioncontrol.ReportObjFromGithub(dep, g.request)
+		reportObject, err = versioncontrol.ReportObjFromGithub(dep, g.client)
 		if err != nil {
 			return nil, errors.Wrapf(err, "unable to generate reportObject from dependency %s", dep.Name)
 		}
@@ -88,9 +89,20 @@ func (g Generator) reportObjFromDependency(dep models.Dependency) (*models.Repor
 			return nil, errors.Wrapf(err, "unable to generate reportObject from dependency %s", dep.Name)
 		}
 	case GERRIT:
-		reportObject, err = versioncontrol.ReportObjFromGerrit(dep, g.request)
+		reportObject, err = versioncontrol.ReportObjFromGerrit(dep, g.client)
 		if err != nil {
-			return nil, errors.Wrapf(err, "unable to generate reportObject from dependency %s", dep.Name)
+			//if the error is from the slack notification, we want to attempt to notify via slack
+			//if strings.Contains(err.Error(), "unable to retrieve license for") {
+			if errors.Cause(err) == versioncontrol.ErrNoLicense{
+				//if the slack notification fails, we need to return an error and fail the pipeline
+				if err := slack.FailureNotify(g.productName, dep.Name, g.client.SlackWebhook); err != nil {
+					return nil, errors.Wrapf(err, "unable to generate reportObject from dependency %s", dep.Name)
+				}
+				//if the error is any other type of error, we want to return an error and fail the pipeline
+				//if the slack notification was successful, we want no errors and pipeline to succeed so "else" is required here
+			} else {
+				return nil, errors.Wrapf(err, "unable to generate reportObject from dependency %s", dep.Name)
+			}
 		}
 	default:
 		log.Println("Unable to determine repo source for ", dep.Name)

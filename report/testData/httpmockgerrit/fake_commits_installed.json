@@ -1,0 +1,24 @@
+)]}'
+{
+"commit": "342b2e1fbaa52c93f31447ad2c6abc048c63e475",
+"parents": [
+{
+"commit": "b1379a7b4714109485d36884eea575780d466cbd",
+"subject": "gen.go: update due to changes to core"
+}
+],
+"author": {
+"name": "Awesome Developer",
+"email": "somefakeemail@fake.org",
+"date": "2018-12-15 17:52:45.000000000",
+"tz": 60
+},
+"committer": {
+"name": "Awesome Developer",
+"email": "somefakeemail@fake.org",
+"date": "2019-04-25 21:42:06.000000000",
+"tz": 0
+},
+"subject": "all: upgrade to Unicode 11",
+"message": "all: upgrade to Unicode 11\n\nby running go generate at the top level.\n\nIDNA still uses the old test format. The new\nformat tests more cases. The 11 format causes\ntest failure, but only for erroneous input that\nresult in errors. The package will in all such\ncases still report an error, but the value result\nmay differ.\n\nUpdates golang/go#27945\n\nChange-Id: Idb94e78411c2cb9f8e829b09d3d8de7807829076\nReviewed-on: https://go-review.googlesource.com/c/fake/+/154442\nRun-TryBot: Marcel van Lohuizen \u003cmpvl@golang.org\u003e\nReviewed-by: Russ Cox \u003crsc@golang.org\u003e\n"
+}

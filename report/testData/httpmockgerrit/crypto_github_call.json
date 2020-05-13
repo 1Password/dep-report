@@ -1,0 +1,110 @@
+{
+  "sha": "0ec3e9974c59449edd84298612e9f16fa13368e8",
+  "node_id": "MDY6Q29tbWl0Mjc1MjIyNDE6MGVjM2U5OTc0YzU5NDQ5ZWRkODQyOTg2MTJlOWYxNmZhMTMzNjhlOA==",
+  "commit": {
+    "author": {
+      "name": "Awesome Dev",
+      "email": "fake@gmail.com",
+      "date": "2020-03-22T18:36:50Z"
+    },
+    "committer": {
+      "name": "Awesome Dev",
+      "email": "fake@golang.org",
+      "date": "2020-03-23T16:52:09Z"
+    },
+    "message": "ssh: support aes256-cbc for passphrase-protected OpenSSH keys\n\nThe existing code for decrypting OpenSSH-format keys only allows aes256-ctr, the current ssh-keygen default.\nHowever, the default encryption scheme was aes256-cbc until relatively recently, and some of these keys are still in use.\nSupport for aes256-cbc has been added.\n\nFixes golang/go#37939\n\nChange-Id: I3730347109c5dd18e4cbe61b48bbca9566ad61d2\nReviewed-on: https://go-review.googlesource.com/c/crypto/+/224817\nReviewed-by: Filippo Valsorda <filippo@golang.org>",
+    "tree": {
+      "sha": "15dc73e96a4ef086ecf3fedfa821cffc5a2fa9b9",
+      "url": "https://api.github.com/repos/golang/crypto/git/trees/15dc73e96a4ef086ecf3fedfa821cffc5a2fa9b9"
+    },
+    "url": "https://api.github.com/repos/golang/crypto/git/commits/0ec3e9974c59449edd84298612e9f16fa13368e8",
+    "comment_count": 0,
+    "verification": {
+      "verified": false,
+      "reason": "unsigned",
+      "signature": null,
+      "payload": null
+    }
+  },
+  "url": "https://api.github.com/repos/golang/crypto/commits/0ec3e9974c59449edd84298612e9f16fa13368e8",
+  "html_url": "https://github.com/golang/crypto/commit/0ec3e9974c59449edd84298612e9f16fa13368e8",
+  "comments_url": "https://api.github.com/repos/golang/crypto/commits/0ec3e9974c59449edd84298612e9f16fa13368e8/comments",
+  "author": {
+    "login": "AwesomeDev",
+    "id": 8988064,
+    "node_id": "MDQ6VXNlcjg5ODgwNjQ=",
+    "avatar_url": "https://avatars0.githubusercontent.com/u/8988064?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/RKinsey",
+    "html_url": "https://github.com/RKinsey",
+    "followers_url": "https://api.github.com/users/RKinsey/followers",
+    "following_url": "https://api.github.com/users/RKinsey/following{/other_user}",
+    "gists_url": "https://api.github.com/users/RKinsey/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/RKinsey/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/RKinsey/subscriptions",
+    "organizations_url": "https://api.github.com/users/RKinsey/orgs",
+    "repos_url": "https://api.github.com/users/RKinsey/repos",
+    "events_url": "https://api.github.com/users/RKinsey/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/RKinsey/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "committer": {
+    "login": "AwesomeDev",
+    "id": 1225294,
+    "node_id": "MDQ6VXNlcjEyMjUyOTQ=",
+    "avatar_url": "https://avatars1.githubusercontent.com/u/1225294?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/FiloSottile",
+    "html_url": "https://github.com/FiloSottile",
+    "followers_url": "https://api.github.com/users/FiloSottile/followers",
+    "following_url": "https://api.github.com/users/FiloSottile/following{/other_user}",
+    "gists_url": "https://api.github.com/users/FiloSottile/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/FiloSottile/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/FiloSottile/subscriptions",
+    "organizations_url": "https://api.github.com/users/FiloSottile/orgs",
+    "repos_url": "https://api.github.com/users/FiloSottile/repos",
+    "events_url": "https://api.github.com/users/FiloSottile/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/FiloSottile/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "parents": [
+    {
+      "sha": "891825fb96dfc23279b4a42f710d49e78e05b333",
+      "url": "https://api.github.com/repos/golang/crypto/commits/891825fb96dfc23279b4a42f710d49e78e05b333",
+      "html_url": "https://github.com/golang/crypto/commit/891825fb96dfc23279b4a42f710d49e78e05b333"
+    }
+  ],
+  "stats": {
+    "total": 33,
+    "additions": 28,
+    "deletions": 5
+  },
+  "files": [
+    {
+      "sha": "31f26349a05ff79b87f9ad919ebdd875d811313d",
+      "filename": "ssh/keys.go",
+      "status": "modified",
+      "additions": 13,
+      "deletions": 5,
+      "changes": 18,
+      "blob_url": "https://github.com/golang/crypto/blob/0ec3e9974c59449edd84298612e9f16fa13368e8/ssh/keys.go",
+      "raw_url": "https://github.com/golang/crypto/raw/0ec3e9974c59449edd84298612e9f16fa13368e8/ssh/keys.go",
+      "contents_url": "https://api.github.com/repos/golang/crypto/contents/ssh/keys.go?ref=0ec3e9974c59449edd84298612e9f16fa13368e8",
+      "patch": "@@ -1246,15 +1246,23 @@ func passphraseProtectedOpenSSHKey(passphrase []byte) openSSHDecryptFunc {\n \t\t}\n \t\tkey, iv := k[:32], k[32:]\n \n-\t\tif cipherName != \"aes256-ctr\" {\n-\t\t\treturn nil, fmt.Errorf(\"ssh: unknown cipher %q, only supports %q\", cipherName, \"aes256-ctr\")\n-\t\t}\n \t\tc, err := aes.NewCipher(key)\n \t\tif err != nil {\n \t\t\treturn nil, err\n \t\t}\n-\t\tctr := cipher.NewCTR(c, iv)\n-\t\tctr.XORKeyStream(privKeyBlock, privKeyBlock)\n+\t\tswitch cipherName {\n+\t\tcase \"aes256-ctr\":\n+\t\t\tctr := cipher.NewCTR(c, iv)\n+\t\t\tctr.XORKeyStream(privKeyBlock, privKeyBlock)\n+\t\tcase \"aes256-cbc\":\n+\t\t\tif len(privKeyBlock)%c.BlockSize() != 0 {\n+\t\t\t\treturn nil, fmt.Errorf(\"ssh: invalid encrypted private key length, not a multiple of the block size\")\n+\t\t\t}\n+\t\t\tcbc := cipher.NewCBCDecrypter(c, iv)\n+\t\t\tcbc.CryptBlocks(privKeyBlock, privKeyBlock)\n+\t\tdefault:\n+\t\t\treturn nil, fmt.Errorf(\"ssh: unknown cipher %q, only supports %q or %q\", cipherName, \"aes256-ctr\", \"aes256-cbc\")\n+\t\t}\n \n \t\treturn privKeyBlock, nil\n \t}"
+    },
+    {
+      "sha": "f1e2fc56923d9bd55801db9030f8a46ee3a78788",
+      "filename": "ssh/testdata/keys.go",
+      "status": "modified",
+      "additions": 15,
+      "deletions": 0,
+      "changes": 15,
+      "blob_url": "https://github.com/golang/crypto/blob/0ec3e9974c59449edd84298612e9f16fa13368e8/ssh/testdata/keys.go",
+      "raw_url": "https://github.com/golang/crypto/raw/0ec3e9974c59449edd84298612e9f16fa13368e8/ssh/testdata/keys.go",
+      "contents_url": "https://api.github.com/repos/golang/crypto/contents/ssh/testdata/keys.go?ref=0ec3e9974c59449edd84298612e9f16fa13368e8",
+      "patch": "@@ -269,6 +269,21 @@ ocEWuVhQ94/RjoAAAAEAAAAAEAAAAzAAAAC3NzaC1lZDI1NTE5AAAAIIw1gSurPTDwZidA\n xdB6KEw1Ce7Bz8JaDIeagAGd3xtQTH3cuuleVxCZZnk9NspsPxigADKCls/RUiK7F+z3Qf\n Lvs9+PH8nIuhFMYZgo3liqZbVS5z4Fqhyzyq4=\n -----END OPENSSH PRIVATE KEY-----\n+`),\n+\t},\n+\n+\t3: {\n+\t\tName:              \"ed25519-encrypted-cbc\",\n+\t\tEncryptionKey:     \"password\",\n+\t\tIncludesPublicKey: true,\n+\t\tPEMBytes: []byte(`-----BEGIN OPENSSH PRIVATE KEY-----\n+b3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jYmMAAAAGYmNyeXB0AAAAGAAAABDzGKF3uX\n+G1gXALZKFd6Ir4AAAAEAAAAAEAAAAzAAAAC3NzaC1lZDI1NTE5AAAAIDne4/teO42zTDdj\n+NwxUMNpbfmp/dxgU4ZNkC3ydgcugAAAAoJ3J/oA7+iqVOz0CIUUk9ufdP1VP4jDf2um+0s\n+Sgs7x6Gpyjq67Ps7wLRdSmxr/G5b+Z8dRGFYS/wUCQEe3whwuImvLyPwWjXLzkAyMzc01f\n+ywBGSrHnvP82ppenc2HuTI+E05Xc02i6JVyI1ShiekQL5twoqtR6pEBZnD17UonIx7cRzZ\n+gbDGyT3bXMQtagvCwoW+/oMTKXiZP5jCJpEO8=\n+-----END OPENSSH PRIVATE KEY-----\n `),\n \t},\n }"
+    }
+  ]
+}

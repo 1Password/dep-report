@@ -8,16 +8,19 @@ import (
 
 //Generator is used to drive the report generation and data retrieval
 type Generator struct {
+	productName string
 	//Client contains details needed to make API calls to github/gerrit/gitlab/etc
-	request versioncontrol.Client
+	client versioncontrol.Client
 }
 
 //NewGenerator creates a Generator struct
-func NewGenerator(githubToken string, productName string) *Generator {
+func NewGenerator(githubToken string, productName string, slackWebhook string) *Generator {
 	generator := Generator{
-		request: versioncontrol.Client{
+		productName: productName,
+		client: versioncontrol.Client{
 			HttpClient: &http.Client{Timeout: 5 * time.Second},
 			Token:      githubToken,
+			SlackWebhook: slackWebhook,
 		},
 	}
 	return &generator

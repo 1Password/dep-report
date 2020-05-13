@@ -1,0 +1,24 @@
+)]}'
+{
+"commit": "0ec3e9974c59449edd84298612e9f16fa13368e8",
+"parents": [
+{
+"commit": "891825fb96dfc23279b4a42f710d49e78e05b333",
+"subject": "gitignore: remove obsolete reference to .hgignore in comment"
+}
+],
+"author": {
+"name": "Awesome Dev",
+"email": "fake@gmail.com",
+"date": "2020-03-22 18:36:50.000000000",
+"tz": -240
+},
+"committer": {
+"name": "Awesome Dev",
+"email": "fake@golang.org",
+"date": "2020-03-23 16:52:09.000000000",
+"tz": 0
+},
+"subject": "ssh: support aes256-cbc for passphrase-protected OpenSSH keys",
+"message": "ssh: support aes256-cbc for passphrase-protected OpenSSH keys\n\nThe existing code for decrypting OpenSSH-format keys only allows aes256-ctr, the current ssh-keygen default.\nHowever, the default encryption scheme was aes256-cbc until relatively recently, and some of these keys are still in use.\nSupport for aes256-cbc has been added.\n\nFixes golang/go#37939\n\nChange-Id: I3730347109c5dd18e4cbe61b48bbca9566ad61d2\nReviewed-on: https://go-review.googlesource.com/c/crypto/+/224817\nReviewed-by: Filippo Valsorda \u003cfilippo@golang.org\u003e\n"
+}

@@ -1,10 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"github.com/1Password/dep-report/models"
 	"github.com/1Password/dep-report/parse"
 	"github.com/1Password/dep-report/report"
-	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -27,14 +27,20 @@ func main() {
 		productName = "b5server"
 	}
 
+	//This env variable is required in order for us to report license failures to slack
+	slackWebhookURL := os.Getenv("DEP_WEBHOOK")
+	if slackWebhookURL == "" {
+		log.Fatal("missing env variable: DEP_WEBHOOK")
+	}
+
 	dependencies, err := getDependencyFile()
 	if err != nil {
 		log.Fatalf("unable to parse dependency file: %v", err)
 	}
 
-	g := report.NewGenerator(githubToken, productName)
+	g := report.NewGenerator(githubToken, productName, slackWebhookURL)
 
-	rawReport, err := g.BuildReport(productName, dependencies)
+	rawReport, err := g.BuildReport(dependencies)
 	if err != nil {
 		log.Fatalf("unable to generate report: %v", err)
 	}
