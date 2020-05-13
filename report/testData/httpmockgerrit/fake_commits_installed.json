@@ -8,14 +8,14 @@
 }
 ],
 "author": {
-"name": "Marcel van Lohuizen",
-"email": "mpvl@golang.org",
+"name": "Awesome Developer",
+"email": "somefakeemail@fake.org",
 "date": "2018-12-15 17:52:45.000000000",
 "tz": 60
 },
 "committer": {
-"name": "Marcel van Lohuizen",
-"email": "mpvl@golang.org",
+"name": "Awesome Developer",
+"email": "somefakeemail@fake.org",
 "date": "2019-04-25 21:42:06.000000000",
 "tz": 0
 },

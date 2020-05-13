@@ -1,12 +1,11 @@
 package report
 
 import (
-	"errors"
 	"flag"
-	"fmt"
 	"github.com/1Password/dep-report/models"
 	"github.com/1Password/dep-report/versioncontrol"
 	"github.com/jarcoal/httpmock"
+	"github.com/pkg/errors"
 	"github.com/stretchr/testify/assert"
 	"io/ioutil"
 	"path/filepath"
@@ -321,6 +320,7 @@ func TestReportObjFromDependency(t *testing.T) {
 		t.Fatal(err)
 	}
 
+	//Fake endpoints
 	//commits installed url
 	httpmock.RegisterResponder("GET", "https://go-review.googlesource.com/projects/fake/commits/342b2e1fbaa52c93f31447ad2c6abc048c63e475", httpmock.NewBytesResponder(200, responses["fake_commits_installed.json"]))
 	//github call
@@ -332,21 +332,33 @@ func TestReportObjFromDependency(t *testing.T) {
 	//tags url
 	httpmock.RegisterResponder("GET", "https://go-review.googlesource.com/projects/fake/tags", httpmock.NewBytesResponder(200, responses["fake_tags.json"]))
 
+	//Real endpoints with fake data
+	//commits installed url
+	httpmock.RegisterResponder("GET", "https://go-review.googlesource.com/projects/crypto/commits/0ec3e9974c59449edd84298612e9f16fa13368e8", httpmock.NewBytesResponder(200, responses["crypto_commits_installed.json"]))
+	//github call
+	httpmock.RegisterResponder("GET", "https://api.github.com/repos/golang/crypto/commits/0ec3e9974c59", httpmock.NewBytesResponder(200, responses["crypto_github_call.json"]))
+	//commits latest url
+	httpmock.RegisterResponder("GET", "https://go-review.googlesource.com/projects/crypto/commits/06a226fb4e3765ef3f48aa2852b401bc7b98e981", httpmock.NewBytesResponder(200, responses["crypto_commits_latest.json"]))
+	//branches master url
+	httpmock.RegisterResponder("GET", "https://go-review.googlesource.com/projects/crypto/branches/master", httpmock.NewBytesResponder(200, responses["crypto_branches_master.json"]))
+	//tags url
+	httpmock.RegisterResponder("GET", "https://go-review.googlesource.com/projects/crypto/tags", httpmock.NewBytesResponder(200, responses["crypto_tags.json"]))
+
 	tests := []struct {
 		description string
 		generator   Generator
 		dep         models.Dependency
 		wantErr     error
 	}{
-		//{
-		//	description: "case where license is found, happy path",
-		//	generator:   *NewGenerator(*githubToken, "test", "https://hooks.slack.com/services/test/test/test"),
-		//	dep: models.Dependency{
-		//		Source:   "",
-		//		Revision: "0ec3e9974c59",
-		//		Name:     "golang.org/x/crypto",
-		//	},
-		//},
+		{
+			description: "case where license is found, happy path",
+			generator:   *NewGenerator(*githubToken, "test", "https://hooks.slack.com/services/test/test/test"),
+			dep: models.Dependency{
+				Source:   "",
+				Revision: "0ec3e9974c59",
+				Name:     "golang.org/x/crypto",
+			},
+		},
 		{
 			description: "case where license is not found, slack notification is successful",
 			generator:   *NewGenerator(*githubToken, "test", "https://hooks.slack.com/services/test/test/test"),
@@ -370,7 +382,7 @@ func TestReportObjFromDependency(t *testing.T) {
 
 	for _, test := range tests {
 		t.Run(test.description, func(t *testing.T) {
-			reportObj, err := test.generator.reportObjFromDependency(test.dep)
+			_, err := test.generator.reportObjFromDependency(test.dep)
 			if err != nil {
 				if test.wantErr != nil {
 					assert.EqualError(t, err, test.wantErr.Error())
@@ -378,7 +390,6 @@ func TestReportObjFromDependency(t *testing.T) {
 					t.Error(err)
 				}
 			}
-			fmt.Println(reportObj)
 		})
 	}
 }

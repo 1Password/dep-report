@@ -1,6 +1,8 @@
 package versioncontrol
 
-import "net/http"
+import (
+	"net/http"
+)
 
 //Client holds the necessary items to make api calls to various version control providers
 type Client struct {

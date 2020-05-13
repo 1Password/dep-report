@@ -3,13 +3,13 @@
   "node_id": "MDY6Q29tbWl0MTk2MDg1MjI6YTZiODhjZjM0YTQ5MTQ5OGU0YzdkMTVjMTA3YTMxMDU4NjkzZTJjYg==",
   "commit": {
     "author": {
-      "name": "CodyOss",
-      "email": "codyoss@google.com",
+      "name": "Awesome Developer",
+      "email": "somefakeemail@fake.org",
       "date": "2020-03-05T17:51:45Z"
     },
     "committer": {
-      "name": "CodyOss",
-      "email": "codyoss@google.com",
+      "name": "Awesome Developer",
+      "email": "somefakeemail@fake.com",
       "date": "2020-03-05T18:01:17Z"
     },
     "message": "all:release v0.54.0\n\nThis commit will be tagged v0.54.0.\n\nChange-Id: I2b414c83f9582135aab3179f226b403af4b2cd27\nReviewed-on:https://code-review.googlesource.com/c/gocloud/+/52912\nReviewed-by: Noah Dietz<ndietz@google.com>",
@@ -30,7 +30,7 @@
   "html_url": "https://github.com/googleapis/google-cloud-go/commit/342b2e1fbaa52c93f31447ad2c6abc048c63e475",
   "comments_url": "https://api.github.com/repos/googleapis/google-cloud-go/commits/342b2e1fbaa52c93f31447ad2c6abc048c63e475/comments",
   "author": {
-    "login": "codyoss",
+    "login": "awesomedev",
     "id": 6331106,
     "node_id": "MDQ6VXNlcjYzMzExMDY=",
     "avatar_url": "https://avatars0.githubusercontent.com/u/6331106?v=4",
@@ -50,7 +50,7 @@
     "site_admin": false
   },
   "committer": {
-    "login": "codyoss",
+    "login": "awesomedev",
     "id": 6331106,
     "node_id": "MDQ6VXNlcjYzMzExMDY=",
     "avatar_url": "https://avatars0.githubusercontent.com/u/6331106?v=4",

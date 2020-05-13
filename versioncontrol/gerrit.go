@@ -2,7 +2,6 @@ package versioncontrol
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/1Password/dep-report/models"
 	"github.com/pkg/errors"
 	"io/ioutil"
@@ -10,6 +9,10 @@ import (
 	"strings"
 	"time"
 )
+
+//ErrNoLicense - Defined error for failure to pull gerrit dependency license
+var ErrNoLicense = errors.New("unable to retrieve license for dependency")
+
 //ReportObjFromGerrit uses the data in a dependency object and creates a report object
 func ReportObjFromGerrit(dep models.Dependency, r Client) (*models.ReportObject, error){
 	var gerritRepoURL string
@@ -96,7 +99,7 @@ func ReportObjFromGerrit(dep models.Dependency, r Client) (*models.ReportObject,
 	reportObject.License, ok = licenseForRepo[dep.Name]
 	if !ok {
 		reportObject.License = "Unknown license"
-		return &reportObject, errors.New(fmt.Sprintf("unable to retrieve license for %s", dep.Name))
+		return &reportObject, ErrNoLicense
 	}
 
 	return &reportObject, nil

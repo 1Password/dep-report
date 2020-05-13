@@ -1,7 +1,6 @@
 package versioncontrol
 
 import (
-	"errors"
 	"github.com/1Password/dep-report/models"
 	"github.com/stretchr/testify/assert"
 	"testing"
@@ -137,7 +136,7 @@ func TestReportObjFromGerrit(t *testing.T) {
 					Version: "",
 				},
 			},
-			wantErr: errors.New("unable to retrieve license for golang.org/x/lint"),
+			wantErr: ErrNoLicense,
 		},
 	}
 	for _, test := range tests {
