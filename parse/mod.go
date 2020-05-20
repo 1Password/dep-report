@@ -1,6 +1,7 @@
 package parse
 
 import (
+	"bytes"
 	"github.com/1Password/dep-report/models"
 	"encoding/json"
 	"fmt"
@@ -11,10 +12,20 @@ import (
 func ParseModules() ([]models.Module, error) {
 	var modArray []models.Module
 
-	goMod, err := exec.Command("go", "list", "-m", "-mod=mod", "-json", "all").Output()
+	cmd := exec.Command("go", "list", "-m", "-mod=mod", "-json", "all")
+	var out bytes.Buffer
+	cmd.Stdout = &out
+
+	err := cmd.Run()
+	goMod, err := cmd.Output()
 	if err != nil {
 		return nil, fmt.Errorf("unable to execute go list command: %v", err)
 	}
+
+	//goMod, err := exec.Command("go", "list", "-m", "-mod=mod", "-json", "all").Output()
+	//if err != nil {
+	//	return nil, fmt.Errorf("unable to execute go list command: %v", err)
+	//}
 	goModString := string(goMod)
 
 	splitGoMod := strings.SplitAfter(goModString, "}\n")
