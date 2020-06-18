@@ -1,7 +1,5 @@
 package models
 
-import "time"
-
 type Dependency struct {
 	//Source is the source of the dependency: github, gitlab, gerrit, etc
 	Source string
@@ -28,9 +26,6 @@ type Pkg struct {
 
 //Module is a type that represents the json output of `go list`
 type Module struct {
-	Path    string    `json:"Path"`
-	Version string    `json:"Version"`
-	Time    time.Time `json:"Time"`
-	Dir     string    `json:"Dir"`
-	GoMod   string    `json:"GoMod"`
+	Path    string
+	Version string
 }
