@@ -1,6 +1,7 @@
 package report
 
 import (
+	"fmt"
 	"github.com/1Password/dep-report/models"
 	"github.com/1Password/dep-report/versioncontrol"
 	"flag"
@@ -31,6 +32,7 @@ func TestGenerateReport(t *testing.T) {
 		description string
 		pkg         []models.Dependency
 		wantReport  models.Report
+		wantError   error
 	}{
 		{
 			description: "Should return report successfully from go.mod",
@@ -280,20 +282,37 @@ func TestGenerateReport(t *testing.T) {
 				},
 			},
 		},
+		{
+			description: "Should return error when a dependency source cannot be determined",
+			pkg: []models.Dependency{
+				{
+					Source:   "",
+					Revision: "12345",
+					Name:     "gopkg.in/fake",
+				},
+			},
+			wantReport: models.Report{},
+			wantError: fmt.Errorf("failed to create report object from dependency: { 12345 gopkg.in/fake}: unable to determine repo source for gopkg.in/fake, must add to map"),
+		},
 	}
 	for _, test := range tests {
 		t.Run(test.description, func(t *testing.T) {
 			gotReport, err := g.BuildReport(productName, test.pkg)
-			if err != nil {
+			if err != nil && test.wantError == nil {
 				t.Errorf("BuildReport failed with errors: %v", err)
+			}
+
+			if err != nil && test.wantError != nil {
+				assert.EqualError(t, err, test.wantError.Error())
 			}
 
 			if gotReport != nil {
 				gotReport.ReportTime = test.wantReport.ReportTime
 				gotReport.CommitTime = test.wantReport.CommitTime
 				gotReport.Commit = test.wantReport.Commit
+
+				assert.EqualValues(t, test.wantReport, *gotReport)
 			}
-			assert.EqualValues(t, test.wantReport, *gotReport)
 		})
 	}
 }
