@@ -1,6 +1,7 @@
 package report
 
 import (
+	"fmt"
 	"github.com/1Password/dep-report/models"
 	"github.com/1Password/dep-report/versioncontrol"
 	"encoding/json"
@@ -94,6 +95,7 @@ func (g Generator) reportObjFromDependency(dep models.Dependency) (*models.Repor
 		}
 	default:
 		log.Println("Unable to determine repo source for ", dep.Name)
+		return nil, fmt.Errorf("unable to determine repo source for %s", dep.Name)
 	}
 
 	return reportObject, nil
