@@ -61,7 +61,7 @@ func getDependencyFile() ([]models.Dependency, error) {
 		}
 		deps = parse.MapPkgToDependency(*pkg)
 	case fileExists(filepath.Join(wd, goModFilePath)):
-		mods, err := parse.ParseModules()
+		mods, err := parse.ParseModules(filepath.Join(wd, goModFilePath))
 		if err != nil {
 			return nil, err
 		}
