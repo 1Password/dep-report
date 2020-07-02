@@ -292,7 +292,7 @@ func TestGenerateReport(t *testing.T) {
 				},
 			},
 			wantReport: models.Report{},
-			wantError: fmt.Errorf("failed to create report object from dependency: { 12345 gopkg.in/fake}: unable to determine repo source for gopkg.in/fake, must add to map"),
+			wantError: fmt.Errorf("failed to create report object from dependency: { 12345 gopkg.in/fake}: unable to determine repo source for gopkg.in/fake"),
 		},
 	}
 	for _, test := range tests {
@@ -304,6 +304,10 @@ func TestGenerateReport(t *testing.T) {
 
 			if err != nil && test.wantError != nil {
 				assert.EqualError(t, err, test.wantError.Error())
+			}
+
+			if err == nil && test.wantError != nil {
+				assert.EqualError(t, err, test.wantError.Error(), "Expected error, but none occurred")
 			}
 
 			if gotReport != nil {

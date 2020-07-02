@@ -95,7 +95,7 @@ func (g Generator) reportObjFromDependency(dep models.Dependency) (*models.Repor
 		}
 	default:
 		log.Println("Unable to determine repo source for ", dep.Name)
-		return nil, fmt.Errorf("unable to determine repo source for %s, must add to map", dep.Name)
+		return nil, fmt.Errorf("unable to determine repo source for %s", dep.Name)
 	}
 
 	return reportObject, nil
