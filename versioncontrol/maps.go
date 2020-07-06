@@ -17,7 +17,7 @@ var GithubRepoURLForPackage = map[string]string{
 	"gopkg.in/resty.v1":               "https://github.com/go-resty/resty",
 	"gopkg.in/alecthomas/kingpin.v2":  "https://github.com/alecthomas/kingpin",
 	"honnef.co/go/tools":              "https://github.com/dominikh/go-tools",
-	"gopkg.in/DataDog/dd-trace-go.v1": "https://github.com/DataDog/dd-trace-go"
+	"gopkg.in/DataDog/dd-trace-go.v1": "https://github.com/DataDog/dd-trace-go",
 }
 
 var GerritRepoURLForPackage = map[string]string{
