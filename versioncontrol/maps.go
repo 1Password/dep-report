@@ -15,9 +15,11 @@ var GithubRepoURLForPackage = map[string]string{
 	"go.uber.org/multierr":            "https://github.com/uber-go/multierr",
 	"go.uber.org/zap":                 "https://github.com/uber-go/zap",
 	"gopkg.in/resty.v1":               "https://github.com/go-resty/resty",
+	"gopkg.in/ini.v1":                 "https://github.com/go-ini/ini",
 	"gopkg.in/alecthomas/kingpin.v2":  "https://github.com/alecthomas/kingpin",
 	"honnef.co/go/tools":              "https://github.com/dominikh/go-tools",
 	"gopkg.in/DataDog/dd-trace-go.v1": "https://github.com/DataDog/dd-trace-go",
+	"gotest.tools":                    "https://github.com/gotestyourself/gotest.tools",
 }
 
 var GerritRepoURLForPackage = map[string]string{

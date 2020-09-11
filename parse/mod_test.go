@@ -45,6 +45,31 @@ func TestMapModToPkg(t *testing.T) {
 			},
 		},
 		{
+			description: "should handle major version suffixes, removing to properly find repo",
+			modules: []models.Module{
+				{
+					Path:    "github.com/pkg/errors/v2",
+					Version: "v2.8.1",
+				},
+				{
+					Path:    "github.com/BurntSushi/toml/v33",
+					Version: "v33.3.1",
+				},
+			},
+			wantPkg: []models.Dependency{
+				{
+					Source:   "",
+					Name:     "github.com/pkg/errors",
+					Revision: "v2.8.1",
+				},
+				{
+					Source:   "",
+					Name:     "github.com/BurntSushi/toml",
+					Revision: "v33.3.1",
+				},
+			},
+		},
+		{
 			description: "should handle modules with pseudo versions",
 			modules: []models.Module{
 				{
