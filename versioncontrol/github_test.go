@@ -25,6 +25,11 @@ func TestRepoNameFromGithubPackage(t *testing.T) {
 			packageName:  "github.com/BurntSushi/toml",
 			wantRepoName: "BurntSushi/toml",
 		},
+		{
+			description:  "Should repo name only as owner and project",
+			packageName:  "github.com/ugorji/go/codec",
+			wantRepoName: "ugorji/go",
+		},
 	}
 
 	for _, test := range tests {

@@ -77,8 +77,12 @@ func repoNameFromGithubPackage(packageName string) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("unable to parse repo url, %w",err)
 	}
+	// This will cut the preceding / in the path and remove and subdirectories attached to the path.
+	// This is necessary because some of the go modules imported are imported with the subpackages in the name
+	// The repo name will then always be returned as {owner}/{project}
+	repoName := strings.Join(strings.Split(u.Path, "/")[1:3], "/")
 
-	return strings.Replace(u.Path, "/", "", 1), nil
+	return repoName, nil
 }
 
 func (r *Client) getGithub(url string, target interface{}) error {
