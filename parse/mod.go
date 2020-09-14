@@ -40,6 +40,10 @@ func MapModToDependency(modules []models.Module) []models.Dependency {
 		var dependency models.Dependency
 		dependency.Name = cutVersionSuffix(mod.Path)
 
+		// trimming the incompatible flag from the version is necessary to properly
+		// find the version tag in github
+		mod.Version = strings.TrimSuffix(mod.Version, "+incompatible")
+
 		if strings.Contains(mod.Version, "-") {
 			splitVersion := strings.Split(mod.Version, "-")
 			dependency.Revision = splitVersion[len(splitVersion)-1]
