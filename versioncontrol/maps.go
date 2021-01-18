@@ -20,7 +20,9 @@ var GithubRepoURLForPackage = map[string]string{
 	"honnef.co/go/tools":              "https://github.com/dominikh/go-tools",
 	"gopkg.in/DataDog/dd-trace-go.v1": "https://github.com/DataDog/dd-trace-go",
 	"gotest.tools":                    "https://github.com/gotestyourself/gotest.tools",
+	"golang.org/x/net":                "https://github.com/golang/net",
 }
+
 
 var GerritRepoURLForPackage = map[string]string{
 	"cloud.google.com/go":   "https://code-review.googlesource.com/projects/gocloud",
@@ -29,7 +31,6 @@ var licenseForRepo = map[string]string{
 	"golang.org/x/crypto":   "BSD-3-Clause",
 	"golang.org/x/sync":     "BSD-3-Clause",
 	"golang.org/x/image":    "BSD-3-Clause",
-	"golang.org/x/net":      "BSD-3-Clause",
 	"golang.org/x/sys":      "BSD-3-Clause",
 	"golang.org/x/text":     "BSD-3-Clause",
 	"golang.org/x/tools":    "BSD-3-Clause",
