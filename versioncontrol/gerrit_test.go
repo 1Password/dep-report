@@ -24,50 +24,6 @@ func TestReportObjFromGerrit(t *testing.T) {
 		wantReportObject *models.ReportObject
 	}{
 		{
-			description: "should successfully return report object when dependency is from go.mod and has pseudo version",
-			dependency: models.Dependency{
-				Name:     "golang.org/x/net",
-				Revision: "d3edc9973b7e",
-				Source: "gerrit",
-			},
-			wantReportObject: &models.ReportObject{
-				Name:    "golang.org/x/net",
-				Source:  "gerrit",
-				License: "BSD-3-Clause",
-				Website: "https://go-review.googlesource.com/projects/net",
-				Installed: models.VersionDetails{
-					Commit: "d3edc9973b7eb1fb302b0ff2c62357091cea9a30",
-					Time:   "2020-03-24T14:37:07Z",
-				},
-				Latest: models.VersionDetails{
-					Commit: "ff2c4b7c35a07b0c1e90ce72aa7bfe41bb66a3cb",
-					Time:   "2020-04-25T23:01:54Z",
-				},
-			},
-		},
-		{
-			description: "should successfully return report object when dependency is from gopkg",
-			dependency: models.Dependency{
-				Name:     "golang.org/x/net",
-				Revision: "d3edc9973b7eb1fb302b0ff2c62357091cea9a30",
-				Source: "gerrit",
-			},
-			wantReportObject: &models.ReportObject{
-				Name:    "golang.org/x/net",
-				Source:  "gerrit",
-				License: "BSD-3-Clause",
-				Website: "https://go-review.googlesource.com/projects/net",
-				Installed: models.VersionDetails{
-					Commit: "d3edc9973b7eb1fb302b0ff2c62357091cea9a30",
-					Time:   "2020-03-24T14:37:07Z",
-				},
-				Latest: models.VersionDetails{
-					Commit: "ff2c4b7c35a07b0c1e90ce72aa7bfe41bb66a3cb",
-					Time:   "2020-04-25T23:01:54Z",
-				},
-			},
-		},
-		{
 			description: "should successfully return report object when dependency is from go.mod and has semantic version",
 			dependency: models.Dependency{
 				Name:     "golang.org/x/text",
