@@ -9,6 +9,7 @@ var GithubRepoURLForPackage = map[string]string{
 	"cloud.google.com/go":             "https://api.github.com/repos/googleapis/google-cloud-go",
 	"gopkg.in/check.v1":               "https://github.com/go-check/check",
 	"gopkg.in/yaml.v2":                "https://github.com/go-yaml/yaml",
+	"gopkg.in/yaml.v3":                "https://github.com/go-yaml/yaml",
 	"gopkg.in/square/go-jose.v2":      "https://github.com/square/go-jose",
 	"go.etcd.io/bbolt":                "https://github.com/etcd-io/bbolt",
 	"go.uber.org/atomic":              "https://github.com/uber-go/atomic",
