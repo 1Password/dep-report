@@ -6,6 +6,7 @@ var GithubRepoURLForPackage = map[string]string{
 	"google.golang.org/genproto":      "https://github.com/googleapis/go-genproto",
 	"google.golang.org/appengine":     "https://github.com/golang/appengine",
 	"google.golang.org/api":           "https://github.com/googleapis/google-api-go-client",
+	"google.golang.org/protobuf":      "https://github.com/golang/protobuf",
 	"cloud.google.com/go":             "https://api.github.com/repos/googleapis/google-cloud-go",
 	"gopkg.in/check.v1":               "https://github.com/go-check/check",
 	"gopkg.in/yaml.v2":                "https://github.com/go-yaml/yaml",
@@ -24,9 +25,8 @@ var GithubRepoURLForPackage = map[string]string{
 	"golang.org/x/net":                "https://github.com/golang/net",
 }
 
-
 var GerritRepoURLForPackage = map[string]string{
-	"cloud.google.com/go":   "https://code-review.googlesource.com/projects/gocloud",
+	"cloud.google.com/go": "https://code-review.googlesource.com/projects/gocloud",
 }
 var licenseForRepo = map[string]string{
 	"golang.org/x/crypto":   "BSD-3-Clause",
