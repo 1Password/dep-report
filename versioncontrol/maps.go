@@ -23,6 +23,7 @@ var GithubRepoURLForPackage = map[string]string{
 	"gopkg.in/DataDog/dd-trace-go.v1": "https://github.com/DataDog/dd-trace-go",
 	"gotest.tools":                    "https://github.com/gotestyourself/gotest.tools",
 	"golang.org/x/net":                "https://github.com/golang/net",
+	"aidanwoods.dev/go-paseto":        "https://github.com/aidantwoods/go-paseto",
 }
 
 var GerritRepoURLForPackage = map[string]string{
