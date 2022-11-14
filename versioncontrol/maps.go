@@ -24,6 +24,7 @@ var GithubRepoURLForPackage = map[string]string{
 	"gotest.tools":                    "https://github.com/gotestyourself/gotest.tools",
 	"golang.org/x/net":                "https://github.com/golang/net",
 	"aidanwoods.dev/go-paseto":        "https://github.com/aidantwoods/go-paseto",
+	"go4.org/intern":                  "https://github.com/go4org/intern",  
 }
 
 var GerritRepoURLForPackage = map[string]string{
