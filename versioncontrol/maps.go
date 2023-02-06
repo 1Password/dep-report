@@ -27,6 +27,8 @@ var GithubRepoURLForPackage = map[string]string{
 	"go4.org/intern":                     "https://github.com/go4org/intern",
 	"go4.org/unsafe/assume-no-moving-gc": "https://github.com/go4org/unsafe-assume-no-moving-gc",
 	"inet.af/netaddr":                    "https://github.com/inetaf/netaddr",
+	"go.opentelemetry.io/otel":           "https://github.com/open-telemetry/opentelemetry-go",
+	"go.opentelemetry.io/otel/trace":     "https://github.com/open-telemetry/opentelemetry-go/trace",
 }
 
 var GerritRepoURLForPackage = map[string]string{
