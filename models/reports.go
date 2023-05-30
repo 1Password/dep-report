@@ -10,7 +10,7 @@ type VersionDetails struct {
 type ReportObject struct {
 	Name      string         `json:"name"`
 	Source    string         `json:"source"`
-	License   string         `json:"License"`
+	License   string         `json:"license"`
 	Website   string         `json:"website"`
 	Installed VersionDetails `json:"installed"`
 	Latest    VersionDetails `json:"latest"`

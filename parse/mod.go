@@ -10,7 +10,7 @@ import (
 	"golang.org/x/mod/modfile"
 )
 
-//ParseModules parses the go.mod file and formats the output for further processing
+// ParseModules parses the go.mod file and formats the output for further processing
 func ParseModules(filepath string) ([]models.Module, error) {
 	modBytes, err := ioutil.ReadFile(filepath)
 	if err != nil {
@@ -33,7 +33,7 @@ func ParseModules(filepath string) ([]models.Module, error) {
 	return modArray, nil
 }
 
-//MapModToDependency takes an array of modules as a param and converts it to an []models.dependency
+// MapModToDependency takes an array of modules as a param and converts it to an []models.dependency
 func MapModToDependency(modules []models.Module) []models.Dependency {
 	dependencies := make([]models.Dependency, len(modules))
 	for i, mod := range modules {
@@ -50,6 +50,8 @@ func MapModToDependency(modules []models.Module) []models.Dependency {
 		} else {
 			dependency.Revision = mod.Version
 		}
+		dependency.Version = mod.Version
+
 		dependencies[i] = dependency
 	}
 	return dependencies

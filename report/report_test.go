@@ -1,13 +1,13 @@
 package report
 
 import (
-	"fmt"
-	"github.com/1Password/dep-report/models"
-	"github.com/1Password/dep-report/versioncontrol"
 	"flag"
-	"github.com/stretchr/testify/assert"
 	"testing"
 	"time"
+
+	"github.com/1Password/dep-report/models"
+	"github.com/1Password/dep-report/versioncontrol"
+	"github.com/stretchr/testify/assert"
 )
 
 var githubToken = flag.String("githubToken", "", "Token to be used in Github requests")
@@ -283,7 +283,7 @@ func TestGenerateReport(t *testing.T) {
 			},
 		},
 		{
-			description: "Should return error when a dependency source cannot be determined",
+			description: "Should generic report when a dependency source cannot be determined",
 			pkg: []models.Dependency{
 				{
 					Source:   "",
@@ -291,8 +291,18 @@ func TestGenerateReport(t *testing.T) {
 					Name:     "gopkg.in/fake",
 				},
 			},
-			wantReport: models.Report{},
-			wantError: fmt.Errorf("failed to create report object from dependency: { 12345 gopkg.in/fake}: unable to determine repo source for gopkg.in/fake"),
+			wantReport: models.Report{
+				Product:    "dep-report",
+				ReportTime: time.Now().UTC().Format("2006-01-02T15:04:05Z"),
+				Commit:     "77ae4af8d07bcd816b0f14bdf26cb074f0cfa8b9",
+				CommitTime: "2020-04-22T11:02:24-06:00",
+				Dependencies: []models.ReportObject{
+					{
+						Name:   "gopkg.in/fake",
+						Source: "unknown/other",
+					},
+				},
+			},
 		},
 	}
 	for _, test := range tests {

@@ -8,6 +8,8 @@ type Dependency struct {
 	Revision string
 	//Name is the name of the dependency and comes from Name in gopkg and Path in go.mod
 	Name string
+	// Version of the installed dependency
+	Version string
 }
 
 // PkgObject Objects used when reading from Gopkg.lock
@@ -19,12 +21,12 @@ type PkgObject struct {
 	Branch   string
 }
 
-//Pkg is a collection of PkgObjects that we use to generate the dependency report
+// Pkg is a collection of PkgObjects that we use to generate the dependency report
 type Pkg struct {
 	Projects []PkgObject
 }
 
-//Module is a type that represents the json output of `go list`
+// Module is a type that represents the json output of `go list`
 type Module struct {
 	Path    string
 	Version string
