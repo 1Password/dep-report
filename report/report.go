@@ -77,6 +77,8 @@ func (g Generator) reportObjFromDependency(dep models.Dependency) (*models.Repor
 	var reportObject *models.ReportObject
 	var err error
 
+	// For GitHub and Gerrit, we perform an online lookup to determine the latest version of a package
+	// For all other packages, we can't determine upstream versions and just report the local data we have
 	switch dep.Source {
 	case GITHUB:
 		reportObject, err = versioncontrol.ReportObjFromGithub(dep, g.request)
