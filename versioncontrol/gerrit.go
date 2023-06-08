@@ -1,16 +1,18 @@
 package versioncontrol
 
 import (
-	"github.com/1Password/dep-report/models"
 	"encoding/json"
-	"github.com/pkg/errors"
 	"io/ioutil"
 	"net/http"
 	"strings"
 	"time"
+
+	"github.com/1Password/dep-report/models"
+	"github.com/pkg/errors"
 )
-//ReportObjFromGerrit uses the data in a dependency object and creates a report object
-func ReportObjFromGerrit(dep models.Dependency, r Client) (*models.ReportObject, error){
+
+// ReportObjFromGerrit uses the data in a dependency object and creates a report object
+func ReportObjFromGerrit(dep models.Dependency, r Client) (*models.ReportObject, error) {
 	var gerritRepoURL string
 	var githubRepoURL string
 
@@ -29,9 +31,9 @@ func ReportObjFromGerrit(dep models.Dependency, r Client) (*models.ReportObject,
 	}
 
 	reportObject := models.ReportObject{
-		Name: dep.Name,
+		Name:    dep.Name,
 		Website: gerritRepoURL,
-		Source: dep.Source,
+		Source:  dep.Source,
 	}
 
 	//If the dependency comes from go.mod, we have to get the full commit SHA from github before we can call gerrit
@@ -56,8 +58,9 @@ func ReportObjFromGerrit(dep models.Dependency, r Client) (*models.ReportObject,
 		return nil, errors.Wrapf(err, "Unable to formatGerritTime")
 	}
 	reportObject.Installed = models.VersionDetails{
-		Commit: installed.CommitSHA,
-		Time:   t,
+		Commit:  installed.CommitSHA,
+		Time:    t,
+		Version: dep.Version,
 	}
 
 	masterURL := gerritRepoURL + "/branches/master"

@@ -5,7 +5,7 @@ type License struct {
 }
 
 type LicenseResponse struct {
-	License License `json:"License"`
+	License License `json:"license"`
 }
 
 type Committer struct {
@@ -13,7 +13,7 @@ type Committer struct {
 }
 
 type Commit struct {
-	CommitSHA string `json:"commit"`
+	CommitSHA string    `json:"commit"`
 	Committer Committer `json:"Committer"`
 }
 

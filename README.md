@@ -11,6 +11,7 @@ It functions by reading the application `go.mod` file, and then interacting with
       "License": "MIT",
       "website": "https://api.github.com/repos/DataDog/datadog-go",
       "installed": {
+        "version": "1.4.1",
         "time": "2021-05-05T11:24:08Z",
         "commit": "fbbbcbc72f95c23c28bbfe2bf008a9958db049a2"
       },

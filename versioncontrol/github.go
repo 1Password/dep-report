@@ -1,17 +1,18 @@
 package versioncontrol
 
 import (
-	"github.com/1Password/dep-report/models"
 	"encoding/json"
 	"fmt"
-	"github.com/pkg/errors"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/1Password/dep-report/models"
+	"github.com/pkg/errors"
 )
 
-func ReportObjFromGithub(dep models.Dependency, r Client) (*models.ReportObject,error) {
+func ReportObjFromGithub(dep models.Dependency, r Client) (*models.ReportObject, error) {
 	repoName, err := repoNameFromGithubPackage(dep.Name)
 	if err != nil {
 		return nil, err
@@ -21,9 +22,9 @@ func ReportObjFromGithub(dep models.Dependency, r Client) (*models.ReportObject,
 	repoURL := "https://api.github.com/repos/" + repoName
 
 	reportObject := models.ReportObject{
-		Name: dep.Name,
+		Name:    dep.Name,
 		Website: repoURL,
-		Source: dep.Source,
+		Source:  dep.Source,
 	}
 
 	licenseURL := repoURL + "/license"
@@ -41,8 +42,9 @@ func ReportObjFromGithub(dep models.Dependency, r Client) (*models.ReportObject,
 	}
 
 	reportObject.Installed = models.VersionDetails{
-		Commit: installed.SHA,
-		Time:   installed.Commit.Committer.Date,
+		Commit:  installed.SHA,
+		Time:    installed.Commit.Committer.Date,
+		Version: dep.Version,
 	}
 
 	branchURL := repoURL + "/commits/HEAD"
@@ -75,7 +77,7 @@ func repoNameFromGithubPackage(packageName string) (string, error) {
 
 	u, err := url.Parse(packageName)
 	if err != nil {
-		return "", fmt.Errorf("unable to parse repo url, %w",err)
+		return "", fmt.Errorf("unable to parse repo url, %w", err)
 	}
 	// This will cut the preceding / in the path and remove and subdirectories attached to the path.
 	// This is necessary because some of the go modules imported are imported with the subpackages in the name
@@ -88,7 +90,7 @@ func repoNameFromGithubPackage(packageName string) (string, error) {
 func (r *Client) getGithub(url string, target interface{}) error {
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		return errors.Wrapf(err,"unable to create request for %s", url)
+		return errors.Wrapf(err, "unable to create request for %s", url)
 	}
 	req.Header.Add("Authorization", "token "+r.Token)
 

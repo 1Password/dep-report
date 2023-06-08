@@ -1,21 +1,21 @@
 package report
 
 import (
-	"fmt"
-	"github.com/1Password/dep-report/models"
-	"github.com/1Password/dep-report/versioncontrol"
 	"encoding/json"
-	"github.com/pkg/errors"
-	"log"
 	"os/exec"
 	"strings"
 	"time"
+
+	"github.com/1Password/dep-report/models"
+	"github.com/1Password/dep-report/versioncontrol"
+	"github.com/pkg/errors"
 )
 
 const (
-	GITHUB = "github"
-	GITLAB = "gitlab"
-	GERRIT = "gerrit"
+	GITHUB  = "github"
+	GITLAB  = "gitlab"
+	GERRIT  = "gerrit"
+	UNKNOWN = "unknown/other"
 )
 
 // BuildReport This function is used to create the dependency report
@@ -43,7 +43,7 @@ func (g *Generator) BuildReport(productName string, dependencies []models.Depend
 	return &report, nil
 }
 
-//FormatReport takes a report struct and formats it into pretty json
+// FormatReport takes a report struct and formats it into pretty json
 func FormatReport(rawReport models.Report) ([]byte, error) {
 	prettyReport, err := json.MarshalIndent(rawReport, "", "  ")
 	if err != nil {
@@ -77,14 +77,11 @@ func (g Generator) reportObjFromDependency(dep models.Dependency) (*models.Repor
 	var reportObject *models.ReportObject
 	var err error
 
+	// For GitHub and Gerrit, we perform an online lookup to determine the latest version of a package
+	// For all other packages, we can't determine upstream versions and just report the local data we have
 	switch dep.Source {
 	case GITHUB:
 		reportObject, err = versioncontrol.ReportObjFromGithub(dep, g.request)
-		if err != nil {
-			return nil, errors.Wrapf(err, "unable to generate reportObject from dependency %s", dep.Name)
-		}
-	case GITLAB:
-		reportObject, err = versioncontrol.ReportObjFromGitlab(dep)
 		if err != nil {
 			return nil, errors.Wrapf(err, "unable to generate reportObject from dependency %s", dep.Name)
 		}
@@ -94,8 +91,11 @@ func (g Generator) reportObjFromDependency(dep models.Dependency) (*models.Repor
 			return nil, errors.Wrapf(err, "unable to generate reportObject from dependency %s", dep.Name)
 		}
 	default:
-		log.Println("Unable to determine repo source for ", dep.Name)
-		return nil, fmt.Errorf("unable to determine repo source for %s", dep.Name)
+		reportObject, err = versioncontrol.ReportObjGeneric(dep)
+		if err != nil {
+			return nil, errors.Wrapf(err, "unable to generate reportObject from dependency %s", dep.Name)
+		}
+
 	}
 
 	return reportObject, nil
@@ -122,6 +122,6 @@ func determineSource(packageName string) string {
 	case strings.Contains(repo, "golang.org/x"):
 		return GERRIT
 	default:
-		return ""
+		return UNKNOWN
 	}
 }
