@@ -1,13 +1,14 @@
 package main
 
 import (
-	"github.com/1Password/dep-report/models"
-	"github.com/1Password/dep-report/parse"
-	"github.com/1Password/dep-report/report"
 	"fmt"
 	"log"
 	"os"
 	"path/filepath"
+
+	"github.com/1Password/dep-report/models"
+	"github.com/1Password/dep-report/parse"
+	"github.com/1Password/dep-report/report"
 )
 
 const (
@@ -22,6 +23,7 @@ func main() {
 	}
 
 	productName, ok := os.LookupEnv("DEP_REPORT_PRODUCT")
+	_, generateCycloneDX := os.LookupEnv("DEP_REPORT_CYCLONEDX")
 
 	if !ok {
 		productName = "b5server"
@@ -39,7 +41,14 @@ func main() {
 		log.Fatalf("unable to generate report: %v", err)
 	}
 
-	prettyReport, err := report.FormatReport(*rawReport)
+	var prettyReport []byte
+
+	if generateCycloneDX {
+		prettyReport, err = report.FormatCycloneDXReport(*rawReport)
+	} else {
+		prettyReport, err = report.FormatReport(*rawReport)
+	}
+
 	if err != nil {
 		log.Fatalf("unable to format report: %v", err)
 	}
