@@ -37,6 +37,15 @@ GITHUB_OAUTH_TOKEN=<your token> go run main.go
 > GITHUB_OAUTH_TOKEN=<your token> dep-report
 ```
 
+## CycloneDX compatibility
+
+For compatibility with other tools, you can create a report that roughly corresponds to the [CycloneDX SBOM format](https://cyclonedx.org). The resulting report contains all the dependencies (direct and transient) in the SBOM's `components` list.
+
+```
+> cd my/go/app
+> GITHUB_OAUTH_TOKEN=<your token> DEP_REPORT_CYCLONEDX=1 dep-report
+```
+
 ## Troubleshooting
 
 ### `Unable to determine repo source for...`

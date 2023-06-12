@@ -125,12 +125,17 @@ type Cassette struct {
 	Mu sync.RWMutex `yaml:"mu,omitempty"`
 	// Interactions between client and server
 	Interactions []*Interaction `yaml:"interactions"`
+	// ReplayableInteractions defines whether to allow interactions to be replayed or not
+	ReplayableInteractions bool `yaml:"-"`
 
 	// Matches actual request with interaction requests.
 	Matcher Matcher `yaml:"-"`
 
-	// Filters interactions before being saved.
+	// Filters interactions before when they are captured.
 	Filters []Filter `yaml:"-"`
+
+	// SaveFilters are applied to interactions just before they are saved.
+	SaveFilters []Filter `yaml:"-"`
 }
 
 // New creates a new empty cassette
@@ -142,6 +147,7 @@ func New(name string) *Cassette {
 		Interactions: make([]*Interaction, 0),
 		Matcher:      DefaultMatcher,
 		Filters:      make([]Filter, 0),
+		SaveFilters:  make([]Filter, 0),
 	}
 
 	return c
@@ -172,7 +178,7 @@ func (c *Cassette) GetInteraction(r *http.Request) (*Interaction, error) {
 	c.Mu.Lock()
 	defer c.Mu.Unlock()
 	for _, i := range c.Interactions {
-		if !i.replayed && c.Matcher(r, i.Request) {
+		if (c.ReplayableInteractions || !i.replayed) && c.Matcher(r, i.Request) {
 			i.replayed = true
 			return i, nil
 		}
@@ -188,6 +194,14 @@ func (c *Cassette) Save() error {
 	// Save cassette file only if there were any interactions made
 	if len(c.Interactions) == 0 {
 		return nil
+	}
+
+	for _, interaction := range c.Interactions {
+		for _, filter := range c.SaveFilters {
+			if err := filter(interaction); err != nil {
+				return err
+			}
+		}
 	}
 
 	// Create directory for cassette if missing
