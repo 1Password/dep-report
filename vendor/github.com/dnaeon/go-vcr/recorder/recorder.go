@@ -48,6 +48,9 @@ const (
 	ModeRecording Mode = iota
 	ModeReplaying
 	ModeDisabled
+	// Replay record from cassette or record a new one when a request is not
+	// present in cassette instead of throwing ErrInteractionNotFound
+	ModeReplayingOrRecording
 )
 
 // Recorder represents a type used to record and replay
@@ -61,7 +64,13 @@ type Recorder struct {
 
 	// realTransport is the underlying http.RoundTripper to make real requests
 	realTransport http.RoundTripper
+
+	// Pass through requests.
+	Passthroughs []Passthrough
 }
+
+// Passthrough function allows ignoring certain requests.
+type Passthrough func(*http.Request) bool
 
 // SetTransport can be used to configure the behavior of the 'real' client used in record-mode
 func (r *Recorder) SetTransport(t http.RoundTripper) {
@@ -70,12 +79,17 @@ func (r *Recorder) SetTransport(t http.RoundTripper) {
 
 // Proxies client requests to their original destination
 func requestHandler(r *http.Request, c *cassette.Cassette, mode Mode, realTransport http.RoundTripper) (*cassette.Interaction, error) {
-	// Return interaction from cassette if in replay mode
-	if mode == ModeReplaying {
+	// Return interaction from cassette if in replay mode or replay/record mode
+	if mode == ModeReplaying || mode == ModeReplayingOrRecording {
 		if err := r.Context().Err(); err != nil {
 			return nil, err
 		}
-		return c.GetInteraction(r)
+
+		if interaction, err := c.GetInteraction(r); mode == ModeReplaying {
+			return interaction, err
+		} else if mode == ModeReplayingOrRecording && err == nil {
+			return interaction, err
+		}
 	}
 
 	// Copy the original request, so we can read the form values
@@ -160,12 +174,11 @@ func NewAsMode(cassetteName string, mode Mode, realTransport http.RoundTripper) 
 			c = cassette.New(cassetteName)
 			mode = ModeRecording
 		} else {
-			// Load cassette from file and enter replay mode
+			// Load cassette from file and enter replay mode or replay/record mode
 			c, err = cassette.Load(cassetteName)
 			if err != nil {
 				return nil, err
 			}
-			mode = ModeReplaying
 		}
 	}
 
@@ -184,7 +197,7 @@ func NewAsMode(cassetteName string, mode Mode, realTransport http.RoundTripper) 
 
 // Stop is used to stop the recorder and save any recorded interactions
 func (r *Recorder) Stop() error {
-	if r.mode == ModeRecording {
+	if r.mode == ModeRecording || r.mode == ModeReplayingOrRecording {
 		if err := r.cassette.Save(); err != nil {
 			return err
 		}
@@ -198,6 +211,12 @@ func (r *Recorder) RoundTrip(req *http.Request) (*http.Response, error) {
 	if r.mode == ModeDisabled {
 		return r.realTransport.RoundTrip(req)
 	}
+	for _, passthrough := range r.Passthroughs {
+		if passthrough(req) {
+			return r.realTransport.RoundTrip(req)
+		}
+	}
+
 	// Pass cassette and mode to handler, so that interactions can be
 	// retrieved or recorded depending on the current recorder mode
 	interaction, err := requestHandler(req, r.cassette, r.mode, r.realTransport)
@@ -265,6 +284,19 @@ func (r *Recorder) SetMatcher(matcher cassette.Matcher) {
 	}
 }
 
+// SetReplayableInteractions defines whether to allow interactions to be replayed or not.
+func (r *Recorder) SetReplayableInteractions(replayable bool) {
+	if r.cassette != nil {
+		r.cassette.ReplayableInteractions = replayable
+	}
+}
+
+// AddPassthrough appends a hook to determine if a request should be ignored by the
+// recorder.
+func (r *Recorder) AddPassthrough(pass Passthrough) {
+	r.Passthroughs = append(r.Passthroughs, pass)
+}
+
 // AddFilter appends a hook to modify a request before it is recorded.
 //
 // Filters are useful for filtering out sensitive parameters from the recorded data.
@@ -272,4 +304,19 @@ func (r *Recorder) AddFilter(filter cassette.Filter) {
 	if r.cassette != nil {
 		r.cassette.Filters = append(r.cassette.Filters, filter)
 	}
+}
+
+// AddSaveFilter appends a hook to modify a request before it is saved.
+//
+// This filter is suitable for treating recorded responses to remove sensitive data. Altering responses using a regular
+// AddFilter can have unintended consequences on code that is consuming responses.
+func (r *Recorder) AddSaveFilter(filter cassette.Filter) {
+	if r.cassette != nil {
+		r.cassette.SaveFilters = append(r.cassette.SaveFilters, filter)
+	}
+}
+
+// Mode returns recorder state
+func (r *Recorder) Mode() Mode {
+	return r.mode
 }
